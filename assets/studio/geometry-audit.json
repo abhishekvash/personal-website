@@ -1,0 +1,6491 @@
+{
+  "purpose": "Saved-scene authoring diagnostic. Measurements only; no repairs or asset export.",
+  "source_blend": "/Users/abhishekvash/Projects/Personal/personal-website/assets/studio/studio.blend",
+  "source_modified_utc": "2026-09-06T17:49:04.321161+00:00",
+  "generated_utc": "2026-09-06T17:52:03.371450+00:00",
+  "units": "Scene units correspond to source-image pixels; volumes use cubic scene units.",
+  "limitations": [
+    "Assembly volumes are sums of component signed volumes, not Boolean union volumes.",
+    "Manifold positive-volume components do not prove an assembly is connected or free of self-intersections.",
+    "Support pairs are selected intended mechanical contacts, not an exhaustive assembly collision analysis.",
+    "Contact gaps use triangle intersection or nearest vertex-to-surface distance; edge-edge distances and fully contained parts may need artist review.",
+    "This does not measure reference-image fidelity, silhouette alignment, lighting, or browser appearance."
+  ],
+  "summary": {
+    "objects": 402,
+    "objects_with_failures": 0,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0,
+    "signed_volume_sum_px3": 686465783.028191
+  },
+  "assemblies": {
+    "Architecture": {
+      "objects": 29,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 87365957.712877
+    },
+    "Bonsai": {
+      "objects": 24,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 12411323.145877
+    },
+    "Interior / Gaming": {
+      "objects": 105,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 484107.430989
+    },
+    "Interior / Kitchen": {
+      "objects": 53,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 2197256.462011
+    },
+    "Interior / Recording": {
+      "objects": 72,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 415058.236054
+    },
+    "Interior / Workspace": {
+      "objects": 92,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 578266.674798
+    },
+    "Observatory": {
+      "objects": 26,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 4010437.223589
+    },
+    "Setting": {
+      "objects": 1,
+      "objects_with_failures": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_sum_px3": 579003376.141996
+    }
+  },
+  "excluded_objects": [
+    {
+      "name": "FallingPetal01",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "FallingPetal02",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "FallingPetal03",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "ScreenGlow01",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "ScreenGlow02",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "ScreenGlow03",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "Setting \u2022 paper backdrop",
+      "reason": "Intended open background surface."
+    },
+    {
+      "name": "Steam01",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    },
+    {
+      "name": "Steam02",
+      "reason": "Intended ambient ribbon, glow, or petal surface."
+    }
+  ],
+  "objects": [
+    {
+      "name": "Architecture \u2022 base plinth",
+      "assembly": "Architecture",
+      "vertices": 22,
+      "faces": 29,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 946421.536809,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 continuous ground storey",
+      "assembly": "Architecture",
+      "vertices": 429,
+      "faces": 502,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 37233630.838243,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 continuous middle storey",
+      "assembly": "Architecture",
+      "vertices": 605,
+      "faces": 596,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 25674971.059991,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 continuous solid roof",
+      "assembly": "Architecture",
+      "vertices": 12,
+      "faces": 14,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1606164.013458,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 continuous upper storey",
+      "assembly": "Architecture",
+      "vertices": 415,
+      "faces": 481,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 20904325.796166,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 gaming interior porthole recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 19532.268412,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 ground perimeter sill",
+      "assembly": "Architecture",
+      "vertices": 14,
+      "faces": 17,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 621708.001081,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 lower side porthole 1 recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15700.938848,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 lower side porthole 2 recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2704.467035,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 middle left sill",
+      "assembly": "Architecture",
+      "vertices": 12,
+      "faces": 14,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 195843.309174,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 middle side porthole recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16114.121562,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 recording interior porthole recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9578.32026,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 right pillar porthole recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 13822.838705,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 solid foot 1",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11120.503509,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 solid foot 2",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11120.500355,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 solid foot 3",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10137.4309,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 solid foot 4",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 12192.91409,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 solid foot 5",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11255.172992,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 upper side porthole recessed blue glass",
+      "assembly": "Architecture",
+      "vertices": 128,
+      "faces": 188,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10536.148749,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent housing",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 33096.918334,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 1",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512774,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 2",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512557,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 3",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512774,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 4",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512774,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 5",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512701,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 6",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512683,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 7",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512539,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 8",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512701,
+      "failures": []
+    },
+    {
+      "name": "Architecture \u2022 vent louver 9",
+      "assembly": "Architecture",
+      "vertices": 56,
+      "faces": 80,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 664.512701,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 curved blossom clusters",
+      "assembly": "Bonsai",
+      "vertices": 115402,
+      "faces": 111546,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 326308.283734,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 individual fallen petals",
+      "assembly": "Bonsai",
+      "vertices": 4518,
+      "faces": 4504,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9705.949012,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 petal-covered soil surface",
+      "assembly": "Bonsai",
+      "vertices": 194,
+      "faces": 288,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 6942892.950292,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 planter round inlay",
+      "assembly": "Bonsai",
+      "vertices": 480,
+      "faces": 480,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1799.781074,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 spreading root 1",
+      "assembly": "Bonsai",
+      "vertices": 512,
+      "faces": 498,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 43672.106482,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 spreading root 2",
+      "assembly": "Bonsai",
+      "vertices": 336,
+      "faces": 322,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 20448.988328,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 spreading root 3",
+      "assembly": "Bonsai",
+      "vertices": 576,
+      "faces": 562,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 30862.28946,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 spreading root 4",
+      "assembly": "Bonsai",
+      "vertices": 672,
+      "faces": 658,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 43838.468621,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 thick glazed ceramic planter",
+      "assembly": "Bonsai",
+      "vertices": 768,
+      "faces": 674,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3050460.89746,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 01",
+      "assembly": "Bonsai",
+      "vertices": 1280,
+      "faces": 1266,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 582062.510582,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 02",
+      "assembly": "Bonsai",
+      "vertices": 1264,
+      "faces": 1250,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 486485.425276,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 03",
+      "assembly": "Bonsai",
+      "vertices": 1264,
+      "faces": 1250,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 401669.462218,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 04",
+      "assembly": "Bonsai",
+      "vertices": 864,
+      "faces": 850,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 80664.174176,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 05",
+      "assembly": "Bonsai",
+      "vertices": 1392,
+      "faces": 1378,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 116278.39003,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 06",
+      "assembly": "Bonsai",
+      "vertices": 912,
+      "faces": 898,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 85372.840825,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 07",
+      "assembly": "Bonsai",
+      "vertices": 896,
+      "faces": 882,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 45210.576448,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 08",
+      "assembly": "Bonsai",
+      "vertices": 1088,
+      "faces": 1074,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 33070.199322,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 09",
+      "assembly": "Bonsai",
+      "vertices": 960,
+      "faces": 946,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 24866.296182,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 10",
+      "assembly": "Bonsai",
+      "vertices": 816,
+      "faces": 802,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 13798.563597,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 11",
+      "assembly": "Bonsai",
+      "vertices": 704,
+      "faces": 690,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 25168.456106,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 12",
+      "assembly": "Bonsai",
+      "vertices": 672,
+      "faces": 658,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15234.738886,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 13",
+      "assembly": "Bonsai",
+      "vertices": 672,
+      "faces": 658,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17483.977863,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 14",
+      "assembly": "Bonsai",
+      "vertices": 720,
+      "faces": 706,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 8661.750043,
+      "failures": []
+    },
+    {
+      "name": "Bonsai \u2022 twisting branch 15",
+      "assembly": "Bonsai",
+      "vertices": 576,
+      "faces": 562,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5306.06986,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_CaseFan_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3717.997478,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_CaseFan_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3717.997478,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairBack",
+      "assembly": "Interior / Gaming",
+      "vertices": 32,
+      "faces": 45,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 47004.843441,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairLeftArm",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 221.692423,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairLeftArm_MountTo_ChairSeat",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 371.816609,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairRightArmPad",
+      "assembly": "Interior / Gaming",
+      "vertices": 12,
+      "faces": 15,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1149.333333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairRightArmUpright",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 304.235485,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ChairSeat",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3893.333333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Caster_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933628,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Caster_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933629,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Caster_2",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933628,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Caster_3",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933628,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Caster_4",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933628,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_GasLift",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 496.95751,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Hub",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 309.145915,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Spoke_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 558.256809,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Spoke_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 369.804269,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Spoke_2",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 568.609275,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Spoke_3",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 624.643607,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Chair_Spoke_4",
+      "assembly": "Interior / Gaming",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 574.198097,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ComputerCase",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 85143.5,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_ComputerCase_MountTo_DeskTop",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 412.928386,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_DeskLeg_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2400.500797,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_DeskLeg_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3275.494827,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_DeskTop",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 131634.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_DriveSlot_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 113.625857,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_DriveSlot_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 113.625857,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_0_Body",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 403.950563,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_0_Head",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 163.971557,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_0_LeftLeg",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 59.144008,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_0_Plinth",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 514.419121,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_0_RightLeg",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 59.513116,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_1_Body",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 403.950563,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_1_Head",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 163.971557,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_1_LeftLeg",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 59.144008,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_1_Plinth",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 514.419121,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Figurine_1_RightLeg",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 59.513116,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_FrontFan_0",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 721.34034,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_FrontFan_1",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 850.149196,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3712.5,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_00",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239546,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_01",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239684,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_02",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239546,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_03",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239684,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_04",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239546,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_05",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239684,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_06",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239454,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_07",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239456,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_08",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239594,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_09",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239316,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_10",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239684,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_11",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239546,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_00_12",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.239543,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_00",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520435,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_01",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520665,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_02",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_03",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520665,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_04",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_05",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520576,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_06",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_07",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520576,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_08",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_09",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520576,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_10",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_11",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520521,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_01_12",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.520524,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_00",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801561,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_01",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801559,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_02",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801413,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_03",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801559,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_04",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801413,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_05",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801561,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_06",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801559,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_07",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801413,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_08",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801559,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_09",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801413,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_10",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801561,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_11",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801559,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_02_12",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 10.801413,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_00",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082544,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_01",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.08248,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_02",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.08248,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_03",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.08248,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_04",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.08248,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_05",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082279,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_06",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082632,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_07",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082693,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_08",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082632,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_09",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082392,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_10",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082629,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_11",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.082392,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Keyboard_Key_03_12",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 11.08248,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_LeftPoster_Frame",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 20619.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_LeftPoster_Print",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2998.830505,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MainMonitor_Foot",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 959.833333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MainMonitor_Foot_MountTo_DeskTop",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 257.525164,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MainMonitor_Housing",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 102578.202971,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MainMonitor_Screen",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 6745.5,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MainMonitor_Stand",
+      "assembly": "Interior / Gaming",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 384.145523,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Mouse",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 649.207414,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_MouseMat",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 287.527578,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_RightPoster_Frame",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 13905.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_RightPoster_Print",
+      "assembly": "Interior / Gaming",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1976.420105,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_Subwoofer",
+      "assembly": "Interior / Gaming",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 31575.149785,
+      "failures": []
+    },
+    {
+      "name": "Interior_Gaming_SubwooferCone",
+      "assembly": "Interior / Gaming",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 4479.519841,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 128,
+      "faces": 128,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 181.461049,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 128,
+      "faces": 128,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 181.461187,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 128,
+      "faces": 128,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 233.401511,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_3",
+      "assembly": "Interior / Kitchen",
+      "vertices": 128,
+      "faces": 128,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 298.325146,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_3_MountTo_RightHob",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 51.922375,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Burner_4",
+      "assembly": "Interior / Kitchen",
+      "vertices": 128,
+      "faces": 128,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 155.48891,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CabinetBody",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1572003.199847,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CabinetFoot_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1669.582352,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CabinetFoot_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1669.582245,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CenterStile",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17606.297064,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_0_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793949,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_0_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.79386,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_0_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793916,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_1_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793949,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_1_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.79386,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_1_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793917,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_2_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793949,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_2_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.79386,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_2_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793917,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_3_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793949,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_3_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793861,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_ControlLamp_3_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9.793916,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CookingPot",
+      "assembly": "Interior / Kitchen",
+      "vertices": 338,
+      "faces": 384,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 21534.102164,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CookingPot_MountTo_RightHob",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 4004.655428,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_CounterTop",
+      "assembly": "Interior / Kitchen",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 237776.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Drawer_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 29325.138014,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Drawer_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 27990.138014,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Drawer_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 27990.138014,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_FryingPan",
+      "assembly": "Interior / Kitchen",
+      "vertices": 338,
+      "faces": 384,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 24067.781459,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_FryingPan_MountTo_LeftHob",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 4537.52894,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_HandleStem_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 44.701252,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_HandleStem_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 44.701252,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_HandleStem_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 44.701252,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_HandleStem_3",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 44.701252,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_HandleStem_4",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 44.701252,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Handle_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 115.744284,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Handle_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 115.744284,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Handle_2",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 115.744284,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Handle_3",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 115.744284,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_Handle_4",
+      "assembly": "Interior / Kitchen",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 115.744284,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_LeftBlueStile",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 32868.390793,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_LeftCreamDoor",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 37840.945839,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_LeftHob",
+      "assembly": "Interior / Kitchen",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16431.611974,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PanFood",
+      "assembly": "Interior / Kitchen",
+      "vertices": 98,
+      "faces": 144,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 22919.565493,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PanHandle",
+      "assembly": "Interior / Kitchen",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 730.247593,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PotHandle_0",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 32,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 195.771305,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PotHandle_1",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 32,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 166.667266,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PotLiquid",
+      "assembly": "Interior / Kitchen",
+      "vertices": 98,
+      "faces": 144,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 38300.364374,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_PotUtensil",
+      "assembly": "Interior / Kitchen",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 333.033955,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_RightBlueStile",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 27343.37482,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_RightCreamDoor",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 34545.257765,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_RightHob",
+      "assembly": "Interior / Kitchen",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9491.003207,
+      "failures": []
+    },
+    {
+      "name": "Interior_Kitchen_WallControls",
+      "assembly": "Interior / Kitchen",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3894.269325,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ChairBack",
+      "assembly": "Interior / Recording",
+      "vertices": 22,
+      "faces": 30,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 36087.944118,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ChairSeat",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3830.833333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ChairSeatBracket",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 560.313222,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Caster_0",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933677,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Caster_1",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933676,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Caster_2",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933677,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Caster_3",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933676,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Caster_4",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.933676,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_GasLift",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 496.958285,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Hub",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 309.145041,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Mechanism",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2178.785776,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Spoke_0",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 602.777982,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Spoke_1",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 488.016293,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Spoke_2",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 555.268095,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Spoke_3",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 687.483116,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_Chair_Spoke_4",
+      "assembly": "Interior / Recording",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 524.804092,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleDesk",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 111567.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_00",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065201,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_01",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065201,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_02",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065191,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_03",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065115,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_04",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065123,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_05",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065109,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_06",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065123,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_07",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_08",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_09",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_10",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065123,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_11",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_12",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_13",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_14",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065123,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleKnob_15",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 40.065106,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleLeg_0",
+      "assembly": "Interior / Recording",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5046.680655,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleLeg_1",
+      "assembly": "Interior / Recording",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 6609.426401,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleMonitor_Foot",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 580.833333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleMonitor_Housing",
+      "assembly": "Interior / Recording",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 56514.382147,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleMonitor_Screen",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3451.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleMonitor_Stand",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 459.761595,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_ConsoleRightCheek",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3166.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_0",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.399963,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_1",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.400146,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_2",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.399963,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_3",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.399963,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_4",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.399963,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_5",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.399963,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderCap_6",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 14.400146,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_0",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_1",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_2",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_3",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_4",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_5",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_FaderTrack_6",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15.035312,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_LampBulb",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1373.433678,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_LampBulb_MountTo_LampShade",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 70.447798,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_LampCeilingMount",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 391.462562,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_LampShade",
+      "assembly": "Interior / Recording",
+      "vertices": 288,
+      "faces": 288,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 18403.144692,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_LampStem",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 594.490772,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneBand",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 157.997119,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneBase",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 7490.398548,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneBody",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3950.841631,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneCable",
+      "assembly": "Interior / Recording",
+      "vertices": 40,
+      "faces": 32,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 85.375483,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneCradle",
+      "assembly": "Interior / Recording",
+      "vertices": 50,
+      "faces": 42,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 343.314309,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MicrophoneStand",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1106.852065,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_MixingConsole",
+      "assembly": "Interior / Recording",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 53078.5,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_RearMicBase",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1780.679065,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_RearMicPole",
+      "assembly": "Interior / Recording",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 543.595259,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_SpeakerCabinet",
+      "assembly": "Interior / Recording",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 82927.872647,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_SpeakerIndicator",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 6.182948,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_SpeakerTweeter",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 992.232028,
+      "failures": []
+    },
+    {
+      "name": "Interior_Recording_SpeakerWoofer",
+      "assembly": "Interior / Recording",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5722.244242,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_ChairBack",
+      "assembly": "Interior / Workspace",
+      "vertices": 26,
+      "faces": 36,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 47427.838929,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_ChairLeftArm",
+      "assembly": "Interior / Workspace",
+      "vertices": 14,
+      "faces": 18,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2580.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_ChairRearBracket",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 749.418575,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_ChairSeat",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 15884.833333,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Caster_0",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.932893,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Caster_1",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.932893,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Caster_2",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.932893,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Caster_3",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.932892,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Caster_4",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 294.932892,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_GasLift",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 496.958574,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Hub",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 309.145327,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Spoke_0",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 580.236586,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Spoke_1",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 461.224522,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Spoke_2",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 583.923444,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Spoke_3",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 722.703138,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Chair_Spoke_4",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 549.773615,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_DeskBackApron",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 179042.522581,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_DeskLeg_0",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 7743.36267,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_DeskLeg_1",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 9510.428331,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_DeskLeg_2",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5047.516634,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_DeskTop",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 155150.666667,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 6890.308098,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_00",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.531906,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_01",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.461414,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_02",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.390923,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_03",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.320469,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_04",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.250065,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_05",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.1799,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_06",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.109428,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_07",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.039051,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_08",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.968527,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_09",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.898052,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_10",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.827721,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_11",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.757481,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_12",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.687023,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_00_13",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.616651,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_00",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.518872,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_01",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.448577,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_02",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.378158,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_03",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.307561,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_04",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.237351,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_05",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.166849,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_06",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.096578,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_07",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.026068,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_08",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.955593,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_09",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.88531,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_10",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.814863,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_11",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.744543,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_12",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.673989,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_01_13",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.603716,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_00",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.506113,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_01",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.435619,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_02",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.365302,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_03",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.294927,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_04",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.224456,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_05",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.154077,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_06",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.083748,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_07",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.013249,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_08",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.942927,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_09",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.87244,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_10",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.802064,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_11",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.731809,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_12",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.661296,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_02_13",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.590772,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_00",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.493095,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_01",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.42282,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_02",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.352405,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_03",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.281897,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_04",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.211509,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_05",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.141197,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_06",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.070764,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_07",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 17.000236,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_08",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.93003,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_09",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.859428,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_10",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.789123,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_11",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.718804,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_12",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.648222,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_Key_03_13",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 16.578017,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Keyboard_MountTo_DeskTop",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 161.51454,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LeftMonitor_Foot",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1628.916667,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LeftMonitor_Housing",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 65743.295004,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LeftMonitor_Screen",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 4234.0,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LeftMonitor_Stand",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 405.364229,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LumbarCushion",
+      "assembly": "Interior / Workspace",
+      "vertices": 14,
+      "faces": 18,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3293.333829,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_LumbarCushion_MountTo_ChairBack",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 63.676671,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_Mouse",
+      "assembly": "Interior / Workspace",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1469.059628,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_MouseCable",
+      "assembly": "Interior / Workspace",
+      "vertices": 30,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 20.637619,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_RightMonitor_Foot",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 6,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1266.416667,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_RightMonitor_Foot_MountTo_DeskTop",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 170.224088,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_RightMonitor_Housing",
+      "assembly": "Interior / Workspace",
+      "vertices": 40,
+      "faces": 56,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 59443.197313,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_RightMonitor_Screen",
+      "assembly": "Interior / Workspace",
+      "vertices": 8,
+      "faces": 8,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 3826.470806,
+      "failures": []
+    },
+    {
+      "name": "Interior_Workspace_RightMonitor_Stand",
+      "assembly": "Interior / Workspace",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 379.969265,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 antenna aerial",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 246.309479,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 antenna column",
+      "assembly": "Observatory",
+      "vertices": 10,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 12497.372589,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 antenna foot",
+      "assembly": "Observatory",
+      "vertices": 10,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 30345.421509,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 connected telescope mount",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1910.306731,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 continuous shell and optical aperture",
+      "assembly": "Observatory",
+      "vertices": 9554,
+      "faces": 9682,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2786232.72006,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 floor seated tripod leg 1",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1537.290983,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 floor seated tripod leg 2",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1005.071093,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 floor seated tripod leg 3",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 2529.023154,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 mounted roof rail",
+      "assembly": "Observatory",
+      "vertices": 16,
+      "faces": 20,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5403.0,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 mounted service door",
+      "assembly": "Observatory",
+      "vertices": 58,
+      "faces": 84,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5684.77166,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 seated chimney cap",
+      "assembly": "Observatory",
+      "vertices": 98,
+      "faces": 144,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 5918.52827,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 seated crown fitting",
+      "assembly": "Observatory",
+      "vertices": 66,
+      "faces": 96,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 31547.490913,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 solid supported base collar",
+      "assembly": "Observatory",
+      "vertices": 258,
+      "faces": 384,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 890976.249705,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 supported antenna platform",
+      "assembly": "Observatory",
+      "vertices": 10,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 113567.328969,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 supported chimney",
+      "assembly": "Observatory",
+      "vertices": 10,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 89582.222686,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope connected band 1",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1443.764089,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope connected band 2",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1226.99732,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope connected band 3",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1027.834384,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope connected band 4",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 846.309641,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope connected band 5",
+      "assembly": "Observatory",
+      "vertices": 20,
+      "faces": 12,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 682.401427,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope lens",
+      "assembly": "Observatory",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 989.266102,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 telescope optical barrel",
+      "assembly": "Observatory",
+      "vertices": 50,
+      "faces": 42,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 23831.962673,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 tripod contact pad 1",
+      "assembly": "Observatory",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 131.902464,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 tripod contact pad 2",
+      "assembly": "Observatory",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 131.90237,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 tripod contact pad 3",
+      "assembly": "Observatory",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 131.902492,
+      "failures": []
+    },
+    {
+      "name": "Observatory \u2022 tripod head",
+      "assembly": "Observatory",
+      "vertices": 482,
+      "faces": 512,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 1009.872826,
+      "failures": []
+    },
+    {
+      "name": "Setting \u2022 solid wooden tabletop",
+      "assembly": "Setting",
+      "vertices": 24,
+      "faces": 22,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0,
+      "signed_volume_px3": 579003376.141996,
+      "failures": []
+    }
+  ],
+  "object_failures": [],
+  "support_contacts": [
+    {
+      "parts": [
+        "Interior_Gaming_ChairBack",
+        "Interior_Gaming_ChairSeat"
+      ],
+      "surface_gap_px": 0.018913,
+      "intersecting_surfaces": false
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_GasLift",
+        "Interior_Gaming_Chair_Hub"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_ChairSeat",
+        "Interior_Gaming_Chair_GasLift"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Hub",
+        "Interior_Gaming_Chair_Spoke_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Spoke_0",
+        "Interior_Gaming_Chair_Caster_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Hub",
+        "Interior_Gaming_Chair_Spoke_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Spoke_1",
+        "Interior_Gaming_Chair_Caster_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Hub",
+        "Interior_Gaming_Chair_Spoke_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Spoke_2",
+        "Interior_Gaming_Chair_Caster_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Hub",
+        "Interior_Gaming_Chair_Spoke_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Spoke_3",
+        "Interior_Gaming_Chair_Caster_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Hub",
+        "Interior_Gaming_Chair_Spoke_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Chair_Spoke_4",
+        "Interior_Gaming_Chair_Caster_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ChairBack",
+        "Interior_Recording_ChairSeat"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_GasLift",
+        "Interior_Recording_Chair_Hub"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ChairSeat",
+        "Interior_Recording_Chair_Mechanism"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Mechanism",
+        "Interior_Recording_Chair_GasLift"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Hub",
+        "Interior_Recording_Chair_Spoke_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Spoke_0",
+        "Interior_Recording_Chair_Caster_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Hub",
+        "Interior_Recording_Chair_Spoke_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Spoke_1",
+        "Interior_Recording_Chair_Caster_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Hub",
+        "Interior_Recording_Chair_Spoke_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Spoke_2",
+        "Interior_Recording_Chair_Caster_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Hub",
+        "Interior_Recording_Chair_Spoke_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Spoke_3",
+        "Interior_Recording_Chair_Caster_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Hub",
+        "Interior_Recording_Chair_Spoke_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_Chair_Spoke_4",
+        "Interior_Recording_Chair_Caster_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_ChairBack",
+        "Interior_Workspace_ChairSeat"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_GasLift",
+        "Interior_Workspace_Chair_Hub"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_ChairSeat",
+        "Interior_Workspace_Chair_GasLift"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Hub",
+        "Interior_Workspace_Chair_Spoke_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Spoke_0",
+        "Interior_Workspace_Chair_Caster_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Hub",
+        "Interior_Workspace_Chair_Spoke_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Spoke_1",
+        "Interior_Workspace_Chair_Caster_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Hub",
+        "Interior_Workspace_Chair_Spoke_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Spoke_2",
+        "Interior_Workspace_Chair_Caster_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Hub",
+        "Interior_Workspace_Chair_Spoke_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Spoke_3",
+        "Interior_Workspace_Chair_Caster_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Hub",
+        "Interior_Workspace_Chair_Spoke_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Chair_Spoke_4",
+        "Interior_Workspace_Chair_Caster_4"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_DeskTop",
+        "Interior_Gaming_DeskLeg_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_DeskTop",
+        "Interior_Gaming_DeskLeg_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleDesk",
+        "Interior_Recording_ConsoleLeg_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleDesk",
+        "Interior_Recording_ConsoleLeg_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_DeskTop",
+        "Interior_Workspace_DeskLeg_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_DeskTop",
+        "Interior_Workspace_DeskLeg_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_DeskTop",
+        "Interior_Workspace_DeskLeg_2"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_MainMonitor_Housing",
+        "Interior_Gaming_MainMonitor_Screen"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_MainMonitor_Housing",
+        "Interior_Gaming_MainMonitor_Stand"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_MainMonitor_Stand",
+        "Interior_Gaming_MainMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleMonitor_Housing",
+        "Interior_Recording_ConsoleMonitor_Screen"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleMonitor_Housing",
+        "Interior_Recording_ConsoleMonitor_Stand"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleMonitor_Stand",
+        "Interior_Recording_ConsoleMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_LeftMonitor_Housing",
+        "Interior_Workspace_LeftMonitor_Screen"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_LeftMonitor_Housing",
+        "Interior_Workspace_LeftMonitor_Stand"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_LeftMonitor_Stand",
+        "Interior_Workspace_LeftMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_RightMonitor_Housing",
+        "Interior_Workspace_RightMonitor_Screen"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_RightMonitor_Housing",
+        "Interior_Workspace_RightMonitor_Stand"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_RightMonitor_Stand",
+        "Interior_Workspace_RightMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_FryingPan",
+        "Interior_Kitchen_PanHandle"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CookingPot",
+        "Interior_Kitchen_PotHandle_0"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CookingPot",
+        "Interior_Kitchen_PotHandle_1"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CounterTop",
+        "Interior_Kitchen_CabinetBody"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CabinetBody",
+        "Interior_Kitchen_LeftCreamDoor"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CabinetBody",
+        "Interior_Kitchen_RightCreamDoor"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_ChairLeftArm_MountTo_ChairSeat",
+        "Interior_Gaming_ChairLeftArm"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_ChairLeftArm_MountTo_ChairSeat",
+        "Interior_Gaming_ChairSeat"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_ComputerCase_MountTo_DeskTop",
+        "Interior_Gaming_ComputerCase"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_ComputerCase_MountTo_DeskTop",
+        "Interior_Gaming_DeskTop"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_00",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_01",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_02",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_03",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_04",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_05",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_06",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_07",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_08",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_09",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_10",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_11",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_00_12",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_00",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_01",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_02",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_03",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_04",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_05",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_06",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_07",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_08",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_09",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_10",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_11",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_01_12",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_00",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_01",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_02",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_03",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_04",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_05",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_06",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_07",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_08",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_09",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_10",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_11",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_02_12",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_00",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_01",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_02",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_03",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_04",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_05",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_06",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_07",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_08",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_09",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_10",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_11",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_Keyboard_Key_03_12",
+        "Interior_Gaming_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_MainMonitor_Foot_MountTo_DeskTop",
+        "Interior_Gaming_MainMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_MainMonitor_Foot_MountTo_DeskTop",
+        "Interior_Gaming_DeskTop"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_Burner_3_MountTo_RightHob",
+        "Interior_Kitchen_Burner_3"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_Burner_3_MountTo_RightHob",
+        "Interior_Kitchen_RightHob"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_0_0",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_0_1",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_0_2",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_1_0",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_1_1",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_1_2",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_2_0",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_2_1",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_2_2",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_3_0",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_3_1",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_ControlLamp_3_2",
+        "Interior_Kitchen_WallControls"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CookingPot_MountTo_RightHob",
+        "Interior_Kitchen_CookingPot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_CookingPot_MountTo_RightHob",
+        "Interior_Kitchen_RightHob"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_FryingPan_MountTo_LeftHob",
+        "Interior_Kitchen_FryingPan"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_FryingPan_MountTo_LeftHob",
+        "Interior_Kitchen_LeftHob"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_00",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_01",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_02",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_03",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_04",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_05",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_06",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_07",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_08",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_09",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_10",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_11",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_12",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_13",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_14",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_ConsoleKnob_15",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_0",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_1",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_2",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_3",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_4",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_5",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderCap_6",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_0",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_1",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_2",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_3",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_4",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_5",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_FaderTrack_6",
+        "Interior_Recording_MixingConsole"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_LampBulb_MountTo_LampShade",
+        "Interior_Recording_LampBulb"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_LampBulb_MountTo_LampShade",
+        "Interior_Recording_LampShade"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_LampCeilingMount",
+        "Interior_Recording_LampStem"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Recording_LampCeilingMount",
+        "Architecture \u2022 continuous middle storey"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_00",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_01",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_02",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_03",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_04",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_05",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_06",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_07",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_08",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_09",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_10",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_11",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_12",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_00_13",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_00",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_01",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_02",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_03",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_04",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_05",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_06",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_07",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_08",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_09",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_10",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_11",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_12",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_01_13",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_00",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_01",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_02",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_03",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_04",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_05",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_06",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_07",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_08",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_09",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_10",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_11",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_12",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_02_13",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_00",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_01",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_02",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_03",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_04",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_05",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_06",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_07",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_08",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_09",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_10",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_11",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_12",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_Key_03_13",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_MountTo_DeskTop",
+        "Interior_Workspace_Keyboard"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_Keyboard_MountTo_DeskTop",
+        "Interior_Workspace_DeskTop"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_LumbarCushion_MountTo_ChairBack",
+        "Interior_Workspace_LumbarCushion"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_LumbarCushion_MountTo_ChairBack",
+        "Interior_Workspace_ChairBack"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_RightMonitor_Foot_MountTo_DeskTop",
+        "Interior_Workspace_RightMonitor_Foot"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Workspace_RightMonitor_Foot_MountTo_DeskTop",
+        "Interior_Workspace_DeskTop"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_LeftPoster_Frame",
+        "Architecture \u2022 continuous upper storey"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_RightPoster_Frame",
+        "Architecture \u2022 continuous upper storey"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Kitchen_WallControls",
+        "Architecture \u2022 continuous ground storey"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_LeftPoster_Frame",
+        "Interior_Gaming_LeftPoster_Print"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    },
+    {
+      "parts": [
+        "Interior_Gaming_RightPoster_Frame",
+        "Interior_Gaming_RightPoster_Print"
+      ],
+      "surface_gap_px": 0.0,
+      "intersecting_surfaces": true
+    }
+  ],
+  "support_gaps_over_half_px": [],
+  "missing_support_pairs": []
+}

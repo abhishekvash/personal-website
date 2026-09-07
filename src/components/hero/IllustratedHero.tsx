@@ -1,7 +1,18 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ClientOnly } from "@tanstack/react-router";
+import {
+  Component,
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import type { ErrorInfo, ReactNode } from "react";
 
-import { StudioScene } from "./StudioScene";
-
+const StudioScene = lazy(() => import("./StudioScene"));
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
 const serverReducedMotion = () => true;
 const serverVisibility = () => false;
@@ -19,9 +30,32 @@ function subscribeVisibility(onChange: () => void) {
   return () => document.removeEventListener("visibilitychange", onChange);
 }
 
+class SceneErrorBoundary extends Component<
+  { children: ReactNode; onError: (error: unknown) => void },
+  { failed: boolean }
+> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: Error, _info: ErrorInfo) {
+    this.props.onError(error);
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
 export function IllustratedHero() {
+  const id = useId();
   const artworkRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [status, setStatus] = useState<"loading" | "ready" | "failed">(
+    "loading",
+  );
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotion,
@@ -33,12 +67,20 @@ export function IllustratedHero() {
     serverVisibility,
   );
   const motionPlaying = isInView && isVisible && !reducedMotion;
+  const handleReady = useCallback(() => {
+    setStatus((current) => (current === "failed" ? current : "ready"));
+  }, []);
+  const handleError = useCallback((error: unknown) => {
+    console.error(
+      "The 3D studio could not render. Showing the original artwork.",
+      error,
+    );
+    setStatus("failed");
+  }, []);
 
   useEffect(() => {
     const artwork = artworkRef.current;
-    if (!artwork) return;
-    // Stay static when visibility observation is unavailable.
-    if (!("IntersectionObserver" in window)) return;
+    if (!artwork || !("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(([entry]) => {
       setIsInView(entry.isIntersecting);
     });
@@ -47,16 +89,54 @@ export function IllustratedHero() {
   }, []);
 
   return (
-    <main
-      className="group/hero grid min-h-svh grid-cols-1 items-start bg-scene-paper pb-20 text-scene-ink lg:grid-cols-2"
-      aria-label="Illustrated creative studio"
-      data-motion={motionPlaying ? "playing" : "paused"}
-    >
+    <main className="studio-page" aria-label="Illustrated creative studio">
       <figure
         ref={artworkRef}
-        className="relative col-span-full m-0 w-full min-w-0 lg:w-3/4 lg:justify-self-end"
+        className="studio-artwork"
+        aria-labelledby={`${id}-title`}
+        aria-describedby={`${id}-description`}
+        data-scene-status={status}
+        data-motion={motionPlaying ? "playing" : "paused"}
       >
-        <StudioScene />
+        <img
+          className="studio-reference"
+          src="/scene/reference.png"
+          width="1536"
+          height="1024"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="sync"
+        />
+        {status !== "failed" ? (
+          <SceneErrorBoundary onError={handleError}>
+            <ClientOnly fallback={null}>
+              <Suspense fallback={null}>
+                <StudioScene
+                  motionPlaying={motionPlaying}
+                  onReady={handleReady}
+                  onError={handleError}
+                />
+              </Suspense>
+            </ClientOnly>
+          </SceneErrorBoundary>
+        ) : null}
+        <figcaption className="sr-only">
+          <span id={`${id}-title`}>A little world of curiosity.</span>{" "}
+          <span id={`${id}-description`}>
+            A blue and cream, three-storey creative studio beneath an
+            observatory. Its open rooms contain a computer desk, a recording
+            studio, a workspace and a tiny kitchen. A pink flowering bonsai
+            stands beside it on a wooden tabletop against a warm beige
+            background, all illustrated in textured risograph inks and
+            reconstructed in three dimensions.
+          </span>
+        </figcaption>
+        <span className="sr-only" role="status">
+          {status === "failed"
+            ? "The interactive scene is unavailable. The original artwork is displayed."
+            : ""}
+        </span>
       </figure>
     </main>
   );

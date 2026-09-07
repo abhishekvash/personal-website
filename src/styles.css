@@ -8,54 +8,92 @@
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
-
   --color-scene-paper: #fbe3be;
   --color-scene-ink: #173f6d;
-  --color-scene-screen: #ffb9b4;
-  --color-scene-steam: #fff0d8;
-  --color-scene-petal: #e67d8c;
+}
 
-  --animate-studio-glow: studio-glow 9s ease-in-out infinite alternate;
-  --animate-studio-steam: studio-steam 7s ease-in-out infinite;
-  --animate-studio-petal: studio-petal 12s linear infinite;
+.studio-page {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-scene-paper);
+  color: var(--color-scene-ink);
+}
 
-  @keyframes studio-glow {
-    from {
-      opacity: 0.015;
-    }
-    to {
-      opacity: 0.13;
-    }
-  }
+.studio-artwork {
+  position: relative;
+  isolation: isolate;
+  width: min(100vw, 150svh);
+  aspect-ratio: 3 / 2;
+  margin: 0;
+  overflow: hidden;
+}
 
-  @keyframes studio-steam {
-    0% {
-      opacity: 0;
-      transform: translateY(3px);
-    }
-    30% {
-      opacity: 0.26;
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-24px);
-    }
-  }
+.studio-reference {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
 
-  @keyframes studio-petal {
-    0% {
-      opacity: 0;
-      transform: translate(0, 0) rotate(0deg);
-    }
-    15% {
-      opacity: 0.65;
-    }
-    80% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-27px, 67px) rotate(85deg);
-    }
-  }
+.studio-artwork[data-scene-status="ready"] .studio-reference {
+  visibility: hidden;
+}
+
+.studio-viewer {
+  position: absolute;
+  inset: 0;
+  outline: none;
+}
+
+.studio-viewer:focus-visible::after {
+  position: absolute;
+  z-index: 3;
+  inset: 5px;
+  border: 1px solid var(--color-scene-ink);
+  border-radius: 3px;
+  pointer-events: none;
+  content: "";
+}
+
+.studio-canvas canvas {
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.studio-canvas canvas:active {
+  cursor: grabbing;
+}
+
+.studio-reset {
+  position: absolute;
+  z-index: 3;
+  bottom: 24px;
+  left: 24px;
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgb(23 63 109 / 20%);
+  border-radius: 4px;
+  padding: 9px 12px;
+  background: rgb(251 227 190 / 92%);
+  color: var(--color-scene-ink);
+  font: 600 12px / 1.4 var(--font-sans);
+  cursor: pointer;
+}
+
+.studio-reset:hover {
+  border-color: rgb(23 63 109 / 55%);
+  background: var(--color-scene-paper);
+}
+
+.studio-reset:focus-visible {
+  outline: 2px solid var(--color-scene-ink);
+  outline-offset: 3px;
 }

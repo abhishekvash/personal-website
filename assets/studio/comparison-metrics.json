@@ -1,0 +1,525 @@
+{
+  "source": "landing page.png",
+  "browser_capture": "assets/studio/browser-home.png",
+  "frame_size": [
+    1536,
+    1024
+  ],
+  "measurement": "Absolute differences of RGB channels in 8-bit sRGB code values.",
+  "pixel_threshold": "Mean absolute RGB-channel difference strictly below 12.",
+  "proves_four_pixel_alignment": false,
+  "alignment_note": "Appearance metrics are not proof of alignment within 4 pixels. Optional patch matching measures sampled image features only, not full silhouettes or 3D depth. Inspect regional crops and orbit views separately.",
+  "global": {
+    "mae_0_255": 2.425501,
+    "percent_pixels_mean_absdiff_lt_12": 96.862221,
+    "pixel_count": 1572864
+  },
+  "regions": {
+    "observatory": {
+      "label": "Observatory",
+      "bounds_xyxy": [
+        570,
+        20,
+        923,
+        287
+      ],
+      "mae_0_255": 1.088572,
+      "percent_pixels_mean_absdiff_lt_12": 98.321503,
+      "pixel_count": 94251
+    },
+    "gaming": {
+      "label": "Gaming",
+      "bounds_xyxy": [
+        482,
+        296,
+        988,
+        524
+      ],
+      "mae_0_255": 0.843021,
+      "percent_pixels_mean_absdiff_lt_12": 97.807884,
+      "pixel_count": 115368
+    },
+    "recording": {
+      "label": "Recording",
+      "bounds_xyxy": [
+        480,
+        504,
+        979,
+        696
+      ],
+      "mae_0_255": 0.545497,
+      "percent_pixels_mean_absdiff_lt_12": 98.505344,
+      "pixel_count": 95808
+    },
+    "workstation": {
+      "label": "Workstation",
+      "bounds_xyxy": [
+        466,
+        713,
+        769,
+        949
+      ],
+      "mae_0_255": 0.296862,
+      "percent_pixels_mean_absdiff_lt_12": 99.134363,
+      "pixel_count": 71508
+    },
+    "kitchen": {
+      "label": "Kitchen",
+      "bounds_xyxy": [
+        775,
+        680,
+        1090,
+        911
+      ],
+      "mae_0_255": 0.549458,
+      "percent_pixels_mean_absdiff_lt_12": 98.732907,
+      "pixel_count": 72765
+    },
+    "bonsai": {
+      "label": "Bonsai",
+      "bounds_xyxy": [
+        947,
+        0,
+        1536,
+        831
+      ],
+      "mae_0_255": 6.684286,
+      "percent_pixels_mean_absdiff_lt_12": 92.067773,
+      "pixel_count": 489459
+    },
+    "table-feet": {
+      "label": "Table + feet",
+      "bounds_xyxy": [
+        240,
+        823,
+        1138,
+        1024
+      ],
+      "mae_0_255": 0.779501,
+      "percent_pixels_mean_absdiff_lt_12": 98.58558,
+      "pixel_count": 180498
+    }
+  },
+  "orbit_captures_present": [
+    "left",
+    "right",
+    "up",
+    "down",
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right"
+  ],
+  "orbit_captures_missing": [],
+  "landmark_alignment": {
+    "method": "For each original 20 \u00d7 20 RGB patch, compare browser patches at integer translations from -8 through +8 pixels on each axis. Choose minimum MAE; ties prefer the smallest Euclidean displacement.",
+    "scope": "Sampled image-feature alignment only; not full-silhouette alignment or 3D depth.",
+    "confidence_note": "Confidence margin is second-best MAE minus best MAE. A larger gap indicates a more distinct match; it is not a calibrated probability.",
+    "flag_thresholds": {
+      "displacement_px_greater_than": 4,
+      "patch_mae_greater_than": 25
+    },
+    "landmarks": [
+      {
+        "name": "Dome cap",
+        "source_center_xy": [
+          729,
+          37
+        ],
+        "best_browser_center_xy": [
+          729,
+          37
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 2.455833,
+        "second_best_patch_mae_0_255": 11.5575,
+        "confidence_margin_mae": 9.101667,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Aperture top",
+        "source_center_xy": [
+          747,
+          77
+        ],
+        "best_browser_center_xy": [
+          747,
+          77
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.240833,
+        "second_best_patch_mae_0_255": 11.171667,
+        "confidence_margin_mae": 10.930833,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Telescope lens",
+        "source_center_xy": [
+          741,
+          125
+        ],
+        "best_browser_center_xy": [
+          741,
+          125
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 1.4775,
+        "second_best_patch_mae_0_255": 20.735,
+        "confidence_margin_mae": 19.2575,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Aerial",
+        "source_center_xy": [
+          549,
+          187
+        ],
+        "best_browser_center_xy": [
+          551,
+          188
+        ],
+        "best_translation_xy": [
+          2,
+          1
+        ],
+        "displacement_px": 2.236068,
+        "best_patch_mae_0_255": 20.44,
+        "second_best_patch_mae_0_255": 20.459167,
+        "confidence_margin_mae": 0.019167,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Upper roof",
+        "source_center_xy": [
+          396,
+          280
+        ],
+        "best_browser_center_xy": [
+          396,
+          280
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 7.905,
+        "second_best_patch_mae_0_255": 13.765,
+        "confidence_margin_mae": 5.86,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Upper port",
+        "source_center_xy": [
+          435,
+          370
+        ],
+        "best_browser_center_xy": [
+          435,
+          370
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 2.8075,
+        "confidence_margin_mae": 2.8075,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Gaming screen",
+        "source_center_xy": [
+          725,
+          361
+        ],
+        "best_browser_center_xy": [
+          725,
+          361
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 6.019167,
+        "confidence_margin_mae": 6.019167,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Gaming chair",
+        "source_center_xy": [
+          674,
+          396
+        ],
+        "best_browser_center_xy": [
+          674,
+          396
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.775833,
+        "second_best_patch_mae_0_255": 10.500833,
+        "confidence_margin_mae": 9.725,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Mic",
+        "source_center_xy": [
+          635,
+          584
+        ],
+        "best_browser_center_xy": [
+          635,
+          584
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 7.3075,
+        "second_best_patch_mae_0_255": 16.025,
+        "confidence_margin_mae": 8.7175,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Lamp",
+        "source_center_xy": [
+          682,
+          550
+        ],
+        "best_browser_center_xy": [
+          682,
+          550
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 8.124167,
+        "confidence_margin_mae": 8.124167,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Console",
+        "source_center_xy": [
+          867,
+          605
+        ],
+        "best_browser_center_xy": [
+          867,
+          605
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 20.885833,
+        "confidence_margin_mae": 20.885833,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Middle port",
+        "source_center_xy": [
+          405,
+          558
+        ],
+        "best_browser_center_xy": [
+          405,
+          558
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 4.9275,
+        "confidence_margin_mae": 4.9275,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Workscreen",
+        "source_center_xy": [
+          537,
+          781
+        ],
+        "best_browser_center_xy": [
+          537,
+          781
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 6.195,
+        "confidence_margin_mae": 6.195,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Pan",
+        "source_center_xy": [
+          858,
+          779
+        ],
+        "best_browser_center_xy": [
+          858,
+          779
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 6.039167,
+        "second_best_patch_mae_0_255": 11.991667,
+        "confidence_margin_mae": 5.9525,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Pot",
+        "source_center_xy": [
+          953,
+          771
+        ],
+        "best_browser_center_xy": [
+          953,
+          771
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.0,
+        "second_best_patch_mae_0_255": 5.296667,
+        "confidence_margin_mae": 5.296667,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Drawer",
+        "source_center_xy": [
+          999,
+          837
+        ],
+        "best_browser_center_xy": [
+          999,
+          837
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.186667,
+        "second_best_patch_mae_0_255": 8.975833,
+        "confidence_margin_mae": 8.789167,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Foot",
+        "source_center_xy": [
+          471,
+          984
+        ],
+        "best_browser_center_xy": [
+          471,
+          984
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 6.983333,
+        "second_best_patch_mae_0_255": 11.906667,
+        "confidence_margin_mae": 4.923333,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Planter port",
+        "source_center_xy": [
+          1180,
+          701
+        ],
+        "best_browser_center_xy": [
+          1180,
+          701
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 0.441667,
+        "second_best_patch_mae_0_255": 8.805,
+        "confidence_margin_mae": 8.363333,
+        "flagged": false,
+        "reasons": []
+      },
+      {
+        "name": "Planter base",
+        "source_center_xy": [
+          1314,
+          820
+        ],
+        "best_browser_center_xy": [
+          1314,
+          820
+        ],
+        "best_translation_xy": [
+          0,
+          0
+        ],
+        "displacement_px": 0.0,
+        "best_patch_mae_0_255": 20.065,
+        "second_best_patch_mae_0_255": 29.224167,
+        "confidence_margin_mae": 9.159167,
+        "flagged": false,
+        "reasons": []
+      }
+    ],
+    "flagged_names": []
+  }
+}

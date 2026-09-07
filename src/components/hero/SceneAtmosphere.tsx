@@ -1,58 +1,134 @@
-/** Small accents only: the traced building and tree never move. */
-export function SceneAtmosphere() {
-  return (
-    <g
-      data-layer="ambient-accents"
-      className="pointer-events-none motion-reduce:hidden [&_path]:[animation-play-state:paused] group-data-[motion=playing]/hero:[&_path]:[animation-play-state:running]"
-    >
-      <g data-layer="screen-light" className="fill-scene-screen">
-        <path
-          className="animate-studio-glow opacity-0"
-          d="M681 335L772 329L776 391L687 401Z"
-        />
-        <path
-          className="animate-studio-glow opacity-0 [animation-delay:-4s]"
-          d="M858 518L929 513L935 583L864 592Z"
-        />
-        <path
-          className="animate-studio-glow opacity-0 [animation-delay:-7s]"
-          d="M499 751L577 746L578 800L501 807Z"
-        />
-      </g>
-      <g data-layer="cooking-steam" className="fill-scene-steam">
-        <g transform="translate(855 768)">
-          <path
-            className="animate-studio-steam opacity-0"
-            d="M-5 0C-17-13 10-22-1-35C-13-49 8-57 1-72C18-58-5-46 8-34C21-18-3-10 6 0Z"
-          />
-        </g>
-        <g transform="translate(951 743)">
-          <path
-            className="animate-studio-steam opacity-0 [animation-delay:-3.5s] [animation-duration:8s]"
-            d="M-3 0C-12-12 10-20 1-31C-10-44 9-53 2-63C18-48-2-42 9-29C18-16-3-8 5 0Z"
-          />
-        </g>
-      </g>
-      <g data-layer="drifting-petals" className="fill-scene-petal">
-        <g transform="translate(1097 470)">
-          <path
-            className="animate-studio-petal opacity-0"
-            d="M0 0C-11-8-14 1-7 8C-2 11 4 8 0 0Z"
-          />
-        </g>
-        <g transform="translate(1440 490)">
-          <path
-            className="animate-studio-petal opacity-0 [animation-delay:-4s] [animation-duration:15s]"
-            d="M0 0C-8-10-15-3-10 5C-6 12 1 8 0 0Z"
-          />
-        </g>
-        <g transform="translate(1190 544)">
-          <path
-            className="animate-studio-petal opacity-0 [animation-delay:-9s] [animation-duration:17s]"
-            d="M0 0C-7-8-12-2-7 5C-1 10 4 7 0 0Z"
-          />
-        </g>
-      </g>
-    </g>
-  );
+import { useFrame } from "@react-three/fiber";
+import { useLayoutEffect, useRef } from "react";
+import { Mesh } from "three";
+import type { Group, Material, Object3D, Vector3 } from "three";
+
+type MotionPart = {
+  object: Object3D;
+  position: Vector3;
+  rotation: number;
+  kind: "steam" | "petal" | "glow";
+  duration: number;
+  phase: number;
+  drift: number;
+  rise: number;
+  materials: { material: Material; opacity: number }[];
+};
+
+function finiteValue(value: unknown, fallback: number) {
+  return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function collectMotion(scene: Group) {
+  const parts: MotionPart[] = [];
+  const restore: (() => void)[] = [];
+  scene.traverse((object) => {
+    const kind = object.name.startsWith("Steam")
+      ? "steam"
+      : object.name.startsWith("FallingPetal")
+        ? "petal"
+        : object.name.startsWith("ScreenGlow")
+          ? "glow"
+          : null;
+    if (!kind) return;
+    const options = (object.userData.motion ?? {}) as Record<string, unknown>;
+    const materials: MotionPart["materials"] = [];
+    object.traverse((child) => {
+      if (!(child instanceof Mesh)) return;
+      const originalMaterial = child.material;
+      const source = Array.isArray(child.material)
+        ? child.material
+        : [child.material];
+      const cloned = source.map((material) => {
+        const copy = material.clone();
+        materials.push({ material: copy, opacity: material.opacity });
+        copy.transparent = true;
+        copy.depthWrite = false;
+        copy.opacity = kind === "steam" ? material.opacity : 0;
+        return copy;
+      });
+      child.material = Array.isArray(child.material) ? cloned : cloned[0];
+      restore.push(() => {
+        child.material = originalMaterial;
+        cloned.forEach((material) => material.dispose());
+      });
+    });
+    parts.push({
+      object,
+      position: object.position.clone(),
+      rotation: object.rotation.z,
+      kind,
+      duration: Math.max(
+        1,
+        finiteValue(options.duration, kind === "steam" ? 7 : 15),
+      ),
+      phase: finiteValue(options.phase, 0),
+      drift: finiteValue(options.drift, kind === "steam" ? 3 : 15),
+      rise: finiteValue(options.rise, kind === "steam" ? 10 : -55),
+      materials,
+    });
+  });
+  return {
+    parts,
+    dispose: () => {
+      restore.forEach((reset) => reset());
+      for (const part of parts) {
+        part.object.position.copy(part.position);
+        part.object.rotation.z = part.rotation;
+      }
+    },
+  };
+}
+
+export function SceneAtmosphere({
+  scene,
+  playing,
+}: {
+  scene: Group;
+  playing: boolean;
+}) {
+  const parts = useRef<MotionPart[]>([]);
+  const elapsed = useRef(0);
+
+  useLayoutEffect(() => {
+    const motion = collectMotion(scene);
+    parts.current = motion.parts;
+    elapsed.current = 0;
+    return () => {
+      parts.current = [];
+      motion.dispose();
+    };
+  }, [scene]);
+
+  useFrame((_state, delta) => {
+    if (!playing) return;
+    elapsed.current += Math.min(delta, 0.05);
+    for (const part of parts.current) {
+      if (part.kind === "steam") {
+        const angle = (elapsed.current / part.duration) * Math.PI * 2;
+        part.object.position.copy(part.position);
+        part.object.position.x += Math.sin(angle) * part.drift;
+        part.object.position.y += (1 - Math.cos(angle)) * part.rise;
+        for (const { material, opacity } of part.materials) {
+          material.opacity = opacity * (0.9 + Math.cos(angle) * 0.1);
+        }
+        continue;
+      }
+      const cycle = (elapsed.current / part.duration + part.phase) % 1;
+      const fadeIn = Math.min(elapsed.current / 2, 1);
+      const envelope = Math.sin(cycle * Math.PI) * fadeIn;
+      if (part.kind !== "glow") {
+        part.object.position.copy(part.position);
+        part.object.position.x += Math.sin(cycle * Math.PI) * part.drift;
+        part.object.position.y += cycle * part.rise;
+        part.object.rotation.z = part.rotation + cycle * 1.3;
+      }
+      for (const { material, opacity } of part.materials) {
+        material.opacity =
+          opacity * envelope * (part.kind === "glow" ? 0.045 : 0.6);
+      }
+    }
+  });
+
+  return null;
 }

@@ -1,4 +1,10 @@
 node_modules
+.pnpm-store/
+*.blend1
+assets/studio/projection.npz
+assets/studio/world-projection.npz
+assets/studio/world-visible-owners.npy
+assets/studio/visible-owners.npy
 .DS_Store
 dist
 dist-ssr
@@ -11,3 +17,7 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+
+# Blender/Python authoring caches.
+__pycache__/
+*.pyc

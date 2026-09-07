@@ -1,10 +1,10 @@
-import * as Sentry from '@sentry/tanstackstart-react'
+import * as Sentry from "@sentry/tanstackstart-react";
 
 const sentryDsn =
-  import.meta.env?.VITE_SENTRY_DSN ?? process.env.VITE_SENTRY_DSN
+  import.meta.env?.VITE_SENTRY_DSN ?? process.env.VITE_SENTRY_DSN;
 
 if (!sentryDsn) {
-  console.warn('VITE_SENTRY_DSN is not defined. Sentry is not running.')
+  console.warn("VITE_SENTRY_DSN is not defined. Sentry is not running.");
 } else {
   Sentry.init({
     dsn: sentryDsn,
@@ -13,5 +13,5 @@ if (!sentryDsn) {
       httpBodies: [],
     },
     tracesSampleRate: 0.1,
-  })
+  });
 }

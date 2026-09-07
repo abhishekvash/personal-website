@@ -1,6 +1,8 @@
 allowBuilds:
   esbuild: true
   lightningcss: true
-  '@sentry/cli': true
+  "@sentry/cli": true
   sharp: true
   workerd: true
+  unrs-resolver: true
+  core-js: false
