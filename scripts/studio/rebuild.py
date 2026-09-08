@@ -1,7 +1,6 @@
 """Rebuild the illustrated studio and its browser assets in dependency order."""
 
 import argparse
-import importlib
 import os
 from pathlib import Path
 import shlex
@@ -14,19 +13,16 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 
 
-def require_image_dependencies():
-    missing = []
-    for module, package in (("PIL", "Pillow"), ("numpy", "numpy")):
-        try:
-            importlib.import_module(module)
-        except ImportError:
-            missing.append(package)
-    if missing:
-        install = shlex.join([sys.executable, "-m", "pip", "install", *missing])
+def require_image_dependencies(python):
+    probe = "import PIL, numpy, scipy"
+    result = subprocess.run([python, "-c", probe], capture_output=True, text=True)
+    if result.returncode != 0:
+        install = shlex.join(["uv", "pip", "install", "--python", python, "-r",
+                              str(HERE / "requirements.txt")])
         raise RuntimeError(
-            f"Cannot import {', '.join(missing)} with {sys.executable}. "
-            "Preparation and atlas baking use this same Python interpreter. "
-            f"Install its dependencies with: {install}"
+            f"{python} cannot import Pillow, NumPy and SciPy. "
+            "Preparation, fitting and atlas baking use this interpreter. "
+            f"Create it with: uv venv .venv-studio --python 3.13 && {install}"
         )
 
 
@@ -41,7 +37,7 @@ def resolve_blender(value):
 
 
 def run_stage(number, description, command):
-    print(f"[{number}/9] {description}", flush=True)
+    print(f"[{number}/5] {description}", flush=True)
     try:
         subprocess.run(command, cwd=ROOT, check=True)
     except subprocess.CalledProcessError as error:
@@ -67,14 +63,21 @@ def main():
         help="Blender executable or path; defaults to BLENDER, then blender on PATH.",
     )
     parser.add_argument("--preview", action="store_true", help="Keep the rebuilt world scene in development preview until visual review.")
+    default_python = ROOT / ".venv-studio/bin/python"
+    parser.add_argument(
+        "--python",
+        default=str(default_python) if default_python.is_file() else sys.executable,
+        metavar="EXECUTABLE",
+        help="Python with Pillow, NumPy and SciPy for the image stages; defaults to .venv-studio when present.",
+    )
     args = parser.parse_args()
     try:
-        require_image_dependencies()
+        require_image_dependencies(args.python)
         blender = resolve_blender(args.blender)
         if not (ROOT / "landing page.png").is_file():
             raise RuntimeError(f"Missing source artwork: {ROOT / 'landing page.png'}")
 
-        python = sys.executable
+        python = args.python
         build = [
             blender,
             "--background",
@@ -82,18 +85,13 @@ def main():
             "--python-exit-code", "1",
             "--python", str(HERE / "build_world.py"),
         ]
-        run_stage(1, "Prepare source artwork and material samples",
+        run_stage(1, "Solve the reference camera and proportions from the painting",
+                  [python, str(HERE / "world_fit.py"), "--write"])
+        run_stage(2, "Prepare source artwork and material samples",
                   [python, str(HERE / "prepare.py")])
-        run_stage(2, "Extend clean source room materials", [python, str(HERE / "world_room_paint.py")])
-        run_stage(3, "Separate observatory artwork surfaces", [python, str(HERE / "world_prepare.py")])
-        run_stage(4, "Build shared world geometry and surface ownership", build)
-        contact = [blender, "--background", "--factory-startup", "--python-exit-code", "1", "--python", str(HERE / "world_floor_ao.py")]
-        run_stage(5, "Bake physical furniture contact shading", contact)
-        run_stage(6, "Bake owned artwork onto surfaces", [python, str(HERE / "bake_world.py")])
-        shadow = [blender, "--background", "--python-exit-code", "1", "--python", str(HERE / "world_shadows.py")]
-        run_stage(7, "Cast shadows from the actual solids", shadow)
-        run_stage(8, "Combine shadows with source wood grain", [python, str(HERE / "compose_world_table.py")])
-        run_stage(9, "Apply atlases and export the browser scene",
+        run_stage(3, "Build world geometry, project paint, and export ownership", build)
+        run_stage(4, "Bake owned artwork onto surfaces", [python, str(HERE / "bake_world.py")])
+        run_stage(5, "Apply atlases and export the browser scene",
                   [*build, "--", "--finalize"])
         if not args.preview:
             for original, target in (("studio-world.glb", "studio.glb"), ("scene-world.json", "scene.json")):

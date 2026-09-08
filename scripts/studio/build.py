@@ -156,6 +156,10 @@ def normalize_unlit(path):
             pbr["baseColorFactor"]=[*material.get("emissiveFactor",[1,1,1]),alpha]
         material.pop("emissiveFactor",None)
         material.setdefault("extensions",{})["KHR_materials_unlit"]={}
+        if "cutout" in material.get("name",""):
+            material["alphaMode"]="MASK"
+            material["alphaCutoff"]=.5
+            material["doubleSided"]=True
     used=document.setdefault("extensionsUsed",[])
     if "KHR_materials_unlit" not in used:
         used.append("KHR_materials_unlit")

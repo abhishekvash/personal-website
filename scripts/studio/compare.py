@@ -12,28 +12,17 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / "assets/studio"
 SIZE = (1536, 1024)
+LANDMARK_TABLE = json.loads((Path(__file__).with_name("landmarks.json")).read_text())
 REGIONS = {
-    "observatory": ("Observatory", (570, 20, 923, 287)),
-    "gaming": ("Gaming", (482, 296, 988, 524)),
-    "recording": ("Recording", (480, 504, 979, 696)),
-    "workstation": ("Workstation", (466, 713, 769, 949)),
-    "kitchen": ("Kitchen", (775, 680, 1090, 911)),
-    "bonsai": ("Bonsai", (947, 0, 1536, 831)),
-    "table-feet": ("Table + feet", (240, 823, 1138, 1024)),
+    name: (entry["label"], tuple(entry["bounds_xyxy"]))
+    for name, entry in LANDMARK_TABLE["regions"].items()
 }
 POSES = (
     "left", "right", "up", "down",
     "top-left", "top-right", "bottom-left", "bottom-right",
 )
-LANDMARKS = (
-    ("Dome cap", 729, 37), ("Aperture top", 747, 77), ("Telescope lens", 741, 125),
-    ("Aerial", 549, 187), ("Upper roof", 396, 280), ("Upper port", 435, 370),
-    ("Gaming screen", 725, 361), ("Gaming chair", 674, 396), ("Mic", 635, 584),
-    ("Lamp", 682, 550), ("Console", 867, 605), ("Middle port", 405, 558),
-    ("Workscreen", 537, 781), ("Pan", 858, 779), ("Pot", 953, 771),
-    ("Drawer", 999, 837), ("Foot", 471, 984), ("Planter port", 1180, 701),
-    ("Planter base", 1314, 820),
-)
+LANDMARKS = tuple((entry["name"], *entry["xy"]) for entry in LANDMARK_TABLE["landmarks"])
+GATE = LANDMARK_TABLE["gate"]
 BACKGROUND = "#f4f1eb"
 TEXT = "#34312d"
 
@@ -95,15 +84,15 @@ def appearance_metrics(original, browser):
     }
 
 
-def landmark_report(original, browser):
+def landmark_report(original, browser, search=8):
     source = np.asarray(original, dtype=np.int16)
     rendered = np.asarray(browser, dtype=np.int16)
     results = []
     for name, x, y in LANDMARKS:
         patch = source[y - 10:y + 10, x - 10:x + 10]
         candidates = []
-        for dy in range(-8, 9):
-            for dx in range(-8, 9):
+        for dy in range(-search, search + 1):
+            for dx in range(-search, search + 1):
                 candidate = rendered[y + dy - 10:y + dy + 10, x + dx - 10:x + dx + 10]
                 if candidate.shape != patch.shape:
                     continue
@@ -114,10 +103,10 @@ def landmark_report(original, browser):
         error, _, dx, dy = best
         distance = math.hypot(dx, dy)
         reasons = []
-        if distance > 4:
-            reasons.append("Best-match displacement exceeds 4 pixels.")
-        if error > 25:
-            reasons.append("Best-match patch MAE exceeds 25 / 255.")
+        if distance > GATE["landmark_displacement_px"]:
+            reasons.append(f"Best-match displacement exceeds {GATE['landmark_displacement_px']} pixels.")
+        if error > GATE["landmark_patch_mae"]:
+            reasons.append(f"Best-match patch MAE exceeds {GATE['landmark_patch_mae']} / 255.")
         results.append({
             "name": name,
             "source_center_xy": [x, y],
@@ -133,7 +122,7 @@ def landmark_report(original, browser):
     return {
         "method": (
             "For each original 20 × 20 RGB patch, compare browser patches at integer "
-            "translations from -8 through +8 pixels on each axis. Choose minimum MAE; "
+            f"translations from -{search} through +{search} pixels on each axis. Choose minimum MAE; "
             "ties prefer the smallest Euclidean displacement."
         ),
         "scope": "Sampled image-feature alignment only; not full-silhouette alignment or 3D depth.",
@@ -141,7 +130,11 @@ def landmark_report(original, browser):
             "Confidence margin is second-best MAE minus best MAE. A larger gap indicates "
             "a more distinct match; it is not a calibrated probability."
         ),
-        "flag_thresholds": {"displacement_px_greater_than": 4, "patch_mae_greater_than": 25},
+        "flag_thresholds": {
+            "displacement_px_greater_than": GATE["landmark_displacement_px"],
+            "patch_mae_greater_than": GATE["landmark_patch_mae"],
+        },
+        "search_radius_px": search,
         "landmarks": results,
         "flagged_names": [result["name"] for result in results if result["flagged"]],
     }

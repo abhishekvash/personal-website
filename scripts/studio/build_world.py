@@ -16,47 +16,92 @@ from build import normalize_unlit, batch_static
 from world import create_camera, legacy_to_world, project, unproject, metadata, AWAY
 from world_architecture import build_world_architecture
 from world_observatory import build_world_observatory
-from world_paint import layers, paint_source_positions, paint_world_architecture, prepare_views
+from world_paint import layers, paint_source_positions, prepare_views
 from interiors import build_interiors
 from world_tree import build_world_tree
 
 WORK=ROOT/"assets/studio"
 
 
+def _frame_split(obj):
+    """Cut a large surface along the painting's frame so in-frame faces are exact."""
+    import bmesh
+    from world import RIGHT, UP, SCALE, IMAGE_ANCHOR
+    mesh=bmesh.new()
+    mesh.from_mesh(obj.data)
+    planes=[(RIGHT,(0-IMAGE_ANCHOR.x)/SCALE),(RIGHT,(1536-IMAGE_ANCHOR.x)/SCALE),
+            (UP,(IMAGE_ANCHOR.y-1024)/SCALE),(UP,(IMAGE_ANCHOR.y-0)/SCALE)]
+    for normal,offset in planes:
+        geometry=list(mesh.verts)+list(mesh.edges)+list(mesh.faces)
+        bmesh.ops.bisect_plane(mesh,geom=geometry,plane_co=normal*offset,plane_no=normal,dist=.0001)
+    mesh.to_mesh(obj.data)
+    mesh.free()
+    obj.data.update()
+
+
 def setting(api):
-    vertices=[(-2000,-1800,0),(3400,-1800,0),(3400,1070,0),(-2000,1070,0)]
+    from world import AWAY, RIGHT, unproject
+    # A generous tabletop: the orbit must never reveal its edges.
+    vertices=[(-7000,-7000,0),(9000,-7000,0),(9000,9000,0),(-7000,9000,0)]
     vertices += [(x,y,-30) for x,y,z in vertices.copy()]
     faces=[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]
     mesh=bpy.data.meshes.new("Setting_Table")
     mesh.from_pydata(vertices,[],faces)
     obj=bpy.data.objects.new("Setting_SolidTable",mesh)
     api.collection.objects.link(obj)
-    mesh.materials.append(api.material("world-table" if (api.output/"textures/world-table.png").exists() else "background"))
     mesh.materials.append(api.material("wood"))
-    uv=mesh.uv_layers.new(name="ArtworkUV")
-    for polygon in mesh.polygons:
-        if polygon.index>0:polygon.material_index=1
-        for index in polygon.loop_indices:
-            p=project(mesh.vertices[mesh.loops[index].vertex_index].co)
-            uv.data[index].uv=(p.x/1536,1-p.y/1024)
     obj["coordinateSpace"]="world"
     obj["sourceFill"]="wood"
-    obj=api.mesh("Setting_PaperBackdrop",[(-1700,-1200,1400),(3300,-1200,1400),(3300,1500,1400),(-1700,1500,1400)],[(0,1,2,3)],"paper-background")
-    legacy_to_world(obj)
+    obj["paintErode"]=8
+    _frame_split(obj)
+    # A vertical paper wall far behind the studio, square to the camera's heading.
+    center=unproject((768,300,1400))
+    across=RIGHT*9000
+    up=Vector((0,0,1))
+    corners=[center-across-up*4000,center+across-up*4000,center+across+up*6000,center-across+up*6000]
+    mesh=bpy.data.meshes.new("Setting_Backdrop")
+    mesh.from_pydata([tuple(c) for c in corners],[],[(0,1,2,3)])
+    obj=bpy.data.objects.new("Setting_PaperBackdrop",mesh)
+    api.collection.objects.link(obj)
+    mesh.materials.append(api.material("paper"))
+    obj["coordinateSpace"]="world"
+    obj["sourceFill"]="paper"
+    obj["paintErode"]=4
+    obj["paintKeepColor"]="paper"
+    mesh.update()
+    if mesh.polygons[0].normal.dot(-AWAY)<0:
+        mesh.polygons.foreach_set("use_smooth",[False])
+        import bmesh
+        b=bmesh.new(); b.from_mesh(mesh); bmesh.ops.reverse_faces(b,faces=list(b.faces)); b.to_mesh(mesh); b.free()
+    _frame_split(obj)
 
 
 def source_projection():
-    objects,triangles,owners,face_ids=[],[],[],[]
+    """Export every surface group with its owning view and its triangles in every view.
+
+    All triangles are occluders in every view; ownership belongs only to the
+    view a group was painted from. Double-painted ink (the bonsai) exists in
+    the reference view alone.
+    """
+    from world import ALL_VIEWS
+    from world_projection_paint import EXCLUDED_PREFIXES
+    views=list(ALL_VIEWS)
+    objects,owners,face_ids=[],[],[]
+    triangles={view:[] for view in views}
     for obj in bpy.context.scene.objects:
-        if obj.type!="MESH" or obj.name.startswith(("Setting","Steam","FallingPetal","ScreenGlow")):
+        if obj.type!="MESH" or obj.name.startswith(EXCLUDED_PREFIXES):
             continue
         mesh=obj.data
-        uv=mesh.uv_layers.get("PaintUV")
-        depths=mesh.attributes.get("PaintDepth")
-        if uv is None or depths is None:
+        if mesh.uv_layers.get("PaintUV") is None or mesh.attributes.get("PaintDepth") is None:
             raise ValueError(f"Unpainted object {obj.name}")
         mesh.calc_loop_triangles()
-        groups=json.loads(obj.get("surfaceGroups","{}")) or {"": {"faces":list(range(len(mesh.polygons))),"fill":obj.get("sourceFill","blue"),"view":obj.get("sourceView","artwork")}}
+        groups=json.loads(obj.get("surfaceGroups","{}"))
+        if not groups:
+            raise ValueError(f"No surface groups on {obj.name}")
+        double=obj.get("paintMode") in ("double","cards")
+        matrix=obj.matrix_world
+        world=[matrix @ vertex.co for vertex in mesh.vertices]
+        projected={view:[ALL_VIEWS[view].project(point) for point in world] for view in views if not (double and view!="artwork")}
         assigned=set()
         for label,group in groups.items():
             face_set=set(group["faces"])
@@ -64,51 +109,100 @@ def source_projection():
             selected=[tri for tri in mesh.loop_triangles if tri.polygon_index in face_set]
             if not selected:continue
             index=len(objects)
+            view=group["view"]
             points=[]
             for tri in selected:
-                coords=[]
-                for loop in tri.loops:
-                    tex=uv.data[loop].uv
-                    coords.append((tex.x*1536,(1-tex.y)*1024,depths.data[loop].value))
-                triangles.append(coords)
-                points.extend(coords)
+                for name in views:
+                    if name not in projected:
+                        triangles[name].append(((0,0,1e9),(0,0,1e9),(0,0,1e9)))
+                        continue
+                    coords=[tuple(projected[name][vertex]) for vertex in tri.vertices]
+                    triangles[name].append(coords)
+                    if name==view:
+                        points.extend(coords)
                 owners.append(index)
                 face_ids.append(tri.polygon_index)
-            points=np.array(points)
-            objects.append({"name":obj.name+("::"+label if label else ""),"object":obj.name,"faces":sorted(face_set),"source":True,"fill":group["fill"],"view":group.get("view",obj.get("sourceView","artwork")),"bounds":[float(points[:,0].min()),float(points[:,1].min()),float(points[:,0].max()),float(points[:,1].max())]})
+            if view=="swatch":
+                bounds=[0.0,0.0,0.0,0.0]
+            else:
+                array=np.array(points)
+                bounds=[float(array[:,0].min()),float(array[:,1].min()),float(array[:,0].max()),float(array[:,1].max())]
+            objects.append({"name":obj.name+("::"+label if label else ""),"object":obj.name,"faces":sorted(face_set),"source":True,"fill":group["fill"],"view":view,"blend":group.get("blend",1.0),"erode":int(obj.get("paintErode",0)),"keepColor":obj.get("paintKeepColor",""),"card":group.get("card"),"bounds":bounds})
             assigned|=face_set
         if assigned!=set(range(len(mesh.polygons))):
             raise ValueError(f"Unassigned paint faces on {obj.name}")
-    np.savez_compressed(WORK/"world-projection.npz",triangles=np.array(triangles,dtype=np.float32),owners=np.array(owners,dtype=np.int32),face_ids=np.array(face_ids,dtype=np.int32))
+    arrays={"tri_"+view:np.array(triangles[view],dtype=np.float32) for view in views}
+    np.savez_compressed(WORK/"world-projection.npz",owners=np.array(owners,dtype=np.int32),face_ids=np.array(face_ids,dtype=np.int32),views=np.array(views),**arrays)
     (WORK/"world-projection.json").write_text(json.dumps(objects)+"\n")
-    print(f"SOURCE OWNERSHIP {len(objects)} surfaces / {len(triangles)} triangles",flush=True)
+    print(f"SOURCE OWNERSHIP {len(objects)} surfaces / {len(owners)} triangles / {len(views)} views",flush=True)
 
 
-def place_roof_accessories():
-    """Fit independent roof attachments while preserving their solid construction."""
-    for obj in bpy.context.scene.objects:
-        if obj.type!="MESH" or not obj.name.startswith("WorldObservatory_"):continue
-        name=obj.name.removeprefix("WorldObservatory_")
-        for vertex in obj.data.vertices:
-            p=vertex.co
-            if name.startswith("Antenna"):
-                if name in ("AntennaPlinth","AntennaRaisedFoot"):
-                    p.x=169+(p.x-169)*1.25
-                    p.y=135+(p.y-135)*1.25
-                p.x+=27
-                p.y+=100
-                p.z=690+(p.z-690)*1.2
-            elif name=="Chimney":
-                p.x+=6
-                p.y-=15
-                p.z=690+(p.z-690)*1.2
-            else:
-                p.x+=33
-        obj.data.update()
+def build_rim(api):
+    """Turn the baked silhouette rim into horizontal pixel-run quads at their solids' depth."""
+    path=WORK/"world-rim.npz"
+    if not path.is_file():return
+    data=np.load(path)
+    mask,depth=data["mask"],data["depth"]
+    vertices,faces,uvs=[],[],[]
+    for y in range(mask.shape[0]):
+        row=mask[y]
+        x=0
+        while x<row.shape[0]:
+            if not row[x]:
+                x+=1;continue
+            start=x
+            d=float(depth[y,x])
+            while x<row.shape[0] and row[x] and abs(float(depth[y,x])-d)<3:
+                x+=1
+            base=len(vertices)
+            corners=[(start,y),(x,y),(x,y+1),(start,y+1)]
+            for u,v in corners:
+                vertices.append(unproject((u,v,d)))
+                uvs.append((u/1536,1-v/1024))
+            faces.append((base,base+1,base+2,base+3))
+    mesh=bpy.data.meshes.new("WorldRim")
+    mesh.from_pydata([tuple(v) for v in vertices],[],faces)
+    obj=bpy.data.objects.new("WorldRim",mesh)
+    api.collection.objects.link(obj)
+    mesh.materials.append(api.material("paper"))
+    uv=mesh.uv_layers.new(name="PaintUV")
+    for polygon in mesh.polygons:
+        for loop_index in polygon.loop_indices:
+            uv.data[loop_index].uv=uvs[mesh.loops[loop_index].vertex_index]
+    obj["coordinateSpace"]="world"
+    obj["sourceFill"]="paper"
+    print(f"WORLD RIM {len(faces)} pixel runs",flush=True)
+    return obj
+
+
+def cutout_material(api,page):
+    """An unlit, alpha-masked page for blossom cards; alpha travels with the image."""
+    material=bpy.data.materials.new(f"world-atlas-{page}")
+    material.use_nodes=True
+    nodes=material.node_tree.nodes
+    nodes.clear()
+    output=nodes.new("ShaderNodeOutputMaterial")
+    principled=nodes.new("ShaderNodeBsdfPrincipled")
+    texture=nodes.new("ShaderNodeTexImage")
+    texture.image=bpy.data.images.load(str(api.output/"textures"/f"world-atlas-{page}.png"),check_existing=False)
+    texture.interpolation="Linear"
+    links=material.node_tree.links
+    links.new(principled.outputs[0],output.inputs["Surface"])
+    links.new(texture.outputs["Color"],principled.inputs["Emission Color"])
+    links.new(texture.outputs["Alpha"],principled.inputs["Alpha"])
+    principled.inputs["Emission Strength"].default_value=1
+    principled.inputs["Base Color"].default_value=(0,0,0,1)
+    material.surface_render_method="DITHERED"
+    material.use_backface_culling=False
+    return material
 
 
 def apply_atlas(api):
+    rim=build_rim(api)
     spec=json.loads((WORK/"world-atlas.json").read_text())
+    if rim is not None and "WorldRim" in spec["objects"]:
+        spec["objects"]["WorldRim"]["faces"]=list(range(len(rim.data.polygons)))
+        spec["objects"]["WorldRim"]["visibleFaces"]=list(range(len(rim.data.polygons)))
     materials={}
     for info in spec["objects"].values():
         obj=bpy.data.objects[info["object"]]
@@ -119,11 +213,14 @@ def apply_atlas(api):
         if "page" in info:
             page=info["page"]
             if page not in materials:
-                material=api.material(f"world-atlas-{page}")
-                for node in material.node_tree.nodes:
-                    if node.type=="TEX_IMAGE":
-                        node.image=bpy.data.images.load(str(api.output/"textures"/f"world-atlas-{page}.png"),check_existing=False)
-                materials[page]=material
+                if str(page).startswith("cutout"):
+                    materials[page]=cutout_material(api,page)
+                else:
+                    material=api.material(f"world-atlas-{page}")
+                    for node in material.node_tree.nodes:
+                        if node.type=="TEX_IMAGE":
+                            node.image=bpy.data.images.load(str(api.output/"textures"/f"world-atlas-{page}.png"),check_existing=False)
+                    materials[page]=material
             atlas_index=len(mesh.materials)
             mesh.materials.append(materials[page])
         visible=set(info.get("visibleFaces",[]))
@@ -135,7 +232,8 @@ def apply_atlas(api):
                     u,v=uv.data[index].uv
                     x0,y0,_,_=info["bounds"]
                     x,y=info["origin"]
-                    uv.data[index].uv=((x+u*1536-x0)/spec["size"],1-(y+(1-v)*1024-y0)/spec["size"])
+                    size=info.get("size",spec["size"])
+                    uv.data[index].uv=((x+u*1536-x0)/size,1-(y+(1-v)*1024-y0)/size)
                 else:
                     p=obj.matrix_world @ mesh.vertices[mesh.loops[index].vertex_index].co
                     normal=polygon.normal
@@ -160,7 +258,7 @@ def export(publish):
     if not publish:return
     batch_static()
     path=ROOT/"public/scene/studio-world.glb"
-    bpy.ops.export_scene.gltf(filepath=str(path),export_format="GLB",export_cameras=True,export_extras=True,export_yup=True,export_apply=True,export_materials="EXPORT",export_animations=False,export_image_format="AUTO")
+    bpy.ops.export_scene.gltf(filepath=str(path),export_format="GLB",export_cameras=True,export_extras=True,export_yup=True,export_apply=True,export_materials="EXPORT",export_animations=False,export_image_format="WEBP",export_image_quality=92,export_normals=False,export_meshopt_compression_enable=True)
     normalize_unlit(path)
     (ROOT/"public/scene/scene-world.json").write_text(json.dumps(metadata())+"\n")
 
@@ -177,13 +275,6 @@ def main():
             raise RuntimeError("Finalization requires a fresh painted build. Run rebuild.py to regenerate original surface UVs.")
         api=Studio(ROOT)
         apply_atlas(api)
-        table=bpy.data.objects.get("Setting_SolidTable")
-        if table and (api.output/"textures/world-table.png").exists():
-            material=api.material("world-table")
-            for node in material.node_tree.nodes:
-                if node.type=="TEX_IMAGE":
-                    node.image=bpy.data.images.load(str(api.output/"textures/world-table.png"),check_existing=False)
-            table.data.materials[0]=material
         bpy.context.scene["worldAtlasApplied"]=True
         export(True)
         return
@@ -200,8 +291,6 @@ def main():
     build_interiors(api)
     from world_interiors import adapt_interiors_to_world
     adapt_interiors_to_world(api,rooms)
-    for obj in bpy.context.scene.objects:
-        if obj.type=="MESH" and obj.name.startswith("Interior_"):paint_source_positions(obj)
     print("WORLD INTERIORS",flush=True)
     build_world_tree(api)
     from world_motion import build_world_motion
@@ -210,11 +299,9 @@ def main():
     create_camera()
     bpy.context.view_layer.update()
     if not options.draft:
-        paint_world_architecture(api,rooms)
-        from world_observatory_paint import paint_world_observatory
-        paint_world_observatory(api)
+        from world_projection_paint import paint_scene
+        paint_scene()
         source_projection()
-    place_roof_accessories()
     export(options.draft)
     print("WORLD BUILD COMPLETE",flush=True)
 

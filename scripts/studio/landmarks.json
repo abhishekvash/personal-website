@@ -1,0 +1,748 @@
+{
+  "regions": {
+    "observatory": {
+      "label": "Observatory",
+      "bounds_xyxy": [570, 20, 923, 287]
+    },
+    "gaming": {
+      "label": "Gaming",
+      "bounds_xyxy": [482, 296, 988, 524]
+    },
+    "recording": {
+      "label": "Recording",
+      "bounds_xyxy": [480, 504, 979, 696]
+    },
+    "workstation": {
+      "label": "Workstation",
+      "bounds_xyxy": [466, 713, 769, 949]
+    },
+    "kitchen": {
+      "label": "Kitchen",
+      "bounds_xyxy": [775, 680, 1090, 911]
+    },
+    "bonsai": {
+      "label": "Bonsai",
+      "bounds_xyxy": [947, 0, 1536, 831]
+    },
+    "table-feet": {
+      "label": "Table + feet",
+      "bounds_xyxy": [240, 823, 1138, 1024]
+    }
+  },
+  "landmarks": [
+    {
+      "name": "Dome cap",
+      "xy": [729, 37]
+    },
+    {
+      "name": "Aperture top",
+      "xy": [747, 77]
+    },
+    {
+      "name": "Telescope lens",
+      "xy": [741, 125]
+    },
+    {
+      "name": "Aerial",
+      "xy": [549, 187]
+    },
+    {
+      "name": "Upper roof",
+      "xy": [396, 280]
+    },
+    {
+      "name": "Upper port",
+      "xy": [435, 370]
+    },
+    {
+      "name": "Gaming screen",
+      "xy": [725, 361]
+    },
+    {
+      "name": "Gaming chair",
+      "xy": [674, 396]
+    },
+    {
+      "name": "Mic",
+      "xy": [635, 584]
+    },
+    {
+      "name": "Lamp",
+      "xy": [682, 550]
+    },
+    {
+      "name": "Console",
+      "xy": [867, 605]
+    },
+    {
+      "name": "Middle port",
+      "xy": [405, 558]
+    },
+    {
+      "name": "Workscreen",
+      "xy": [537, 781]
+    },
+    {
+      "name": "Pan",
+      "xy": [858, 779]
+    },
+    {
+      "name": "Pot",
+      "xy": [953, 771]
+    },
+    {
+      "name": "Drawer",
+      "xy": [999, 837]
+    },
+    {
+      "name": "Foot",
+      "xy": [471, 984]
+    },
+    {
+      "name": "Planter port",
+      "xy": [1180, 701]
+    },
+    {
+      "name": "Planter base",
+      "xy": [1314, 820]
+    }
+  ],
+  "gate": {
+    "landmark_displacement_px": 4,
+    "landmark_patch_mae": 25,
+    "global_mae": 4,
+    "region_mae": 6,
+    "region_mae_overrides": {
+      "bonsai": 10
+    }
+  },
+  "fit": {
+    "parameters": {
+      "azimuth": [0.3665191429188092, 0.08, 0.75],
+      "elevation": [0.22689280275926285, 0.03, 0.6],
+      "scale": [1.0, 0.7, 1.4],
+      "u0": [450, 350, 560],
+      "v0": [1015, 900, 1120],
+      "gx0": [0, -1e-6, 1e-6],
+      "gx1": [700, 550, 850],
+      "gy0": [0, -1e-6, 1e-6],
+      "gy1": [420, 200, 600],
+      "gz0": [40, 0, 90],
+      "gz1": [280, 200, 340],
+      "rx0": [25, 0, 90],
+      "rx1": [675, 580, 720],
+      "ry0": [27, 0, 90],
+      "ry1": [392, 150, 600],
+      "rz1": [475, 400, 540],
+      "ux0": [57, 0, 130],
+      "ux1": [642, 540, 720],
+      "uy0": [55, 0, 130],
+      "uy1": [365, 150, 600],
+      "uz1": [690, 600, 760],
+      "dome_x": [350, 250, 450],
+      "dome_y": [210, 100, 320],
+      "dome_shoulder_z": [765, 700, 820],
+      "dome_r": [140, 100, 190],
+      "port_upper_y": [120, 20, 300],
+      "port_upper_z": [575, 480, 690],
+      "port_upper_r": [33, 20, 50],
+      "port_middle_y": [190, 20, 380],
+      "port_middle_z": [371, 280, 475],
+      "port_middle_r": [39, 20, 55],
+      "port_lower_y": [145, 20, 400],
+      "port_lower_z": [159, 40, 280],
+      "port_lower_r": [38, 20, 55],
+      "port_small_y": [274, 20, 400],
+      "port_small_z": [231, 40, 280],
+      "port_small_r": [16, 8, 30],
+      "port_front_x": [635, 500, 700],
+      "port_front_z": [408, 280, 475],
+      "port_front_r": [32, 15, 50],
+      "planter_x": [1000, 700, 1400],
+      "planter_y": [200, -100, 700],
+      "planter_r": [165, 100, 260],
+      "planter_h": [150, 80, 260],
+      "angle_left": [3.141592653589793, 2.0, 4.5],
+      "angle_right": [0.0, -1.2, 1.2],
+      "angle_far": [1.5707963267948966, 0.5, 2.6],
+      "angle_near": [-1.5707963267948966, -2.6, -0.5],
+      "angle_bleft": [3.141592653589793, 2.0, 4.5],
+      "angle_bright": [0.0, -1.2, 1.2],
+      "angle_bnear": [-1.5707963267948966, -2.6, -0.5],
+      "antenna_x": [196, 60, 400],
+      "antenna_y": [235, 30, 400],
+      "chimney_x": [532, 300, 650],
+      "chimney_y": [130, 20, 400],
+      "planter_rb": [175, 100, 260]
+    },
+    "boxes": {
+      "ground": ["gx0", "gx1", "gy0", "gy1", "gz0", "gz1"],
+      "recording": ["rx0", "rx1", "ry0", "ry1", "gz1", "rz1"],
+      "gaming": ["ux0", "ux1", "uy0", "uy1", "rz1", "uz1"]
+    },
+    "correspondences": [
+      {
+        "name": "ground front LFT",
+        "feature": ["box", "ground", "LFT"],
+        "uv": [454, 708],
+        "weight": 1.0
+      },
+      {
+        "name": "ground front RFT",
+        "feature": ["box", "ground", "RFT"],
+        "uv": [1098, 643],
+        "weight": 1.0
+      },
+      {
+        "name": "ground front RFD",
+        "feature": ["box", "ground", "RFD"],
+        "uv": [1107, 924],
+        "weight": 1.0
+      },
+      {
+        "name": "ground front LFD",
+        "feature": ["box", "ground", "LFD"],
+        "uv": [438, 982],
+        "weight": 1.0
+      },
+      {
+        "name": "ground side LKT",
+        "feature": ["box", "ground", "LKT"],
+        "uv": [331, 619],
+        "weight": 0.6
+      },
+      {
+        "name": "ground side LFT",
+        "feature": ["box", "ground", "LFT"],
+        "uv": [455, 705],
+        "weight": 0.6
+      },
+      {
+        "name": "ground side LFD",
+        "feature": ["box", "ground", "LFD"],
+        "uv": [441, 957],
+        "weight": 0.6
+      },
+      {
+        "name": "ground side LKD",
+        "feature": ["box", "ground", "LKD"],
+        "uv": [309, 855],
+        "weight": 0.6
+      },
+      {
+        "name": "recording front LFT",
+        "feature": ["box", "recording", "LFT"],
+        "uv": [471, 492],
+        "weight": 1.0
+      },
+      {
+        "name": "recording front RFT",
+        "feature": ["box", "recording", "RFT"],
+        "uv": [1068, 477],
+        "weight": 1.0
+      },
+      {
+        "name": "recording front RFD",
+        "feature": ["box", "recording", "RFD"],
+        "uv": [1075, 681],
+        "weight": 1.0
+      },
+      {
+        "name": "recording front LFD",
+        "feature": ["box", "recording", "LFD"],
+        "uv": [460, 714],
+        "weight": 1.0
+      },
+      {
+        "name": "recording side LKT",
+        "feature": ["box", "recording", "LKT"],
+        "uv": [368, 446],
+        "weight": 0.6
+      },
+      {
+        "name": "recording side LFT",
+        "feature": ["box", "recording", "LFT"],
+        "uv": [469, 503],
+        "weight": 0.6
+      },
+      {
+        "name": "recording side LFD",
+        "feature": ["box", "recording", "LFD"],
+        "uv": [456, 696],
+        "weight": 0.6
+      },
+      {
+        "name": "recording side LKD",
+        "feature": ["box", "recording", "LKD"],
+        "uv": [343, 615],
+        "weight": 0.6
+      },
+      {
+        "name": "gaming front LFT",
+        "feature": ["box", "gaming", "LFT"],
+        "uv": [488, 317],
+        "weight": 1.0
+      },
+      {
+        "name": "gaming front RFT",
+        "feature": ["box", "gaming", "RFT"],
+        "uv": [1019, 278],
+        "weight": 1.0
+      },
+      {
+        "name": "gaming front RFD",
+        "feature": ["box", "gaming", "RFD"],
+        "uv": [1024, 464],
+        "weight": 1.0
+      },
+      {
+        "name": "gaming front LFD",
+        "feature": ["box", "gaming", "LFD"],
+        "uv": [482, 525],
+        "weight": 1.0
+      },
+      {
+        "name": "gaming side LKT",
+        "feature": ["box", "gaming", "LKT"],
+        "uv": [398, 276],
+        "weight": 0.6
+      },
+      {
+        "name": "gaming side LFT",
+        "feature": ["box", "gaming", "LFT"],
+        "uv": [488, 317],
+        "weight": 0.6
+      },
+      {
+        "name": "gaming side LFD",
+        "feature": ["box", "gaming", "LFD"],
+        "uv": [482, 490],
+        "weight": 0.6
+      },
+      {
+        "name": "gaming side LKD",
+        "feature": ["box", "gaming", "LKD"],
+        "uv": [382, 443],
+        "weight": 0.6
+      },
+      {
+        "name": "dome left extreme",
+        "feature": ["dome_extreme", "left"],
+        "uv": [592, 180],
+        "weight": 0.6
+      },
+      {
+        "name": "dome right extreme",
+        "feature": ["dome_extreme", "right"],
+        "uv": [906, 168],
+        "weight": 0.6
+      },
+      {
+        "name": "dome top",
+        "feature": ["dome_top"],
+        "uv": [735, 45],
+        "weight": 0.8
+      },
+      {
+        "name": "upper port centre",
+        "feature": ["point", "gx0", "port_upper_y", "port_upper_z"],
+        "uv": [435, 371],
+        "weight": 1.0
+      },
+      {
+        "name": "upper port radius",
+        "feature": ["radius_v", "port_upper_r"],
+        "pixels": 33,
+        "weight": 0.5
+      },
+      {
+        "name": "middle port centre",
+        "feature": ["point", "gx0", "port_middle_y", "port_middle_z"],
+        "uv": [407, 558],
+        "weight": 1.0
+      },
+      {
+        "name": "middle port radius",
+        "feature": ["radius_v", "port_middle_r"],
+        "pixels": 39,
+        "weight": 0.5
+      },
+      {
+        "name": "lower port centre",
+        "feature": ["point", "gx0", "port_lower_y", "port_lower_z"],
+        "uv": [397, 788],
+        "weight": 1.0
+      },
+      {
+        "name": "lower port radius",
+        "feature": ["radius_v", "port_lower_r"],
+        "pixels": 38,
+        "weight": 0.5
+      },
+      {
+        "name": "small port centre",
+        "feature": ["point", "gx0", "port_small_y", "port_small_z"],
+        "uv": [360, 726],
+        "weight": 0.8
+      },
+      {
+        "name": "small port radius",
+        "feature": ["radius_v", "port_small_r"],
+        "pixels": 16,
+        "weight": 0.5
+      },
+      {
+        "name": "front pillar port centre",
+        "feature": ["point", "port_front_x", "ry0", "port_front_z"],
+        "uv": [1028, 558],
+        "weight": 1.0
+      },
+      {
+        "name": "front pillar port radius",
+        "feature": ["radius_v", "port_front_r"],
+        "pixels": 32,
+        "weight": 0.5
+      },
+      {
+        "name": "planter rim left",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "planter_h",
+          "planter_r"
+        ],
+        "angle": "angle_left",
+        "uv": [1140, 660],
+        "weight": 0.6
+      },
+      {
+        "name": "planter rim right",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "planter_h",
+          "planter_r"
+        ],
+        "angle": "angle_right",
+        "uv": [1500, 640],
+        "weight": 0.6
+      },
+      {
+        "name": "planter rim far",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "planter_h",
+          "planter_r"
+        ],
+        "angle": "angle_far",
+        "uv": [1310, 593],
+        "weight": 0.6
+      },
+      {
+        "name": "planter rim near",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "planter_h",
+          "planter_r"
+        ],
+        "angle": "angle_near",
+        "uv": [1300, 690],
+        "weight": 0.6
+      },
+      {
+        "name": "planter base near",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "__zero__",
+          "planter_rb"
+        ],
+        "angle": "angle_bnear",
+        "uv": [1310, 812],
+        "weight": 0.6
+      },
+      {
+        "name": "planter base left",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "__zero__",
+          "planter_rb"
+        ],
+        "angle": "angle_bleft",
+        "uv": [1152, 770],
+        "weight": 0.6
+      },
+      {
+        "name": "planter base right",
+        "feature": [
+          "circle",
+          "planter_x",
+          "planter_y",
+          "__zero__",
+          "planter_rb"
+        ],
+        "angle": "angle_bright",
+        "uv": [1490, 748],
+        "weight": 0.6
+      },
+      {
+        "name": "antenna base centre",
+        "feature": ["point", "antenna_x", "antenna_y", "uz1"],
+        "uv": [540, 268],
+        "weight": 0.8
+      },
+      {
+        "name": "chimney base centre",
+        "feature": ["point", "chimney_x", "chimney_y", "uz1"],
+        "uv": [893, 262],
+        "weight": 0.8
+      }
+    ],
+    "priors": [
+      {
+        "name": "ground depth/width from side + front elevations",
+        "a": "gy1",
+        "b": "gx1",
+        "target": 0.555,
+        "weight": 1.0
+      },
+      {
+        "name": "recording depth/width",
+        "a": "ry1",
+        "a0": "ry0",
+        "b": "rx1",
+        "b0": "rx0",
+        "target": 0.533,
+        "weight": 1.0
+      },
+      {
+        "name": "gaming depth/width",
+        "a": "uy1",
+        "a0": "uy0",
+        "b": "ux1",
+        "b0": "ux0",
+        "target": 0.512,
+        "weight": 1.0
+      }
+    ],
+    "ties": [],
+    "views": {
+      "view-front": {
+        "image": "Codex Image Sep 7, 2026, 12_09_36 AM.png",
+        "parameters": {
+          "azimuth": [0.0, -0.12, 0.12],
+          "elevation": [0.0, -0.1, 0.1],
+          "scale_u": [1.1, 0.8, 1.5],
+          "scale_v": [1.1, 0.8, 1.5],
+          "u0": [345, 200, 500],
+          "v0": [945, 800, 1100]
+        },
+        "correspondences": [
+          {
+            "feature": ["box", "ground", "LFT"],
+            "uv": [345, 700]
+          },
+          {
+            "feature": ["box", "ground", "RFT"],
+            "uv": [1110, 700]
+          },
+          {
+            "feature": ["box", "ground", "RFD"],
+            "uv": [1110, 940]
+          },
+          {
+            "feature": ["box", "ground", "LFD"],
+            "uv": [345, 940]
+          },
+          {
+            "feature": ["box", "recording", "LFT"],
+            "uv": [390, 480]
+          },
+          {
+            "feature": ["box", "recording", "RFT"],
+            "uv": [1075, 480]
+          },
+          {
+            "feature": ["box", "gaming", "LFT"],
+            "uv": [425, 258]
+          },
+          {
+            "feature": ["box", "gaming", "RFT"],
+            "uv": [1040, 258]
+          },
+          {
+            "feature": ["dome_top"],
+            "uv": [762, 22],
+            "weight": 0.5
+          }
+        ]
+      },
+      "view-left": {
+        "image": "Codex Image Sep 7, 2026, 12_09_32 AM.png",
+        "parameters": {
+          "azimuth": [1.5708, 1.45, 1.7],
+          "elevation": [0.0, -0.1, 0.1],
+          "scale_u": [1.05, 0.8, 1.5],
+          "scale_v": [1.05, 0.8, 1.5],
+          "u0": [892, 750, 1000],
+          "v0": [900, 800, 1050]
+        },
+        "correspondences": [
+          {
+            "feature": ["box", "ground", "LKT"],
+            "uv": [465, 650]
+          },
+          {
+            "feature": ["box", "ground", "LFT"],
+            "uv": [892, 650]
+          },
+          {
+            "feature": ["box", "ground", "LFD"],
+            "uv": [892, 900]
+          },
+          {
+            "feature": ["box", "ground", "LKD"],
+            "uv": [465, 900]
+          },
+          {
+            "feature": ["box", "recording", "LKT"],
+            "uv": [495, 460]
+          },
+          {
+            "feature": ["box", "recording", "LFT"],
+            "uv": [860, 460]
+          },
+          {
+            "feature": ["box", "gaming", "LKT"],
+            "uv": [520, 265]
+          },
+          {
+            "feature": ["box", "gaming", "LFT"],
+            "uv": [835, 265]
+          },
+          {
+            "feature": ["dome_top"],
+            "uv": [696, 52],
+            "weight": 0.5
+          }
+        ]
+      },
+      "view-rear": {
+        "image": "Codex Image Sep 7, 2026, 12_12_23 AM.png",
+        "parameters": {
+          "azimuth": [3.14159, 3.02, 3.27],
+          "elevation": [0.0, -0.1, 0.1],
+          "scale_u": [1.0, 0.7, 1.4],
+          "scale_v": [1.0, 0.7, 1.4],
+          "u0": [1245, 1100, 1400],
+          "v0": [865, 750, 1000]
+        },
+        "correspondences": [
+          {
+            "feature": ["box", "ground", "RKT"],
+            "uv": [555, 665]
+          },
+          {
+            "feature": ["box", "ground", "LKT"],
+            "uv": [1245, 665]
+          },
+          {
+            "feature": ["box", "ground", "LKD"],
+            "uv": [1245, 865]
+          },
+          {
+            "feature": ["box", "ground", "RKD"],
+            "uv": [555, 865]
+          },
+          {
+            "feature": ["box", "recording", "RKT"],
+            "uv": [600, 500]
+          },
+          {
+            "feature": ["box", "recording", "LKT"],
+            "uv": [1195, 500]
+          },
+          {
+            "feature": ["box", "gaming", "RKT"],
+            "uv": [640, 310]
+          },
+          {
+            "feature": ["box", "gaming", "LKT"],
+            "uv": [1155, 310]
+          },
+          {
+            "feature": ["dome_top"],
+            "uv": [900, 85],
+            "weight": 0.5
+          }
+        ]
+      },
+      "view-top": {
+        "image": "Codex Image Sep 7, 2026, 12_18_28 AM.png",
+        "parameters": {
+          "azimuth": [0.0, -0.1, 0.1],
+          "elevation": [1.5708, 1.45, 1.5708],
+          "scale_u": [0.95, 0.6, 1.4],
+          "scale_v": [1.4, 0.8, 2.2],
+          "u0": [250, 100, 400],
+          "v0": [790, 600, 950]
+        },
+        "correspondences": [
+          {
+            "feature": ["box", "ground", "LFT"],
+            "uv": [255, 790]
+          },
+          {
+            "feature": ["box", "ground", "RFT"],
+            "uv": [900, 790]
+          },
+          {
+            "feature": ["box", "ground", "RKT"],
+            "uv": [900, 190]
+          },
+          {
+            "feature": ["box", "ground", "LKT"],
+            "uv": [255, 190]
+          },
+          {
+            "feature": ["box", "gaming", "LFT"],
+            "uv": [335, 600]
+          },
+          {
+            "feature": ["box", "gaming", "RFT"],
+            "uv": [820, 600]
+          },
+          {
+            "feature": ["box", "gaming", "RKT"],
+            "uv": [820, 215]
+          },
+          {
+            "feature": ["box", "gaming", "LKT"],
+            "uv": [335, 215]
+          },
+          {
+            "feature": ["dome_top"],
+            "uv": [570, 350],
+            "weight": 0.5
+          }
+        ]
+      }
+    },
+    "feet_uv": [
+      [461, 994],
+      [628, 977],
+      [846, 951],
+      [1082, 935],
+      [325, 898]
+    ]
+  }
+}

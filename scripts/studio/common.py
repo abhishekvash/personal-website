@@ -27,8 +27,8 @@ def triangulate(polylines):
 class Studio:
     def __init__(self, root):
         self.root = Path(root)
-        self.output = self.root / "public/scene"
-        self.output.mkdir(parents=True, exist_ok=True)
+        self.output = self.root / "assets/studio"
+        (self.output / "textures").mkdir(parents=True, exist_ok=True)
         self.image = bpy.data.images.load(str(self.output / "textures/artwork.png"))
         raw = np.empty(WIDTH * HEIGHT * 4, dtype=np.float32)
         self.image.pixels.foreach_get(raw)

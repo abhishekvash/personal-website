@@ -7,17 +7,20 @@ import bmesh
 import bpy
 from mathutils import Vector
 
+from world import GEOMETRY
 
-CENTER = Vector((350, 210, 0))
-ROOF_Z = 690
-COLLAR_TOP = 715
-SHOULDER_Z = 765
-OUTER_RADIUS = 140
-INNER_RADIUS = 128
-FLOOR_Z = 727
-APERTURE_Z = 810
-APERTURE_OUTER = 91.5
-APERTURE_INNER = 75.5
+
+_DOME = GEOMETRY["dome"]
+CENTER = Vector((_DOME["x"], _DOME["y"], 0))
+ROOF_Z = _DOME["roofZ"]
+COLLAR_TOP = ROOF_Z + 25
+SHOULDER_Z = _DOME["shoulderZ"]
+OUTER_RADIUS = _DOME["r"]
+INNER_RADIUS = OUTER_RADIUS - 12
+FLOOR_Z = ROOF_Z + 37
+APERTURE_Z = SHOULDER_Z + 45
+APERTURE_OUTER = 91.5 * OUTER_RADIUS / 140
+APERTURE_INNER = 75.5 * OUTER_RADIUS / 140
 SEGMENTS = 128
 
 
@@ -268,7 +271,7 @@ def _build_collar(api):
     for index, angle in enumerate((-2.18, -1.22, .89, 2.15)):
         point = (CENTER.x + 150 * math.cos(angle), CENTER.y + 150 * math.sin(angle), 702)
         _ball(api, f"CollarFastener{index:02}", point, 3.4)
-    _lathe(api, "CrownCap", (CENTER.x, CENTER.y, 903), (0, 0, 1),
+    _lathe(api, "CrownCap", (CENTER.x, CENTER.y, SHOULDER_Z + OUTER_RADIUS - 2), (0, 0, 1),
            [(0, 26), (2, 31), (8, 31), (9, 29)], "blue", segments=64,
            segment_fills=["gold", "blue", "cream"])
 
@@ -291,7 +294,7 @@ def _build_panel_details(api):
                 points.append(point)
         if len(points) > 1:
             _tube(api, f"DomePanelSeam{index:02}_Upper", points, .38)
-    for level, z in enumerate((SHOULDER_Z, 834)):
+    for level, z in enumerate((SHOULDER_Z, SHOULDER_Z + 69 * OUTER_RADIUS / 140)):
         radius = _radius_at(z, OUTER_RADIUS) + .22
         pending = []
         for step in range(129):
@@ -317,7 +320,7 @@ def _build_panel_details(api):
     for index, angle in enumerate((3.92, 5.50, .86, 2.28)):
         builder = _AssemblyMesh()
         rings = []
-        for radius, z in ((139.6, 727), (142.6, 727), (142.6, 756), (139.6, 756)):
+        for radius, z in ((OUTER_RADIUS - .4, FLOOR_Z), (OUTER_RADIUS + 2.6, FLOOR_Z), (OUTER_RADIUS + 2.6, FLOOR_Z + 29), (OUTER_RADIUS - .4, FLOOR_Z + 29)):
             rings.append([builder.vertex((CENTER.x + radius * math.cos(angle - .105 + step * .21 / 8),
                                            CENTER.y + radius * math.sin(angle - .105 + step * .21 / 8), z))
                           for step in range(9)])
@@ -331,24 +334,26 @@ def _build_panel_details(api):
 
 
 def _build_roof_fittings(api):
-    x, y = 169, 135
-    _box(api, "AntennaPlinth", (x, y, 696), (56, 48, 12), bevel=1.4)
-    _box(api, "AntennaRaisedFoot", (x, y, 706), (32, 30, 9), bevel=1)
-    _lathe(api, "AntennaColumn", (x, y, 710), (0, 0, 1),
-           [(0, 12), (4, 12), (4.5, 8), (52, 8), (53, 6.5)], "cream", segments=32,
+    # Positions come from the painting fit; heights are relative to the roof.
+    x, y = GEOMETRY["fittings"]["antenna"]
+    _box(api, "AntennaPlinth", (x, y, ROOF_Z + 7), (70, 60, 14), bevel=1.4)
+    _box(api, "AntennaRaisedFoot", (x, y, ROOF_Z + 19), (40, 38, 11), bevel=1)
+    _lathe(api, "AntennaColumn", (x, y, ROOF_Z + 24), (0, 0, 1),
+           [(0, 12), (5, 12), (5.5, 8), (62, 8), (63.5, 6.5)], "cream", segments=32,
            segment_fills=["blue", "blue", "cream", "cream"])
-    _lathe(api, "AntennaAerial", (x, y, 762), (0, 0, 1), [(0, 1.5), (29, 1.15)], "blue", segments=16)
-    _ball(api, "AntennaTip", (x, y, 791), 1.8, "gold")
-    x, y = 526, 145
+    _lathe(api, "AntennaAerial", (x, y, ROOF_Z + 86), (0, 0, 1), [(0, 1.5), (58, 1.15)], "blue", segments=16)
+    _ball(api, "AntennaTip", (x, y, ROOF_Z + 144), 1.8, "gold")
+    x, y = GEOMETRY["fittings"]["chimney"]
     _lathe(api, "Chimney", (x, y, ROOF_Z), (0, 0, 1),
-           [(0, 18), (8, 18), (9, 13), (33, 13), (34, 13), (58, 13), (58.5, 16), (61, 16)],
+           [(0, 18), (10, 18), (11, 13), (40, 13), (41, 13), (70, 13), (70.5, 16), (73, 16)],
            "cream", segments=48,
            segment_fills=["cream", "cream", "cream", "ink", "cream", "cream", "cream"])
 
 
 def _build_telescope(api):
-    objective = Vector((307, 164, 836))
-    tail = Vector((393, 136, 790))
+    base = Vector((CENTER.x, CENTER.y, ROOF_Z))
+    objective = base + Vector((-43, -46, 146))
+    tail = base + Vector((43, -74, 100))
     axis = (tail - objective).normalized()
     length = (tail - objective).length
     _lathe(api, "OpticalBarrel", objective, axis,
@@ -360,18 +365,18 @@ def _build_telescope(api):
         radius = 11 if distance < 36 else 10 if distance < 64 else 8.5
         _lathe(api, f"BarrelBand{index:02}", objective + axis * (distance - 1), axis,
                [(0, radius), (2, radius)], "gold", segments=40)
-    pivot = Vector((352, 151, 777))
+    pivot = base + Vector((2, -59, 87))
     attachment = objective + axis * 53
     _tube(api, "TelescopeCradle", [pivot, attachment], 5.5, "gold", sides=16)
     _ball(api, "TripodHead", pivot, 7, "gold")
-    for index, (x, y) in enumerate(((327, 125), (375, 133), (354, 190))):
+    for index, (x, y) in enumerate(((base.x - 23, base.y - 85), (base.x + 25, base.y - 77), (base.x + 4, base.y - 20))):
         _tube(api, f"TripodLeg{index:02}", [pivot, (x, y, FLOOR_Z + 3)], 3.2, "gold", sides=12)
         _lathe(api, f"TripodFoot{index:02}", (x, y, FLOOR_Z), (0, 0, 1), [(0, 5), (3, 5), (4, 3)],
                "gold", segments=20)
 
 
 def build_world_observatory(api):
-    """Build closed observatory parts on the flat upper roof at world Z=690."""
+    """Build closed observatory parts on the flat upper roof at the fitted roof height."""
     _build_shell(api)
     _build_collar(api)
     _build_panel_details(api)

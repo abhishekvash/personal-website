@@ -6,6 +6,7 @@ import {
   SRGBColorSpace,
   Texture,
 } from "three";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { BufferGeometry, Group, Material } from "three";
 
@@ -127,7 +128,9 @@ export async function loadSceneAssets(
   const failedResources = new Set<string>();
   const manager = new LoadingManager();
   manager.onError = (url) => failedResources.add(url);
-  const gltf = await new GLTFLoader(manager).parseAsync(buffer, "/scene/");
+  const loader = new GLTFLoader(manager);
+  loader.setMeshoptDecoder(MeshoptDecoder);
+  const gltf = await loader.parseAsync(buffer, "/scene/");
   const geometries = new Set<BufferGeometry>();
   const materials = new Set<Material>();
   const textures = new Set<Texture>();

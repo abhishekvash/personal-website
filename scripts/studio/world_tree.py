@@ -11,14 +11,18 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 from tree import build_tree, _flower_and_bark_masks
-from world import AWAY, RIGHT, UP, legacy_to_world, project, unproject
+from world import AWAY, GEOMETRY, RIGHT, UP, legacy_to_world, project, unproject
 from world_paint import paint_source_positions
 
 
 BASE_SOURCE = (1309, 792)
-SOIL_Z = 142
-LIP_Z = 152
-SOIL_RADIUS = 153
+_PLANTER = GEOMETRY["planter"]
+_RADIAL = _PLANTER["r"] / 165
+_RADIAL_BASE = _PLANTER.get("rBase", _PLANTER["r"]) / 165
+_VERTICAL = _PLANTER["h"] / 152
+SOIL_Z = 142 * _VERTICAL
+LIP_Z = 152 * _VERTICAL
+SOIL_RADIUS = 153 * _RADIAL
 SEGMENTS = 96
 RIGHT_GROUND = Vector((RIGHT.x, RIGHT.y, 0)).normalized()
 FRONT_GROUND = -Vector((AWAY.x, AWAY.y, 0)).normalized()
@@ -27,11 +31,9 @@ FRONT_GROUND = -Vector((AWAY.x, AWAY.y, 0)).normalized()
 def _planter_center():
     if AWAY.z >= -.01:
         raise ValueError("The world camera must look downward toward positive world depth.")
-    provisional = unproject((*BASE_SOURCE, 0))
-    depth = -provisional.z / AWAY.z
-    center = unproject((*BASE_SOURCE, depth))
-    center.z = 0
-    return center, depth - 90
+    planter = GEOMETRY["planter"]
+    center = Vector((planter["x"], planter["y"], 0))
+    return center, project(center).z - 90
 
 
 def _radial(center, angle, radius, height):
@@ -54,8 +56,13 @@ def _normals(obj):
 def _upright_vessel(obj, center):
     # The broad side wall is a vertical cylinder. The foot and mouth retain
     # rounded transitions, while every circumferential ring remains level.
-    profile = ((153, 0), (165, 3), (165, 129), (170, 150),
-               (168, LIP_Z), (154, LIP_Z), (152, SOIL_Z), (149, 12))
+    def taper(radius, height):
+        # Blend from the painted base radius to the painted rim radius.
+        t = min(1.0, max(0.0, height / 150))
+        return radius * (_RADIAL_BASE * (1 - t) + _RADIAL * t)
+
+    profile = tuple((taper(radius, height), height * _VERTICAL) for radius, height in
+                    ((153, 0), (165, 3), (165, 129), (170, 150), (168, 152), (154, 152), (152, 142), (149, 12)))
     if len(obj.data.vertices) != len(profile) * SEGMENTS:
         raise ValueError("The source planter topology changed; update the world profile.")
     for ring, (radius, height) in enumerate(profile):
@@ -74,7 +81,7 @@ def _upright_vessel(obj, center):
 def _level_soil(obj, center):
     if len(obj.data.vertices) != (SEGMENTS + 1) * 2:
         raise ValueError("The source soil topology changed; update the world soil volume.")
-    for offset, height, radius in ((0, SOIL_Z, SOIL_RADIUS), (SEGMENTS + 1, 12, 150)):
+    for offset, height, radius in ((0, SOIL_Z, SOIL_RADIUS), (SEGMENTS + 1, 12 * _VERTICAL, 150 * _RADIAL)):
         obj.data.vertices[offset].co = center + Vector((0, 0, height))
         for index in range(SEGMENTS):
             obj.data.vertices[offset + index + 1].co = _radial(center, index * math.tau / SEGMENTS, radius, height)
@@ -89,7 +96,7 @@ def _mounted_inlay(obj, center):
     rings, sides = 48, 10
     if len(obj.data.vertices) != rings * sides:
         raise ValueError("The source inlay topology changed; update the world fitting.")
-    radius, fitting_radius = 165, 20.5
+    radius, fitting_radius = 165 * _RADIAL, 20.5
     horizontal = 1180 - BASE_SOURCE[0]
     angle = math.acos(horizontal / radius)
     surface = _radial(center, angle, radius, 0)
@@ -441,6 +448,48 @@ def _supporting_twigs(api, anchors, nodes, parents, roots, descendants):
     return obj
 
 
+def _spread_cards(objects):
+    """Spread blossom cards in camera depth, never in front of the wood that crosses them."""
+    canopy = next(obj for obj in objects if "curved blossom clusters" in obj.name)
+    branches = [obj for obj in objects if "twisting branch" in obj.name]
+    wood_vertices, wood_faces, _ = _wood_surface(branches)
+    wood_projection = np.asarray([tuple(project(point)) for point in wood_vertices])
+    wood_depth = np.asarray([point.dot(AWAY) for point in wood_vertices])
+    center_depth = float(np.median(wood_depth))
+    wood_front = np.full((1024, 1536), math.inf)
+    for face in wood_faces:
+        points = wood_projection[list(face)]
+        x0, y0 = np.floor(points[:, :2].min(axis=0)).astype(int)
+        x1, y1 = np.ceil(points[:, :2].max(axis=0)).astype(int) + 1
+        x0, y0, x1, y1 = max(0, x0), max(0, y0), min(1536, x1), min(1024, y1)
+        if x1 > x0 and y1 > y0:
+            patch = wood_front[y0:y1, x0:x1]
+            np.minimum(patch, float(wood_depth[list(face)].min()), out=patch)
+    mesh = canopy.data
+    clamped = 0
+    depths = []
+    for index, polygon in enumerate(mesh.polygons):
+        indices = list(polygon.vertices)
+        current = float(np.mean([mesh.vertices[i].co.dot(AWAY) for i in indices]))
+        target = center_depth + (((index + 1) * .618033988749895) % 1 - .5) * 192
+        shift = target - current
+        uv = np.asarray([tuple(project(mesh.vertices[i].co))[:2] for i in indices])
+        x0, y0 = np.floor(uv.min(axis=0)).astype(int)
+        x1, y1 = np.ceil(uv.max(axis=0)).astype(int) + 1
+        x0, y0, x1, y1 = max(0, x0), max(0, y0), min(1536, x1), min(1024, y1)
+        front_depth = float(wood_front[y0:y1, x0:x1].min()) if x1 > x0 and y1 > y0 else math.inf
+        limit = front_depth - max(mesh.vertices[i].co.dot(AWAY) for i in indices) - 5
+        if shift > limit:
+            shift, clamped = limit, clamped + 1
+        for i in indices:
+            mesh.vertices[i].co += AWAY * shift
+        depths.append(current + shift)
+    mesh.update()
+    canopy["depthSpread"] = json.dumps({"cards": len(mesh.polygons), "depthMin": float(min(depths)),
+                                        "depthMax": float(max(depths)), "woodOcclusionClamps": clamped})
+    print(f"WORLD CANOPY {len(mesh.polygons)} blossom cards / {canopy['depthSpread']}", flush=True)
+
+
 def _volumetric_canopy(api, objects):
     canopy = next(obj for obj in objects if "curved blossom clusters" in obj.name)
     branches = [obj for obj in objects if "twisting branch" in obj.name]
@@ -478,5 +527,5 @@ def build_world_tree(api):
             obj["treeRole"] = "branch" if "twisting branch" in obj.name else "curved canopy blossoms"
         obj["coordinateSpace"] = "world"
     _join_left_twig(objects)
-    objects.append(_volumetric_canopy(api, objects))
+    _spread_cards(objects)
     return objects

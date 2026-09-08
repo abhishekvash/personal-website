@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "public/scene"
-TEXTURES = OUT / "textures"
+TEXTURES = ROOT / "assets/studio/textures"
 
 
 def prepare():

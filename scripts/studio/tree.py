@@ -5,6 +5,8 @@ import heapq
 
 import numpy as np
 
+from common import HEIGHT, WIDTH
+
 
 def _material_faces(api, obj, back_material, indices):
     obj.data.materials.append(api.material(back_material))
@@ -401,6 +403,41 @@ def _ink_volumes(api, name, mask, offset=(930, 0), mode="flower", branch_surface
         _material_faces(api, obj, "pink" if flower else "bark", back_faces)
 
 
+def _blossom_cards(api, name, mask, offset=(930, 0)):
+    """One flat card per printed flower, owning exactly its own pixels.
+
+    Cards keep the painting's silhouettes crisp at full resolution and cost
+    four vertices each. The label map lets the bake cut each card's alpha to
+    its own contour, so neighbouring flowers never duplicate on it.
+    """
+    import json
+    step = 2
+    labels_half, centers, _ = _flower_contours(mask[::step, ::step], offset, step)
+    labels = np.repeat(np.repeat(labels_half, step, axis=0), step, axis=1)[:mask.shape[0], :mask.shape[1]]
+    labels = np.where(mask, labels, -1).astype(np.int32)
+    full = np.full((HEIGHT, WIDTH), -1, dtype=np.int32)
+    full[offset[1]:offset[1] + labels.shape[0], offset[0]:offset[0] + labels.shape[1]] = labels
+    np.save(api.root / "assets/studio/world-canopy-labels.npy", full)
+    vertices, faces, groups = [], [], {}
+    for label in np.unique(labels[labels >= 0]):
+        ys, xs = np.where(labels == label)
+        u0, u1 = offset[0] + xs.min() - 1.5, offset[0] + xs.max() + 2.5
+        v0, v1 = offset[1] + ys.min() - 1.5, offset[1] + ys.max() + 2.5
+        cx, cy = (u0 + u1) / 2, (v0 + v1) / 2
+        canopy_radius = ((cx - 1285) / 355) ** 2 + ((cy - 240) / 390) ** 2
+        depth = -27 + 26 * canopy_radius + 2 * math.sin(cx / 90) * math.sin(cy / 100)
+        base = len(vertices)
+        vertices += [(u0, v0, depth), (u1, v0, depth), (u1, v1, depth), (u0, v1, depth)]
+        groups[f"card{int(label)}"] = {"faces": [len(faces)], "fill": "pink", "card": int(label)}
+        faces.append((base, base + 3, base + 2, base + 1))
+    obj = api.mesh(name, vertices, faces, material="source")
+    obj["sourceFill"] = "pink"
+    obj["paintMode"] = "cards"
+    obj["surfaceGroups"] = json.dumps(groups)
+    obj["blossomCards"] = len(faces)
+    return obj
+
+
 def _planter(api):
     segments = 96
     # Profile rings describe the original asymmetric blue ceramic bowl, its
@@ -556,5 +593,5 @@ def build_tree(api):
     # Bark printing is carried by the closed wood itself. Separate projected
     # ink skins made fringes and disconnected plates at oblique viewpoints.
     _branches(api, _close_silhouette(ownership))
-    _ink_volumes(api, "Bonsai • curved blossom clusters", flowers)
+    _blossom_cards(api, "Bonsai • curved blossom clusters", flowers)
     _fallen_petals(api)

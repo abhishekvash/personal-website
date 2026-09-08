@@ -8,14 +8,15 @@ import json
 
 import bmesh
 import bpy
-from mathutils import Matrix, Vector
+from mathutils import Vector
+
+from world import GEOMETRY
 
 
-STOREYS = {
-    "Ground": {"width": 700, "depth": 420, "bottom": 40, "top": 280},
-    "Recording": {"width": 650, "depth": 365, "bottom": 280, "top": 475},
-    "Gaming": {"width": 585, "depth": 310, "bottom": 475, "top": 690},
-}
+STOREYS = {name: {"bottom": storey["z"][0], "top": storey["z"][1]}
+           for name, storey in GEOMETRY["storeys"].items()}
+WALL = GEOMETRY["wall"]
+CORNER_RADIUS = GEOMETRY["cornerRadius"]
 
 
 def _finish(obj, fill="blue"):
@@ -117,21 +118,7 @@ def _surface_groups(obj, classify=None):
 
 
 def _room_bounds():
-    return {
-        "Workspace": {"x": [-330, -10], "y": [-210, 190], "floorZ": 60,
-                      "ceilingZ": 260, "openingX": [-330, -10], "frontY": -210,
-                      "floorFill": "gold", "rearFill": "pink", "storey": "Ground"},
-        "Kitchen": {"x": [10, 330], "y": [-210, 190], "floorZ": 60,
-                    "ceilingZ": 260, "openingX": [10, 330], "frontY": -210,
-                    "floorFill": "gold", "rearFill": "gold", "storey": "Ground"},
-        "Recording": {"x": [-305, 305], "y": [-182.5, 162.5], "floorZ": 280,
-                      "ceilingZ": 455, "openingX": [-305, 215], "frontY": -182.5,
-                      "floorFill": "pink", "rearFill": "pink", "storey": "Recording"},
-        "Gaming": {"x": [-272.5, 272.5], "y": [-155, 135], "floorZ": 475,
-                   "ceilingZ": 670, "openingX": [-172.5, 227.5], "frontY": -155,
-                   "usableX": [-172.5, 272.5], "serviceBayWidth": 100,
-                   "floorFill": "pink", "rearFill": "pink", "storey": "Gaming"},
-    }
+    return json.loads(json.dumps(GEOMETRY["rooms"]))
 
 
 def _carve_room(api, shell, name, room):
@@ -213,8 +200,8 @@ def _paint_shell(api, shell, rooms):
     _surface_groups(shell, classify)
 
 
-def _side_port(api, shell, name, side, half_width, y, z, radius, room):
-    x = side * half_width
+def _side_port(api, shell, name, side, half_width, y, z, radius, room, center_x=0):
+    x = center_x + side * half_width
     axis = (1, 0, 0)
     cutter = _cylinder(api, name + "_BoreCutter", (x - side * 10, y, z), radius, 46, axis)
     _boolean(shell, cutter)
@@ -229,11 +216,13 @@ def _side_port(api, shell, name, side, half_width, y, z, radius, room):
 
 def _front_port(api, shell):
     name = "WorldArchitecture_RecordingFrontPorthole"
-    center = (285, -171.5, 408)
-    cutter = _cylinder(api, name + "_BoreCutter", center, 30, 50, (0, 1, 0))
+    spec = GEOMETRY["frontPort"]
+    radius = spec["r"]
+    center = (spec["x"], spec["y"] + 11.5, spec["z"])
+    cutter = _cylinder(api, name + "_BoreCutter", center, radius, 50, (0, 1, 0))
     _boolean(shell, cutter)
-    rim = _torus(api, name + "_Rim", (285, -183, 408), 31, 3, (0, 1, 0))
-    glass = _cylinder(api, name + "_Glass", center, 30.35, 3, (0, 1, 0))
+    rim = _torus(api, name + "_Rim", (spec["x"], spec["y"], spec["z"]), radius + 1, 3, (0, 1, 0))
+    glass = _cylinder(api, name + "_Glass", center, radius + .35, 3, (0, 1, 0))
     for obj in (rim, glass):
         obj["mountedTo"] = shell.name
         _surface_groups(obj)
@@ -241,17 +230,22 @@ def _front_port(api, shell):
 
 def _vent(api, shell):
     name = "WorldArchitecture_GamingServiceVent"
-    bounds = (-274, -209, -160, -148, 540, 653)
-    recess = _box(api, name + "_RecessCutter", bounds, radius=4)
+    spec = GEOMETRY["vent"]
+    x0, x1 = spec["x"]
+    z0, z1 = spec["z"]
+    y = spec["y"]
+    recess = _box(api, name + "_RecessCutter", (x0, x1, y - 5, y + 7, z0, z1), radius=4)
     _boolean(shell, recess)
-    housing = _box(api, name + "_Housing", (-277, -206, -158, -145, 537, 656), "cream", 5)
-    aperture = _box(api, name + "_OpeningCutter", (-270, -213, -166, -149, 543, 650), radius=3)
+    housing = _box(api, name + "_Housing", (x0 - 3, x1 + 3, y - 3, y + 10, z0 - 3, z1 + 3), "cream", 5)
+    aperture = _box(api, name + "_OpeningCutter", (x0 + 4, x1 - 4, y - 11, y + 6, z0 + 3, z1 - 3), radius=3)
     _boolean(housing, aperture)
     housing["mountedTo"] = shell.name
     _surface_groups(housing)
-    for index in range(9):
-        z = 552 + index * 10.6
-        slat = _box(api, name + f"_Louver{index + 1:02}", (-272, -211, -155, -148, z, z + 4.2),
+    count = 9
+    pitch = (z1 - z0 - 24) / count
+    for index in range(count):
+        z = z0 + 12 + index * pitch
+        slat = _box(api, name + f"_Louver{index + 1:02}", (x0 + 2, x1 - 2, y, y + 7, z, z + pitch * .4),
                     "blue", 1.7)
         slat["mountedTo"] = housing.name
         _surface_groups(slat)
@@ -259,52 +253,46 @@ def _vent(api, shell):
 
 def build_world_architecture(api):
     """Build the fixed architecture and return the usable room bounds in world units."""
-    existing = set(bpy.context.scene.objects)
     rooms = _room_bounds()
-    shell = _box(api, "WorldArchitecture_BuildingShell", (-350, 350, -210, 210, 40, 280), radius=7)
-    middle = _box(api, "WorldArchitecture_RecordingOuterSolid", (-325, 325, -182.5, 182.5, 260, 475), radius=7)
-    upper = _box(api, "WorldArchitecture_GamingOuterSolid", (-292.5, 292.5, -155, 155, 455, 690), radius=7)
-    _boolean(shell, middle, "UNION")
-    _boolean(shell, upper, "UNION")
+    storeys = GEOMETRY["storeys"]
+
+    def bounds(storey):
+        return (*storey["x"], *storey["y"], *storey["z"])
+
+    shell = _box(api, "WorldArchitecture_BuildingShell", bounds(storeys["Ground"]), radius=CORNER_RADIUS, segments=8)
+    for name, storey in storeys.items():
+        if name == "Ground":
+            continue
+        x0, x1, y0, y1, z0, z1 = bounds(storey)
+        # Overlap the storey below by one wall so the union is weld-tight.
+        solid = _box(api, f"WorldArchitecture_{name}OuterSolid", (x0, x1, y0, y1, z0 - WALL, z1),
+                     radius=CORNER_RADIUS, segments=8)
+        _boolean(shell, solid, "UNION")
     for name, room in rooms.items():
         _carve_room(api, shell, name, room)
-    for room, half_width, z, radius in (("Ground", 350, 159, 37),
-                                        ("Recording", 325, 371, 39),
-                                        ("Gaming", 292.5, 575, 35)):
-        for side, label in ((-1, "Left"), (1, "Right")):
-            positions={"Ground":((-65,208),(80,159)),"Recording":((-20,426),(80,371)),"Gaming":((-15,611),(108,542))}
-            y,z=positions[room][0 if side<0 else 1]
-            _side_port(api, shell, f"WorldArchitecture_{room}{label}Porthole",
-                       side, half_width, y, z, radius, room)
-    for side, label in ((-1, "Left"), (1, "Right")):
-        _side_port(api, shell, f"WorldArchitecture_Ground{label}SmallPorthole",
-                   side, 350, 64 if side<0 else 92, 231 if side<0 else 221, 13, "Ground")
+    for port in GEOMETRY["ports"]:
+        storey = storeys[port["storey"]]
+        half_width = (storey["x"][1] - storey["x"][0]) / 2
+        center_x = (storey["x"][0] + storey["x"][1]) / 2
+        _side_port(api, shell, "WorldArchitecture_" + port["name"], port["side"], half_width,
+                   port["y"], port["z"], port["r"], port["storey"], center_x)
     _front_port(api, shell)
     _vent(api, shell)
     _paint_shell(api, shell, rooms)
-    shell["construction"] = "Unioned stepped solids with shared 20-unit decks and bounded room cavities."
+    shell["construction"] = "Unioned stepped solids from the painting fit, with bounded room cavities."
 
-    plinth = _box(api, "WorldArchitecture_BasePlinth", (-370, 370, -222.5, 222.5, 20, 40.5), "blue", 8)
+    plinth_spec = GEOMETRY["plinth"]
+    px0, px1 = plinth_spec["x"]
+    py0, py1 = plinth_spec["y"]
+    pz0, pz1 = plinth_spec["z"]
+    plinth = _box(api, "WorldArchitecture_BasePlinth", (px0, px1, py0, py1, pz0, pz1 + .5), "blue", 6)
     _surface_groups(plinth)
-    for index, (x, y) in enumerate(((-320, -181), (-107, -181), (107, -181), (320, -181),
-                                    (-320, 181), (320, 181))):
+    foot_height = plinth_spec["footHeight"]
+    for index, (x, y) in enumerate(GEOMETRY["feet"]):
+        x = min(max(x, px0 + 12), px1 - 12)
         foot = _box(api, f"WorldArchitecture_Foot{index + 1:02}",
-                    (x - 10, x + 10, y - 13, y + 13, 0, 20.5), "blue", 2)
+                    (x - 11, x + 11, y - 13, y + 13, 0, foot_height + .5), "blue", 2)
         foot["mountedTo"] = plinth.name
         _surface_groups(foot)
-    # The construction is centered for symmetry. Publish a corner-based world
-    # frame shared by furniture, dome, and camera: ground x0..700, y0..420.
-    offset = Matrix.Translation((350, 210, 0))
-    for obj in set(bpy.context.scene.objects) - existing:
-        if obj.type == "MESH":
-            obj.data.transform(offset @ obj.matrix_world)
-            obj.matrix_world = Matrix.Identity(4)
-            obj.data.update()
-    for room in rooms.values():
-        for key in ("x", "openingX", "usableX"):
-            if key in room:
-                room[key] = [value + 350 for value in room[key]]
-        room["y"] = [value + 210 for value in room["y"]]
-        room["frontY"] += 210
     shell["roomBounds"] = json.dumps(rooms)
     return rooms

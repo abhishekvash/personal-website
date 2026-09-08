@@ -6,10 +6,15 @@ import {
   NoToneMapping,
   SRGBColorSpace,
   Spherical,
+  Vector2,
   Vector3,
   WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 
 import { SceneAtmosphere } from "./SceneAtmosphere";
 import { getScenePreview, loadSceneAssets } from "./scene-assets";
@@ -208,15 +213,77 @@ function CameraControls({
   return null;
 }
 
+// The painting is 1536 pixels wide. When the canvas draws it larger, bilinear
+// magnification softens the ink; a light unsharp mask restores the edge the
+// browser's own image resampling would have kept.
+const SOURCE_WIDTH = 1536;
+const sharpenShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    texelSize: { value: new Vector2(1 / SOURCE_WIDTH, 1 / 1024) },
+    strength: { value: 0 },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform vec2 texelSize;
+    uniform float strength;
+    varying vec2 vUv;
+    void main() {
+      vec4 center = texture2D(tDiffuse, vUv);
+      if (strength <= 0.0) {
+        gl_FragColor = center;
+        return;
+      }
+      vec4 blur = center * 4.0
+        + texture2D(tDiffuse, vUv + vec2(texelSize.x, 0.0)) * 2.0
+        + texture2D(tDiffuse, vUv - vec2(texelSize.x, 0.0)) * 2.0
+        + texture2D(tDiffuse, vUv + vec2(0.0, texelSize.y)) * 2.0
+        + texture2D(tDiffuse, vUv - vec2(0.0, texelSize.y)) * 2.0
+        + texture2D(tDiffuse, vUv + texelSize)
+        + texture2D(tDiffuse, vUv - texelSize)
+        + texture2D(tDiffuse, vUv + vec2(texelSize.x, -texelSize.y))
+        + texture2D(tDiffuse, vUv - vec2(texelSize.x, -texelSize.y));
+      blur /= 16.0;
+      gl_FragColor = vec4(clamp(center.rgb + (center.rgb - blur.rgb) * strength, 0.0, 1.0), center.a);
+    }
+  `,
+};
+
 function RenderLifecycle({
   capture,
   onReady,
   onError,
 }: Pick<SceneProps, "onReady" | "onError"> & { capture: boolean }) {
-  const { gl } = useThree();
+  const { gl, scene, camera } = useThree();
   const complete = useRef(false);
   const failed = useRef(false);
   const readyFrame = useRef<number | null>(null);
+  const composer = useRef<EffectComposer | null>(null);
+  const sharpen = useRef<ShaderPass | null>(null);
+
+  useLayoutEffect(() => {
+    const pass = new ShaderPass(sharpenShader);
+    const effect = new EffectComposer(gl);
+    effect.addPass(new RenderPass(scene, camera));
+    effect.addPass(pass);
+    // Restores the renderer's output colour space after the offscreen passes.
+    effect.addPass(new OutputPass());
+    composer.current = effect;
+    sharpen.current = pass;
+    return () => {
+      effect.dispose();
+      pass.dispose();
+      composer.current = null;
+      sharpen.current = null;
+    };
+  }, [gl, scene, camera]);
 
   useLayoutEffect(() => {
     const canvas = gl.domElement;
@@ -253,10 +320,27 @@ function RenderLifecycle({
     };
   }, [gl, onError]);
 
-  useFrame(({ scene, camera }) => {
+  useFrame(({ size, viewport }) => {
     if (failed.current) return;
     try {
-      gl.render(scene, camera);
+      const effect = composer.current;
+      const pass = sharpen.current;
+      if (effect && pass) {
+        const width = size.width * viewport.dpr;
+        const height = size.height * viewport.dpr;
+        effect.setSize(size.width, size.height);
+        effect.setPixelRatio(viewport.dpr);
+        const magnification = width / SOURCE_WIDTH;
+        pass.uniforms.strength.value =
+          magnification > 1.05 ? Math.min(0.9, (magnification - 1) * 0.6) : 0;
+        pass.uniforms.texelSize.value.set(
+          magnification / width,
+          magnification / height,
+        );
+        effect.render();
+      } else {
+        gl.render(scene, camera);
+      }
     } catch (error) {
       failed.current = true;
       onError(error);

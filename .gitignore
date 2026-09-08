@@ -21,3 +21,4 @@ todos.json
 # Blender/Python authoring caches.
 __pycache__/
 *.pyc
+.venv-studio/
