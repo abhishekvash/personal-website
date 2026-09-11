@@ -1,9 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 300 900;
+  src: url("@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
 @custom-variant dark (&:is(.dark *));
+
+::selection {
+  background: var(--color-blossom-pink);
+  color: var(--color-midnight-paper);
+}
 
 @theme {
   /* Typography */

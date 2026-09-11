@@ -7,6 +7,8 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
 import { useSyncExternalStore } from "react";
+import figtreeFontUrl from "@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url";
+import frauncesFontUrl from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 
 import PostHogProvider from "../integrations/posthog/provider";
@@ -32,13 +34,27 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       {
         title: "TanStack Start Starter",
       },
     ],
     links: [
+      {
+        rel: "preload",
+        href: figtreeFontUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: frauncesFontUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       {
         rel: "stylesheet",
         href: appCss,

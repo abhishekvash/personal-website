@@ -344,17 +344,17 @@ function CameraFraming() {
   useLayoutEffect(() => {
     if (!(camera instanceof OrthographicCamera)) return;
 
-    // Shrink the artwork 15% while keeping the full-page canvas and right alignment.
-    const artworkWidth =
-      (size.width <= 768
-        ? size.width
-        : Math.min(size.width * 0.72, size.height * 1.1688)) * 0.85;
+    const stacked = size.width <= 1024;
+    const artworkWidth = stacked
+      ? Math.min(size.width * 1.05, size.height * 1.3)
+      : Math.min(size.width * 0.72, size.height * 1.1688) * 0.85;
     const artworkHeight = (artworkWidth * 77) / 90;
     camera.setViewOffset(
       artworkWidth,
       artworkHeight,
-      artworkWidth - size.width,
-      (artworkHeight - size.height) / 2,
+      stacked ? (artworkWidth - size.width) / 2 : artworkWidth - size.width,
+      (artworkHeight - size.height) / 2 +
+        (size.width <= 640 ? size.height * 0.18 : 0),
       size.width,
       size.height,
     );
