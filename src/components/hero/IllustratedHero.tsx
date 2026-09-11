@@ -42,16 +42,6 @@ export function IllustratedHero() {
         aria-describedby={`${id}-description`}
         data-scene-status={status}
       >
-        <img
-          className="studio-reference"
-          src="/scene/curiosity-house-preview.jpg"
-          width="2000"
-          height="1710"
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          decoding="async"
-        />
         {status !== "failed" ? (
           <SceneErrorBoundary onError={handleError}>
             <ClientOnly fallback={null}>
@@ -69,10 +59,15 @@ export function IllustratedHero() {
             gaming room, and rooftop observatory.
           </span>
         </figcaption>
-        <span className="sr-only" role="status">
+        <span
+          className={status === "failed" ? "studio-message" : "sr-only"}
+          role="status"
+        >
           {status === "failed"
-            ? "The interactive scene is unavailable. A rendered preview is displayed."
-            : ""}
+            ? "The scene could not load. Please refresh to try again."
+            : status === "loading"
+              ? "Loading the interactive scene."
+              : ""}
         </span>
       </figure>
     </main>

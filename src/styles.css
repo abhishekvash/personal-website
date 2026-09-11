@@ -8,7 +8,7 @@
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
-  --color-scene-paper: #050711;
+  --color-scene-paper: #0b1028;
   --color-scene-ink: #c7dcff;
 }
 
@@ -17,34 +17,24 @@
   min-height: 100svh;
   place-items: center end;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 78% 40%, rgb(191 35 132 / 22%), transparent 31%),
-    radial-gradient(circle at 88% 78%, rgb(28 126 194 / 18%), transparent 33%),
-    var(--color-scene-paper);
+  background: var(--color-scene-paper);
   color: var(--color-scene-ink);
 }
 
 .studio-artwork {
   position: relative;
   isolation: isolate;
-  width: min(72vw, 116.88svh);
-  aspect-ratio: 90 / 77;
+  width: 100%;
+  height: 100svh;
   margin: 0;
   overflow: hidden;
 }
 
-.studio-reference {
+.studio-message {
   position: absolute;
-  z-index: 2;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.studio-artwork[data-scene-status="ready"] .studio-reference {
-  visibility: hidden;
+  inset: 50% 1.5rem auto;
+  color: #f0dce9;
+  text-align: center;
 }
 
 .studio-viewer {
@@ -60,10 +50,4 @@
 
 .studio-canvas canvas:active {
   cursor: grabbing;
-}
-
-@media (max-width: 768px) {
-  .studio-artwork {
-    width: 100vw;
-  }
 }

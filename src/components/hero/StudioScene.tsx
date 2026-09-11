@@ -1,16 +1,21 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
-  LinearToneMapping,
+  ACESFilmicToneMapping,
+  Box3,
+  DepthTexture,
+  Group,
+  HalfFloatType,
   MathUtils,
   MeshStandardMaterial,
   OrthographicCamera,
-  PCFSoftShadowMap,
+  PCFShadowMap,
   SRGBColorSpace,
   Spherical,
   Texture,
   Vector2,
   Vector3,
+  WebGLRenderTarget,
   WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -20,7 +25,18 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-import type { Group, Material, Mesh } from "three";
+import {
+  RoomLighting,
+  studioCeilingHeight,
+  studioCeilingLights,
+  studioConsoleX,
+} from "./RoomLighting";
+import { installCharacterPortraits } from "./CharacterPortraits";
+import { installScreenContent } from "./ScreenContent";
+import { SunRaysPass } from "./SunRaysPass";
+import { sunPosition, sunlight } from "./sunlight";
+import type { RefObject } from "react";
+import type { DirectionalLight, Material, Mesh } from "three";
 
 type SceneProps = {
   onReady: () => void;
@@ -42,7 +58,17 @@ const materialColors: Record<string, string> = {
   "Blossom • 4": "#ff94aa",
   "Cherry • amber bark ridges": "#b36d32",
   "Cherry • dark sculpted bark": "#4a2c29",
-  "Frame • warm ivory": "#f2ca7c",
+  "Frame • warm ivory": "#f3d6b8",
+};
+
+// Keep practical lights luminous without giving screens the same bloom as lamps.
+const materialEmission: Partial<Record<string, number>> = {
+  "Lamp • glowing diffuser": 1.4,
+  "Props • warm LED": 0.65,
+  "Neon • coral": 0.65,
+  "Neon • peach": 0.6,
+  "Display • raspberry": 0.45,
+  "Display • midnight plum": 0.4,
 };
 
 async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
@@ -73,30 +99,166 @@ async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
   const geometries = new Set<Mesh["geometry"]>();
   const materials = new Set<Material>();
   const textures = new Set<Texture>();
+  const deviceMaterials = new Map<string, MeshStandardMaterial>();
+  const chairParts: Array<Mesh> = [];
+  const speakerParts: Array<Mesh> = [];
 
   gltf.scene.traverse((object) => {
     if (object.type !== "Mesh") return;
     const mesh = object as Mesh;
+    if (/^(Study|Studio|Gaming)_chair__/.test(mesh.name)) chairParts.push(mesh);
+    if (mesh.name.startsWith("Studio_nearfield_monitor__")) {
+      mesh.position.x += studioConsoleX - 0.85 - 0.4;
+      speakerParts.push(mesh);
+    }
+    // Center the display and its artwork between the speakers, slightly nearer the chair.
+    if (
+      mesh.name.startsWith("Studio_display__") ||
+      (mesh.name.startsWith("Display_star") &&
+        mesh.position.y > 3.6 &&
+        mesh.position.y < 4.3)
+    ) {
+      mesh.position.x += studioConsoleX - 1.48;
+      mesh.position.z += 0.08;
+    }
     mesh.castShadow = true;
     mesh.receiveShadow = true;
+    // Recess the diffuser into the ceiling; remove the hanging shade and stem.
+    if (mesh.name.startsWith("Pendant_lamp__")) {
+      if (mesh.name === "Pendant_lamp__warm_diffuser") {
+        const { x, z } = studioCeilingLights[0];
+        mesh.position.set(x, studioCeilingHeight - 0.005, z);
+      } else {
+        mesh.visible = false;
+      }
+    }
     const meshMaterials = Array.isArray(mesh.material)
       ? mesh.material
       : [mesh.material];
     for (const material of meshMaterials) {
+      materials.add(material);
       const color = materialColors[material.name];
       if (material instanceof MeshStandardMaterial) {
         if (color) material.color.set(color);
         material.roughness = Math.min(material.roughness, 0.76);
-        if (
-          /Display|Lamp|Neon|warm LED|luminous/.test(material.name) &&
-          material.emissive.getHex() !== 0
-        ) {
-          material.emissiveIntensity = 2.4;
-        }
+        const emission = materialEmission[material.name];
+        if (emission !== undefined) material.emissiveIntensity = emission;
         material.needsUpdate = true;
       }
     }
+
+    const original = mesh.material;
+    if (!(original instanceof MeshStandardMaterial)) return;
+    let deviceColor: string | undefined;
+    let deviceIntensity = 0.9;
+    if (mesh.name.startsWith("PC__illuminated_fan_ring")) {
+      deviceColor = mesh.position.y > 5.85 ? "#c391ff" : "#65e3ff";
+      deviceIntensity = 1.2;
+    } else if (mesh.name.startsWith("Mixer__VU_meter")) {
+      deviceColor = "#adc998";
+      deviceIntensity = 0.22;
+    } else if (mesh.name.startsWith("Gaming__concealed_coral_light_strip")) {
+      deviceColor = "#f57ab6";
+      deviceIntensity = 1.1;
+    }
+    if (!deviceColor) return;
+
+    // Device accents must not recolor the shared neon/LED materials elsewhere.
+    const key = `${original.uuid}:${deviceColor}`;
+    let material = deviceMaterials.get(key);
+    if (!material) {
+      material = original.clone();
+      material.color.set(deviceColor);
+      material.emissive.set(deviceColor);
+      material.emissiveIntensity = deviceIntensity;
+      deviceMaterials.set(key, material);
+    }
+    mesh.material = material;
   });
+
+  for (const part of speakerParts) {
+    // Duplicate every cabinet, driver, and trim component for a matching stereo pair.
+    const speaker = part.clone();
+    speaker.name = part.name.replace(
+      "Studio_nearfield_monitor__",
+      "Studio_right_nearfield_monitor__",
+    );
+    speaker.position.x += 1.7;
+    gltf.scene.add(speaker);
+  }
+
+  const studioDiffuser = gltf.scene.getObjectByName(
+    "Pendant_lamp__warm_diffuser",
+  );
+  if (studioDiffuser) {
+    for (const { name, x, z } of studioCeilingLights.slice(1)) {
+      // Share geometry and material so both recessed fixtures remain identical.
+      const diffuser = studioDiffuser.clone();
+      diffuser.name = `${name} diffuser`;
+      diffuser.position.set(x, studioCeilingHeight - 0.005, z);
+      gltf.scene.add(diffuser);
+    }
+  }
+
+  const chairLayouts = [
+    {
+      prefix: "Study_chair__",
+      screens: ["Study_display__screen", "Study_display__screen001"],
+    },
+    {
+      prefix: "Studio_chair__",
+      screens: ["Studio_display__screen"],
+      consoleName: "Mixing_console__brass_case",
+    },
+    {
+      prefix: "Gaming_chair__",
+      screens: ["Gaming_ultrawide__screen"],
+    },
+  ];
+  gltf.scene.updateMatrixWorld(true);
+  for (const { prefix, screens: screenNames, consoleName } of chairLayouts) {
+    const seat = gltf.scene.getObjectByName(`${prefix}seat`);
+    const back = gltf.scene.getObjectByName(`${prefix}upholstered_back`);
+    const screens = screenNames
+      .map((name) => gltf.scene.getObjectByName(name))
+      .filter((screen) => screen !== undefined);
+    if (!seat || !back || screens.length !== screenNames.length) continue;
+
+    const pivot = new Box3().setFromObject(seat).getCenter(new Vector3());
+    const backCenter = new Box3().setFromObject(back).getCenter(new Vector3());
+    const screenCenter = new Vector3();
+    for (const screen of screens) {
+      screenCenter.add(
+        new Box3().setFromObject(screen).getCenter(new Vector3()),
+      );
+    }
+    screenCenter.divideScalar(screens.length);
+    const destination = pivot.clone();
+    const consoleCase = consoleName
+      ? gltf.scene.getObjectByName(consoleName)
+      : undefined;
+    if (consoleCase) {
+      const bounds = new Box3().setFromObject(consoleCase);
+      destination.x = bounds.getCenter(new Vector3()).x;
+      destination.z = bounds.max.z + 0.3;
+    }
+
+    const forward = pivot.clone().sub(backCenter);
+    const towardsScreen = screenCenter.sub(destination);
+    const chair = new Group();
+    chair.name = `${prefix}facing_screens`;
+    chair.position.copy(pivot);
+    gltf.scene.add(chair);
+    chair.updateMatrixWorld(true);
+    // Keep seats, backs, armrests, and casters together when turning each chair.
+    chairParts
+      .filter((part) => part.name.startsWith(prefix))
+      .forEach((part) => chair.attach(part));
+    chair.rotation.y =
+      Math.atan2(towardsScreen.x, towardsScreen.z) -
+      Math.atan2(forward.x, forward.z);
+    chair.position.copy(destination);
+  }
 
   const dispose = () => {
     gltf.scene.traverse((object) => {
@@ -118,22 +280,36 @@ async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
     textures.forEach((texture) => texture.dispose());
   };
 
-  return { scene: gltf.scene, camera, dispose };
+  try {
+    installScreenContent(gltf.scene);
+    await installCharacterPortraits(gltf.scene);
+    signal.throwIfAborted();
+    return { scene: gltf.scene, camera, dispose };
+  } catch (error) {
+    dispose();
+    throw error;
+  }
 }
 
-function PostProcessing() {
+function PostProcessing({ sun }: { sun: RefObject<DirectionalLight | null> }) {
   const { camera, gl, scene, size } = useThree();
   const composer = useRef<EffectComposer | null>(null);
 
   useLayoutEffect(() => {
-    const effect = new EffectComposer(gl);
+    if (!sun.current) return;
+    const target = new WebGLRenderTarget(size.width, size.height, {
+      type: HalfFloatType,
+      depthTexture: new DepthTexture(size.width, size.height),
+    });
+    const effect = new EffectComposer(gl, target);
     effect.addPass(new RenderPass(scene, camera));
+    effect.addPass(new SunRaysPass(camera, sun.current));
     effect.addPass(
       new UnrealBloomPass(
         new Vector2(size.width, size.height),
-        0.48,
-        0.38,
-        0.86,
+        0.28,
+        0.45,
+        1.05,
       ),
     );
     effect.addPass(new OutputPass());
@@ -143,11 +319,40 @@ function PostProcessing() {
 
     return () => {
       composer.current = null;
+      effect.passes.forEach((pass) => pass.dispose());
       effect.dispose();
     };
-  }, [camera, gl, scene, size.height, size.width]);
+  }, [camera, gl, scene, size.height, size.width, sun]);
 
   useFrame(() => composer.current?.render(), 1);
+  return null;
+}
+
+function CameraFraming() {
+  const { camera, size, invalidate } = useThree();
+
+  useLayoutEffect(() => {
+    if (!(camera instanceof OrthographicCamera)) return;
+
+    // Expand the sky to the viewport without moving or enlarging the house.
+    const artworkWidth =
+      size.width <= 768
+        ? size.width
+        : Math.min(size.width * 0.72, size.height * 1.1688);
+    const artworkHeight = (artworkWidth * 77) / 90;
+    camera.setViewOffset(
+      artworkWidth,
+      artworkHeight,
+      artworkWidth - size.width,
+      (artworkHeight - size.height) / 2,
+      size.width,
+      size.height,
+    );
+    invalidate();
+
+    return () => camera.clearViewOffset();
+  }, [camera, invalidate, size.height, size.width]);
+
   return null;
 }
 
@@ -192,6 +397,7 @@ function CameraControls() {
 export default function StudioScene({ onReady, onError }: SceneProps) {
   const [assets, setAssets] = useState<SceneAssets | null>(null);
   const ready = useRef(false);
+  const sun = useRef<DirectionalLight>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -225,6 +431,11 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
         camera={assets.camera}
         frameloop="demand"
         dpr={[1, 2]}
+        shadows={{
+          type: PCFShadowMap,
+          autoUpdate: false,
+          needsUpdate: true,
+        }}
         gl={(defaults) => {
           const renderer = new WebGLRenderer({
             ...defaults,
@@ -233,14 +444,13 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
             powerPreference: "high-performance",
           });
           renderer.outputColorSpace = SRGBColorSpace;
-          renderer.shadowMap.enabled = true;
-          renderer.shadowMap.type = PCFSoftShadowMap;
-          renderer.toneMapping = LinearToneMapping;
-          renderer.toneMappingExposure = 1;
+          renderer.toneMapping = ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
           return renderer;
         }}
         onCreated={({ gl }) => {
-          gl.setClearColor("#050711", 0);
+          // Transparent pixels must also have zero RGB for premultiplied compositing.
+          gl.setClearColor(0x000000, 0);
           requestAnimationFrame(() => {
             if (!ready.current) {
               ready.current = true;
@@ -250,33 +460,36 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
         }}
       >
         <primitive object={assets.scene} dispose={null} />
-        <ambientLight color="#53659d" intensity={0.32} />
-        <hemisphereLight args={["#708cff", "#280d32", 0.42]} />
+        <ambientLight color="#a69bcd" intensity={0.045} />
+        <hemisphereLight args={["#a4ace5", "#9d5063", 0.3]} />
+        {/* Near-horizontal light from +X lets the tree cast shadows onto the house. */}
         <directionalLight
-          color="#75d9ff"
-          position={[-8, 18, -12]}
-          intensity={1.45}
+          ref={sun}
+          color={sunlight.color}
+          position={sunPosition}
+          intensity={sunlight.intensity}
           castShadow
           shadow-mapSize={[2048, 2048]}
+          shadow-radius={1 + sunlight.diffusion}
           shadow-camera-near={1}
-          shadow-camera-far={50}
+          shadow-camera-far={90}
           shadow-camera-left={-10}
           shadow-camera-right={10}
           shadow-camera-top={10}
           shadow-camera-bottom={-10}
           shadow-bias={-0.0002}
-          shadow-normalBias={0.02}
+          shadow-normalBias={0.025}
         >
           <object3D
             attach="target"
-            position={cameraTarget}
+            position={sunlight.target}
             onUpdate={(target) => target.updateMatrixWorld()}
           />
         </directionalLight>
         <directionalLight
-          color="#ff4fbd"
-          position={[10, 12, 4]}
-          intensity={1.05}
+          color="#a6b5ef"
+          position={[-8, 12, 10]}
+          intensity={0.25}
         >
           <object3D
             attach="target"
@@ -284,29 +497,41 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
             onUpdate={(target) => target.updateMatrixWorld()}
           />
         </directionalLight>
-        <pointLight
-          color="#ff365c"
-          position={[0, 6.1, -0.25]}
-          intensity={5}
-          distance={4}
-          decay={2}
-        />
-        <pointLight
-          color="#ff563c"
-          position={[-1, 4.1, -0.25]}
-          intensity={4}
-          distance={3.5}
-          decay={2}
-        />
-        <pointLight
-          color="#ffbd68"
-          position={[-2.6, 1.7, 0.3]}
-          intensity={2}
-          distance={2.5}
-          decay={2}
-        />
+        {/* A transparent ground receiver anchors the long, low-sun shadows without a visible platform. */}
+        <mesh
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[-20, -0.04, 0]}
+          receiveShadow
+        >
+          <planeGeometry args={[100, 40]} />
+          <shadowMaterial
+            color="#120b20"
+            opacity={0.28}
+            depthWrite={false}
+            onBeforeCompile={(shader) => {
+              // Local lamps shadow their rooms, not the distant atmospheric ground.
+              shader.fragmentShader = shader.fragmentShader.replace(
+                "#include <shadowmask_pars_fragment>",
+                /* glsl */ `
+                  float getShadowMask() {
+                    #if defined(USE_SHADOWMAP) && NUM_DIR_LIGHT_SHADOWS > 0
+                      DirectionalLightShadow sun = directionalLightShadows[0];
+                      return getShadow(directionalShadowMap[0], sun.shadowMapSize,
+                        sun.shadowIntensity, sun.shadowBias, sun.shadowRadius,
+                        vDirectionalShadowCoord[0]);
+                    #else
+                      return 1.0;
+                    #endif
+                  }
+                `,
+              );
+            }}
+          />
+        </mesh>
+        <RoomLighting />
+        <CameraFraming />
         <CameraControls />
-        <PostProcessing />
+        <PostProcessing sun={sun} />
       </Canvas>
     </div>
   );
