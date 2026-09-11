@@ -61,6 +61,7 @@
     "eslint": "^9.20.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "react-grab": "^0.2.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "wrangler": "^4.70.0"
