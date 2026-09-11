@@ -33,6 +33,9 @@ import {
 } from "./RoomLighting";
 import { installCharacterPortraits } from "./CharacterPortraits";
 import { installScreenContent } from "./ScreenContent";
+import { installSceneAnimation } from "./SceneAnimation";
+import { SceneMotion, useReducedMotion } from "./SceneMotion";
+import { positionStudyTaskLamp } from "./StudyTaskLamp";
 import { SunRaysPass } from "./SunRaysPass";
 import { sunPosition, sunlight } from "./sunlight";
 import type { RefObject } from "react";
@@ -46,6 +49,7 @@ type SceneProps = {
 type SceneAssets = {
   scene: Group;
   camera: OrthographicCamera;
+  animate: (time: number) => void;
   dispose: () => void;
 };
 
@@ -281,10 +285,16 @@ async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
   };
 
   try {
-    installScreenContent(gltf.scene);
+    positionStudyTaskLamp(gltf.scene);
+    const animatePreview = installScreenContent(gltf.scene);
     await installCharacterPortraits(gltf.scene);
     signal.throwIfAborted();
-    return { scene: gltf.scene, camera, dispose };
+    const animateRoom = installSceneAnimation(gltf.scene, camera);
+    const animate = (time: number) => {
+      animateRoom(time);
+      animatePreview(time);
+    };
+    return { scene: gltf.scene, camera, animate, dispose };
   } catch (error) {
     dispose();
     throw error;
@@ -334,11 +344,11 @@ function CameraFraming() {
   useLayoutEffect(() => {
     if (!(camera instanceof OrthographicCamera)) return;
 
-    // Expand the sky to the viewport without moving or enlarging the house.
+    // Shrink the artwork 15% while keeping the full-page canvas and right alignment.
     const artworkWidth =
-      size.width <= 768
+      (size.width <= 768
         ? size.width
-        : Math.min(size.width * 0.72, size.height * 1.1688);
+        : Math.min(size.width * 0.72, size.height * 1.1688)) * 0.85;
     const artworkHeight = (artworkWidth * 77) / 90;
     camera.setViewOffset(
       artworkWidth,
@@ -398,6 +408,7 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
   const [assets, setAssets] = useState<SceneAssets | null>(null);
   const ready = useRef(false);
   const sun = useRef<DirectionalLight>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -425,8 +436,9 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
   if (!assets) return null;
 
   return (
-    <div className="studio-viewer" aria-hidden="true">
+    <div className="studio-viewer">
       <Canvas
+        aria-hidden="true"
         className="studio-canvas"
         camera={assets.camera}
         frameloop="demand"
@@ -529,6 +541,7 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
           />
         </mesh>
         <RoomLighting />
+        <SceneMotion animate={assets.animate} enabled={!reducedMotion} />
         <CameraFraming />
         <CameraControls />
         <PostProcessing sun={sun} />

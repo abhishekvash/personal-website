@@ -67,20 +67,21 @@ assert(
   "Morph targets are not supported.",
 );
 
-// These meshes are already hidden/replaced by StudioScene, ScreenContent, and
-// CharacterPortraits. Keep their named nodes, plus all screen/portrait anchors.
-function isReplacedArtwork(name) {
+// Strip runtime-replaced artwork and the intentionally removed gaming subwoofer.
+// Keep named nodes for stable object identities, including all screen/portrait anchors.
+function isUnusedMesh(name) {
   return (
     (/^Character art \/ /.test(name) &&
       !/^Character art \/ (background|brass frame)/.test(name)) ||
     /^(Display star|Pixel star|Synthwave terrain|Tiny sunset)/.test(name) ||
     /^(Study|Studio) display \/ luminous flower diagram/.test(name) ||
-    /^Pendant lamp \/ (stem|red shade)/.test(name)
+    /^Pendant lamp \/ (stem|red shade)/.test(name) ||
+    /^Gaming subwoofer \/ /.test(name)
   );
 }
 let removedMeshes = 0;
 for (const node of document.nodes) {
-  if (node.mesh !== undefined && isReplacedArtwork(node.name)) {
+  if (node.mesh !== undefined && isUnusedMesh(node.name)) {
     delete node.mesh;
     removedMeshes++;
   }
@@ -218,7 +219,7 @@ console.log(
       beforeBytes: source.length,
       afterBytes: optimized.length,
       savedBytes: source.length - optimized.length,
-      replacedMeshPayloadsRemoved: removedMeshes,
+      unusedMeshPayloadsRemoved: removedMeshes,
       meshDefinitions: [originalMeshCount, meshes.length],
       geometryPrecision: "unchanged",
     },

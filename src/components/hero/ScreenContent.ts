@@ -5,6 +5,7 @@ import {
   MeshBasicMaterial,
   PlaneGeometry,
   SRGBColorSpace,
+  ShaderChunk,
   Vector3,
 } from "three";
 import type { Group } from "three";
@@ -264,6 +265,7 @@ const screens = [
 ];
 
 export function installScreenContent(scene: Group) {
+  const previewTime = { value: 0 };
   scene.traverse((object) => {
     if (
       /^(Display_star|Pixel_star|Synthwave_terrain|Tiny_sunset)/.test(
@@ -294,14 +296,48 @@ export function installScreenContent(scene: Group) {
     texture.name = label;
     texture.colorSpace = SRGBColorSpace;
     texture.anisotropy = 4;
-    const display = new Mesh(
-      new PlaneGeometry(size.x, size.y),
-      new MeshBasicMaterial({ map: texture, color: "#b9b9b9" }),
-    );
+    const material = new MeshBasicMaterial({ map: texture, color: "#b9b9b9" });
+    if (draw === drawPreview) {
+      // Warp only the foliage. Browser chrome, text, pot, and texture remain static.
+      material.customProgramCacheKey = () => "terrarium-preview-motion-v2";
+      material.onBeforeCompile = (shader) => {
+        shader.uniforms.uPreviewTime = previewTime;
+        shader.fragmentShader = `uniform float uPreviewTime;\n${shader.fragmentShader}`;
+        shader.fragmentShader = shader.fragmentShader.replace(
+          "#include <map_fragment>",
+          /* glsl */ `
+            vec2 previewUv = vMapUv;
+            float height = clamp((vMapUv.y - 0.35) / 0.35, 0.0, 1.0);
+            float foliage = smoothstep(0.475, 0.51, vMapUv.x)
+              * (1.0 - smoothstep(0.90, 0.94, vMapUv.x))
+              * smoothstep(0.35, 0.47, vMapUv.y)
+              * (1.0 - smoothstep(0.71, 0.76, vMapUv.y));
+            previewUv.x += sin(uPreviewTime * 1.4 + height * 1.2)
+              * height * foliage * 0.075;
+            if (foliage > 0.0) previewUv.x = clamp(previewUv.x, 0.475, 0.94);
+            ${ShaderChunk.map_fragment.replace("vMapUv", "previewUv")}
+            vec2 moteA = vec2(0.55 + 0.035 * sin(uPreviewTime * 1.2),
+              0.46 + 0.14 * sin(uPreviewTime * 0.9));
+            vec2 moteB = vec2(0.87 + 0.03 * sin(uPreviewTime),
+              0.44 + 0.17 * cos(uPreviewTime * 0.8));
+            vec2 distanceA = (vMapUv - moteA) * vec2(640.0, 360.0);
+            vec2 distanceB = (vMapUv - moteB) * vec2(640.0, 360.0);
+            float pollen = exp(-dot(distanceA, distanceA) / 90.0)
+              + exp(-dot(distanceB, distanceB) / 90.0);
+            diffuseColor.rgb = mix(diffuseColor.rgb, vec3(1.0, 0.78, 0.24),
+              min(pollen, 1.0) * 0.95);
+          `,
+        );
+      };
+    }
+    const display = new Mesh(new PlaneGeometry(size.x, size.y), material);
     display.name = `${label} content`;
     bounds.getCenter(display.position);
     display.position.z = bounds.max.z + 0.001;
     original.visible = false;
     scene.add(display);
   }
+  return (time: number) => {
+    previewTime.value = time;
+  };
 }

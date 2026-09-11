@@ -15,8 +15,17 @@ export const studioCeilingHeight = 4.505;
 export const studioConsoleX = 1.2;
 export const studioCeilingLights = [
   { name: "Recording studio recessed light", x: 0, z: 0.12 },
-  { name: "Recording console recessed light", x: studioConsoleX, z: 0.12 },
 ];
+
+export const studyTaskLight: RoomLight = {
+  name: "Study task lamp",
+  color: "#ffca8d",
+  position: [-2.59, 1.9, 0.3],
+  target: [-2.15, 1.32, 0.4],
+  intensity: 1.76,
+  distance: 2.2,
+  angle: 0.75,
+};
 
 const roomLights: Array<RoomLight> = [
   {
@@ -28,15 +37,7 @@ const roomLights: Array<RoomLight> = [
     distance: 3,
     angle: 1.2,
   },
-  {
-    name: "Study task lamp",
-    color: "#ffca8d",
-    position: [-2.62, 1.61, 0.32],
-    target: [-1.95, 1.15, 0.3],
-    intensity: 2.2,
-    distance: 2.2,
-    angle: 1.1,
-  },
+  studyTaskLight,
   ...studioCeilingLights.map(({ name, x, z }): RoomLight => ({
     name,
     color: "#ffd4a2",
