@@ -3,12 +3,35 @@ import { LazyMotion, MotionConfig, m, useReducedMotion } from "motion/react";
 import { Component, Suspense, lazy, useCallback, useId, useState } from "react";
 import { SceneLoader } from "./SceneLoader";
 import type { ScenePhase } from "./StudioScene";
-import type { ErrorInfo, ReactNode } from "react";
+import type { FeatureBundle, Transition } from "motion/react";
+import type { ErrorInfo, JSX, ReactNode } from "react";
 
 export type SceneStatus = "module" | ScenePhase | "ready" | "failed";
 
-const loadMotionFeatures = () =>
-  import("./motion-features").then((module) => module.default);
+type PublicSceneStatus = "loading" | "ready" | "failed";
+
+type SceneErrorBoundaryProps = {
+  children: ReactNode;
+  onError: (error: unknown) => void;
+};
+
+type SceneErrorBoundaryState = { failed: boolean };
+
+const statusMessages: Record<PublicSceneStatus, string> = {
+  loading: "Loading the interactive scene.",
+  ready: "The interactive scene is ready.",
+  failed: "The interactive scene could not load. Try again.",
+};
+
+function getPublicStatus(status: SceneStatus): PublicSceneStatus {
+  if (status === "ready" || status === "failed") return status;
+  return "loading";
+}
+
+async function loadMotionFeatures(): Promise<FeatureBundle> {
+  const module = await import("./motion-features");
+  return module.default;
+}
 
 const StudioScene = lazy(async () => {
   performance.mark("scene:module-start");
@@ -19,25 +42,25 @@ const StudioScene = lazy(async () => {
 });
 
 class SceneErrorBoundary extends Component<
-  { children: ReactNode; onError: (error: unknown) => void },
-  { failed: boolean }
+  SceneErrorBoundaryProps,
+  SceneErrorBoundaryState
 > {
   state = { failed: false };
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): SceneErrorBoundaryState {
     return { failed: true };
   }
 
-  componentDidCatch(error: Error, _info: ErrorInfo) {
+  componentDidCatch(error: Error, _info: ErrorInfo): void {
     this.props.onError(error);
   }
 
-  render() {
+  render(): ReactNode {
     return this.state.failed ? null : this.props.children;
   }
 }
 
-export function IllustratedHero() {
+export function IllustratedHero(): JSX.Element {
   const id = useId();
   const reduceMotion = useReducedMotion();
   const [status, setStatus] = useState<SceneStatus>("module");
@@ -52,8 +75,17 @@ export function IllustratedHero() {
     setStatus("module");
     setAttempt((value) => value + 1);
   }, []);
-  const publicStatus =
-    status === "ready" ? "ready" : status === "failed" ? "failed" : "loading";
+  const publicStatus = getPublicStatus(status);
+  const ready = status === "ready";
+  const revealScene = ready || reduceMotion;
+  const textAnimation = {
+    opacity: ready ? 1 : 0,
+    y: revealScene ? 0 : 6,
+  };
+  const textTransition: Transition = {
+    duration: reduceMotion ? 0.2 : 0.42,
+    ease: [0.16, 1, 0.3, 1],
+  };
 
   return (
     <MotionConfig reducedMotion="user">
@@ -68,14 +100,10 @@ export function IllustratedHero() {
               <m.span
                 className="block"
                 initial={false}
-                animate={{
-                  opacity: status === "ready" ? 1 : 0,
-                  y: status === "ready" || reduceMotion ? 0 : 6,
-                }}
+                animate={textAnimation}
                 transition={{
-                  duration: reduceMotion ? 0.2 : 0.42,
+                  ...textTransition,
                   delay: reduceMotion ? 0.08 : 0.34,
-                  ease: [0.16, 1, 0.3, 1],
                 }}
               >
                 Hi!
@@ -83,14 +111,10 @@ export function IllustratedHero() {
               <m.span
                 className="block whitespace-nowrap"
                 initial={false}
-                animate={{
-                  opacity: status === "ready" ? 1 : 0,
-                  y: status === "ready" || reduceMotion ? 0 : 6,
-                }}
+                animate={textAnimation}
                 transition={{
-                  duration: reduceMotion ? 0.2 : 0.42,
+                  ...textTransition,
                   delay: reduceMotion ? 0.12 : 0.43,
-                  ease: [0.16, 1, 0.3, 1],
                 }}
               >
                 I&apos;m Abhishek :)
@@ -99,14 +123,10 @@ export function IllustratedHero() {
             <m.p
               className="mt-5 max-w-[29rem] text-base leading-relaxed font-medium text-moonlit-rose sm:mt-7 sm:text-lg"
               initial={false}
-              animate={{
-                opacity: status === "ready" ? 1 : 0,
-                y: status === "ready" || reduceMotion ? 0 : 6,
-              }}
+              animate={textAnimation}
               transition={{
-                duration: reduceMotion ? 0.2 : 0.42,
+                ...textTransition,
                 delay: reduceMotion ? 0.16 : 0.52,
-                ease: [0.16, 1, 0.3, 1],
               }}
             >
               I spend my time making things with code, sound, and words, usually
@@ -121,11 +141,10 @@ export function IllustratedHero() {
             data-scene-phase={status}
             initial={false}
             animate={{
-              clipPath:
-                status === "ready" || reduceMotion
-                  ? "circle(150% at 50% 52%)"
-                  : "circle(12% at 50% 52%)",
-              opacity: status === "ready" || reduceMotion ? 1 : 0.68,
+              clipPath: revealScene
+                ? "circle(150% at 50% 52%)"
+                : "circle(12% at 50% 52%)",
+              opacity: revealScene ? 1 : 0.68,
             }}
             transition={{
               duration: reduceMotion ? 0.18 : 0.9,
@@ -154,11 +173,7 @@ export function IllustratedHero() {
               </span>
             </figcaption>
             <span className="sr-only" role="status" aria-live="polite">
-              {status === "failed"
-                ? "The interactive scene could not load. Try again."
-                : status === "ready"
-                  ? "The interactive scene is ready."
-                  : "Loading the interactive scene."}
+              {statusMessages[publicStatus]}
             </span>
           </m.figure>
         </main>

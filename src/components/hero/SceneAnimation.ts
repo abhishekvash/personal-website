@@ -29,7 +29,7 @@ const outputColor = /* glsl */ `
   #include <colorspace_fragment>
 `;
 
-function animatedMaterial(fragmentShader: string, phase = 0) {
+function animatedMaterial(fragmentShader: string, phase = 0): ShaderMaterial {
   return new ShaderMaterial({
     vertexShader,
     fragmentShader,
@@ -37,7 +37,7 @@ function animatedMaterial(fragmentShader: string, phase = 0) {
   });
 }
 
-function mergeParts(parts: Array<BufferGeometry>) {
+function mergeParts(parts: Array<BufferGeometry>): BufferGeometry {
   // Three.js returns null for incompatible attributes despite its narrower typings.
   const geometry = mergeGeometries(parts) as BufferGeometry | null;
   parts.forEach((part) => part.dispose());
@@ -46,7 +46,10 @@ function mergeParts(parts: Array<BufferGeometry>) {
   return geometry;
 }
 
-export function installSceneAnimation(scene: Group, camera: Camera) {
+export function installSceneAnimation(
+  scene: Group,
+  camera: Camera,
+): (time: number) => void {
   scene.updateMatrixWorld(true);
   const meshes: Array<Mesh> = [];
   scene.traverse((object) => {
@@ -106,10 +109,15 @@ export function installSceneAnimation(scene: Group, camera: Camera) {
   }
 
   // Rotate actual blades about each hub; leave bezels and housings stationary.
-  for (const ring of meshes.filter((mesh) =>
-    mesh.name.startsWith("PC__illuminated_fan_ring"),
-  )) {
-    if (!(ring.material instanceof MeshStandardMaterial)) continue;
+  const fanBlades = meshes.filter((mesh) =>
+    mesh.name.startsWith("PC__fan_blade"),
+  );
+  for (const ring of meshes) {
+    if (
+      !ring.name.startsWith("PC__illuminated_fan_ring") ||
+      !(ring.material instanceof MeshStandardMaterial)
+    )
+      continue;
     const center = new Box3().setFromObject(ring).getCenter(new Vector3());
     const rotor = new Group();
     rotor.name = `${ring.name} rotor`;
@@ -117,9 +125,7 @@ export function installSceneAnimation(scene: Group, camera: Camera) {
     scene.add(rotor);
     rotor.updateMatrixWorld(true);
     const bladeMaterials: Array<MeshStandardMaterial> = [];
-    for (const blade of meshes.filter((mesh) =>
-      mesh.name.startsWith("PC__fan_blade"),
-    )) {
+    for (const blade of fanBlades) {
       const position = new Box3().setFromObject(blade).getCenter(new Vector3());
       if (Math.abs(position.y - center.y) > 0.13) continue;
       blade.castShadow = false;
@@ -137,10 +143,8 @@ export function installSceneAnimation(scene: Group, camera: Camera) {
     fans.push({ rotor, material: ring.material, blades: bladeMaterials });
   }
 
-  for (const wisp of meshes.filter((mesh) =>
-    mesh.name.startsWith("Cooking__warm_steam_wisp"),
-  )) {
-    wisp.visible = false;
+  for (const mesh of meshes) {
+    if (mesh.name.startsWith("Cooking__warm_steam_wisp")) mesh.visible = false;
   }
   const steamGeometry = new PlaneGeometry(0.24, 0.4);
   // Cookware straddles the authored burners. Follow the utensils, without moving them.
@@ -273,7 +277,7 @@ export function installSceneAnimation(scene: Group, camera: Camera) {
     shaderMaterials.push(material);
   }
 
-  const animate = (time: number) => {
+  function animate(time: number): void {
     for (const material of shaderMaterials)
       material.uniforms.uTime.value = time;
     for (const { material, phase } of keys) {
@@ -295,7 +299,7 @@ export function installSceneAnimation(scene: Group, camera: Camera) {
       mesh.scale.setScalar(0.75 + age * 0.55);
       mesh.quaternion.copy(camera.quaternion);
     }
-  };
+  }
   animate(0);
   return animate;
 }

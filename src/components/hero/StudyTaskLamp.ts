@@ -1,5 +1,5 @@
 import { Box3, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
-import { studyTaskLight } from "./RoomLighting";
+import { studyTaskLight } from "./roomLayout";
 
 type Axis = "x" | "y" | "z";
 
