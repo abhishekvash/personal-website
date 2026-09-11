@@ -1,8 +1,18 @@
 import { ClientOnly } from "@tanstack/react-router";
 import { Component, Suspense, lazy, useCallback, useId, useState } from "react";
+import { SceneLoader } from "./SceneLoader";
+import type { ScenePhase } from "./StudioScene";
 import type { ErrorInfo, ReactNode } from "react";
 
-const StudioScene = lazy(() => import("./StudioScene"));
+export type SceneStatus = "module" | ScenePhase | "ready" | "failed";
+
+const StudioScene = lazy(async () => {
+  performance.mark("scene:module-start");
+  const module = await import("./StudioScene");
+  performance.mark("scene:module-end");
+  performance.measure("scene:module", "scene:module-start", "scene:module-end");
+  return module;
+});
 
 class SceneErrorBoundary extends Component<
   { children: ReactNode; onError: (error: unknown) => void },
@@ -25,17 +35,27 @@ class SceneErrorBoundary extends Component<
 
 export function IllustratedHero() {
   const id = useId();
-  const [status, setStatus] = useState<"loading" | "ready" | "failed">(
-    "loading",
-  );
+  const [status, setStatus] = useState<SceneStatus>("module");
+  const [attempt, setAttempt] = useState(0);
+  const handlePhase = useCallback((phase: ScenePhase) => setStatus(phase), []);
   const handleReady = useCallback(() => setStatus("ready"), []);
   const handleError = useCallback((error: unknown) => {
     console.error("The 3D curiosity house could not render.", error);
     setStatus("failed");
   }, []);
+  const handleRetry = useCallback(() => {
+    setStatus("module");
+    setAttempt((value) => value + 1);
+  }, []);
+  const publicStatus =
+    status === "ready" ? "ready" : status === "failed" ? "failed" : "loading";
 
   return (
-    <main className="relative grid h-svh grid-rows-[40%_60%] overflow-hidden bg-scene-paper text-scene-ink min-[1025px]:block">
+    <main
+      className="relative grid h-svh grid-rows-[40%_60%] overflow-hidden bg-scene-paper text-scene-ink min-[1025px]:block"
+      aria-busy={publicStatus === "loading"}
+    >
+      <SceneLoader status={status} onRetry={handleRetry} />
       <header className="pointer-events-none z-10 w-full max-w-[44rem] self-end px-[max(1.5rem,env(safe-area-inset-left))] pb-[clamp(1.5rem,4svh,2.5rem)] min-[1025px]:absolute min-[1025px]:top-1/2 min-[1025px]:left-[7vw] min-[1025px]:w-auto min-[1025px]:max-w-[30rem] min-[1025px]:-translate-y-1/2 min-[1025px]:px-0 min-[1025px]:pb-0">
         <h1 className="font-display text-[clamp(2.625rem,10vw,4.75rem)] leading-[0.9] font-medium tracking-[-0.035em] text-warm-ivory min-[1025px]:text-[clamp(4rem,6vw,5.5rem)]">
           <span className="block">Hi!</span>
@@ -50,13 +70,18 @@ export function IllustratedHero() {
         className="relative isolate m-0 h-full min-h-0 w-full overflow-hidden min-[1025px]:absolute min-[1025px]:inset-0 min-[1025px]:h-svh"
         aria-labelledby={`${id}-title`}
         aria-describedby={`${id}-description`}
-        data-scene-status={status}
+        data-scene-status={publicStatus}
+        data-scene-phase={status}
       >
         {status !== "failed" ? (
-          <SceneErrorBoundary onError={handleError}>
+          <SceneErrorBoundary key={attempt} onError={handleError}>
             <ClientOnly fallback={null}>
               <Suspense fallback={null}>
-                <StudioScene onReady={handleReady} onError={handleError} />
+                <StudioScene
+                  onReady={handleReady}
+                  onError={handleError}
+                  onPhase={handlePhase}
+                />
               </Suspense>
             </ClientOnly>
           </SceneErrorBoundary>
@@ -69,19 +94,12 @@ export function IllustratedHero() {
             gaming room, and rooftop observatory.
           </span>
         </figcaption>
-        <span
-          className={
-            status === "failed"
-              ? "absolute inset-x-6 top-1/2 text-center text-moonlit-rose"
-              : "sr-only"
-          }
-          role="status"
-        >
+        <span className="sr-only" role="status" aria-live="polite">
           {status === "failed"
-            ? "The scene could not load. Please refresh to try again."
-            : status === "loading"
-              ? "Loading the interactive scene."
-              : ""}
+            ? "The interactive scene could not load. Try again."
+            : status === "ready"
+              ? "The interactive scene is ready."
+              : "Loading the interactive scene."}
         </span>
       </figure>
     </main>

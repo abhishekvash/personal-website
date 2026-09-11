@@ -7,17 +7,19 @@ import {
   TextureLoader,
   Vector3,
 } from "three";
+import pinkHairedPortraitUrl from "../../assets/scene/pink-haired.webp?url";
+import poolsidePortraitUrl from "../../assets/scene/poolside.webp?url";
 import type { Group } from "three";
 
 const portraits = [
   {
     background: "Character_art__background",
-    image: "/scene/portraits/poolside.webp",
+    image: poolsidePortraitUrl,
     name: "Poolside anime portrait",
   },
   {
     background: "Character_art__background001",
-    image: "/scene/portraits/pink-haired.webp",
+    image: pinkHairedPortraitUrl,
     name: "Pink-haired anime portrait",
   },
 ];

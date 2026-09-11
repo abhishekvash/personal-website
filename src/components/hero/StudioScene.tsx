@@ -25,6 +25,7 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import sceneUrl from "../../assets/scene/curiosity-house.glb?url";
 import {
   RoomLighting,
   studioCeilingHeight,
@@ -41,9 +42,12 @@ import { sunPosition, sunlight } from "./sunlight";
 import type { RefObject } from "react";
 import type { DirectionalLight, Material, Mesh } from "three";
 
+export type ScenePhase = "download" | "parse" | "setup" | "first-frame";
+
 type SceneProps = {
   onReady: () => void;
   onError: (error: unknown) => void;
+  onPhase: (phase: ScenePhase) => void;
 };
 
 type SceneAssets = {
@@ -75,17 +79,46 @@ const materialEmission: Partial<Record<string, number>> = {
   "Display • midnight plum": 0.4,
 };
 
-async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
-  const response = await fetch("/scene/curiosity-house.glb", { signal });
+function mark(name: string) {
+  performance.mark(`scene:${name}`);
+}
+
+function measure(name: string, start: string, end: string) {
+  try {
+    performance.measure(`scene:${name}`, `scene:${start}`, `scene:${end}`);
+  } catch {
+    // A direct route transition may begin after an optional earlier mark.
+  }
+}
+
+async function loadScene(
+  signal: AbortSignal,
+  onPhase: (phase: ScenePhase) => void,
+): Promise<SceneAssets> {
+  onPhase("download");
+  mark("download-start");
+  const response = await fetch(sceneUrl, { signal });
   if (!response.ok) {
     throw new Error(`Could not load scene: HTTP ${response.status}.`);
   }
 
+  const buffer = await response.arrayBuffer();
+  mark("download-end");
+  measure("download", "download-start", "download-end");
+  onPhase("parse");
+  mark("parse-start");
+
   const loader = new GLTFLoader();
   loader.setMeshoptDecoder(MeshoptDecoder);
 
-  const gltf = await loader.parseAsync(await response.arrayBuffer(), "/scene/");
+  const sceneBaseUrl = new URL(".", new URL(sceneUrl, window.location.href))
+    .href;
+  const gltf = await loader.parseAsync(buffer, sceneBaseUrl);
   signal.throwIfAborted();
+  mark("parse-end");
+  measure("parse", "parse-start", "parse-end");
+  onPhase("setup");
+  mark("setup-start");
   const sourceCamera = gltf.cameras.find(
     (camera) => camera.name === "HeroCamera",
   );
@@ -294,6 +327,8 @@ async function loadScene(signal: AbortSignal): Promise<SceneAssets> {
       animateRoom(time);
       animatePreview(time);
     };
+    mark("setup-end");
+    measure("setup", "setup-start", "setup-end");
     return { scene: gltf.scene, camera, animate, dispose };
   } catch (error) {
     dispose();
@@ -366,6 +401,20 @@ function CameraFraming() {
   return null;
 }
 
+function FirstFrame({ onReady }: { onReady: () => void }) {
+  const reported = useRef(false);
+
+  useFrame(() => {
+    if (reported.current) return;
+    reported.current = true;
+    mark("first-frame");
+    measure("total", "module-start", "first-frame");
+    onReady();
+  }, 2);
+
+  return null;
+}
+
 function CameraControls() {
   const { camera, gl, invalidate } = useThree();
 
@@ -404,9 +453,8 @@ function CameraControls() {
   return null;
 }
 
-export default function StudioScene({ onReady, onError }: SceneProps) {
+export default function StudioScene({ onReady, onError, onPhase }: SceneProps) {
   const [assets, setAssets] = useState<SceneAssets | null>(null);
-  const ready = useRef(false);
   const sun = useRef<DirectionalLight>(null);
   const reducedMotion = useReducedMotion();
 
@@ -414,13 +462,14 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
     const controller = new AbortController();
     let loadedAssets: SceneAssets | null = null;
 
-    void loadScene(controller.signal)
+    void loadScene(controller.signal, onPhase)
       .then((loaded) => {
         if (controller.signal.aborted) {
           loaded.dispose();
           return;
         }
         loadedAssets = loaded;
+        onPhase("first-frame");
         setAssets(loaded);
       })
       .catch((error: unknown) => {
@@ -431,7 +480,7 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
       controller.abort();
       loadedAssets?.dispose();
     };
-  }, [onError]);
+  }, [onError, onPhase]);
 
   if (!assets) return null;
 
@@ -463,12 +512,6 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
         onCreated={({ gl }) => {
           // Transparent pixels must also have zero RGB for premultiplied compositing.
           gl.setClearColor(0x000000, 0);
-          requestAnimationFrame(() => {
-            if (!ready.current) {
-              ready.current = true;
-              onReady();
-            }
-          });
         }}
       >
         <primitive object={assets.scene} dispose={null} />
@@ -545,6 +588,7 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
         <CameraFraming />
         <CameraControls />
         <PostProcessing sun={sun} />
+        <FirstFrame onReady={onReady} />
       </Canvas>
     </div>
   );
