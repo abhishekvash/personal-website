@@ -1,10 +1,7 @@
-import { LazyMotion, MotionConfig, m, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
 import type { SceneStatus } from "./IllustratedHero";
-
-const loadMotionFeatures = () =>
-  import("./motion-features").then((module) => module.default);
 
 const windows = [0, 1, 2, 3, 4, 5];
 
@@ -59,37 +56,54 @@ export function SceneLoader({
   if (!mounted) return null;
 
   return (
-    <MotionConfig reducedMotion="user">
-      <LazyMotion features={loadMotionFeatures} strict>
-        <m.div
-          className="fixed inset-0 z-50 grid place-items-center bg-midnight-paper px-6 text-center"
-          initial={false}
-          animate={{ opacity: ready ? 0 : 1 }}
-          transition={{
-            duration: reduceMotion ? 0 : 0.38,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          onAnimationComplete={() => {
-            if (ready) setMounted(false);
-          }}
-        >
-          <div className="flex flex-col items-center gap-5">
-            <TinyHouse active={!ready && !failed && !reduceMotion} />
-            <p className="text-sm font-medium tracking-[0.01em] text-moonlit-rose">
-              {failed ? "The house couldn’t wake up." : "Waking the house…"}
-            </p>
-            {failed ? (
-              <button
-                className="text-sm font-semibold text-warm-ivory underline decoration-blossom-pink/80 underline-offset-4 transition-colors hover:text-sunlight-peach focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-cyan"
-                type="button"
-                onClick={onRetry}
-              >
-                Try again
-              </button>
-            ) : null}
-          </div>
-        </m.div>
-      </LazyMotion>
-    </MotionConfig>
+    <div
+      className="pointer-events-none fixed inset-0 z-50 grid place-items-center px-6 text-center"
+      aria-hidden={ready}
+    >
+      <m.div
+        className="absolute inset-0 bg-midnight-paper"
+        initial={false}
+        animate={{ opacity: ready ? 0 : 1 }}
+        transition={{
+          duration: reduceMotion ? 0.18 : 0.58,
+          delay: ready && !reduceMotion ? 0.08 : 0,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        onAnimationComplete={() => {
+          if (ready) setMounted(false);
+        }}
+      />
+      <m.div
+        className="relative flex flex-col items-center gap-5"
+        initial={false}
+        animate={
+          ready
+            ? {
+                filter: reduceMotion ? "blur(0px)" : "blur(6px)",
+                opacity: 0,
+                scale: reduceMotion ? 1 : 0.86,
+              }
+            : { filter: "blur(0px)", opacity: 1, scale: 1 }
+        }
+        transition={{
+          duration: reduceMotion ? 0.12 : 0.32,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+      >
+        <TinyHouse active={!ready && !failed && !reduceMotion} />
+        <p className="text-sm font-medium tracking-[0.01em] text-moonlit-rose">
+          {failed ? "The house couldn’t wake up." : "Waking the house…"}
+        </p>
+        {failed ? (
+          <button
+            className="pointer-events-auto text-sm font-semibold text-warm-ivory underline decoration-blossom-pink/80 underline-offset-4 transition-colors hover:text-sunlight-peach focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-cyan"
+            type="button"
+            onClick={onRetry}
+          >
+            Try again
+          </button>
+        ) : null}
+      </m.div>
+    </div>
   );
 }
