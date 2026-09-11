@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-11T09:19:35Z",
+  "title": "Design System: Abhishek's Personal Website",
+  "extensions": {
+    "colorMeta": {
+      "blossom-pink": {
+        "role": "primary",
+        "displayName": "Blossom Pink",
+        "canonical": "#ef5c88",
+        "tonalRamp": [
+          "oklch(15% 0.07 5)",
+          "oklch(27% 0.11 5)",
+          "oklch(39% 0.15 5)",
+          "oklch(51% 0.18 5)",
+          "oklch(63% 0.17 5)",
+          "oklch(75% 0.13 5)",
+          "oklch(87% 0.07 5)",
+          "oklch(95% 0.03 5)"
+        ]
+      },
+      "midnight-paper": {
+        "role": "neutral",
+        "displayName": "Midnight Paper",
+        "canonical": "#0b1028",
+        "tonalRamp": [
+          "oklch(15% 0.04 273)",
+          "oklch(27% 0.04 273)",
+          "oklch(39% 0.04 273)",
+          "oklch(51% 0.035 273)",
+          "oklch(63% 0.03 273)",
+          "oklch(75% 0.025 273)",
+          "oklch(87% 0.015 273)",
+          "oklch(95% 0.008 273)"
+        ]
+      },
+      "cloud-blue": {
+        "role": "neutral",
+        "displayName": "Cloud Blue",
+        "canonical": "#c7dcff",
+        "tonalRamp": [
+          "oklch(15% 0.045 257)",
+          "oklch(27% 0.06 257)",
+          "oklch(39% 0.07 257)",
+          "oklch(51% 0.075 257)",
+          "oklch(63% 0.07 257)",
+          "oklch(75% 0.06 257)",
+          "oklch(87% 0.04 257)",
+          "oklch(95% 0.018 257)"
+        ]
+      },
+      "warm-ivory": {
+        "role": "secondary",
+        "displayName": "Warm Ivory",
+        "canonical": "#f3d6b8",
+        "tonalRamp": [
+          "oklch(15% 0.03 64)",
+          "oklch(27% 0.05 64)",
+          "oklch(39% 0.07 64)",
+          "oklch(51% 0.08 64)",
+          "oklch(63% 0.075 64)",
+          "oklch(75% 0.06 64)",
+          "oklch(87% 0.04 64)",
+          "oklch(95% 0.018 64)"
+        ]
+      },
+      "sunlight-peach": {
+        "role": "secondary",
+        "displayName": "Sunlight Peach",
+        "canonical": "#ffb080",
+        "tonalRamp": [
+          "oklch(15% 0.06 49)",
+          "oklch(27% 0.10 49)",
+          "oklch(39% 0.14 49)",
+          "oklch(51% 0.17 49)",
+          "oklch(63% 0.16 49)",
+          "oklch(75% 0.12 49)",
+          "oklch(87% 0.07 49)",
+          "oklch(95% 0.03 49)"
+        ]
+      },
+      "electric-cyan": {
+        "role": "tertiary",
+        "displayName": "Electric Cyan",
+        "canonical": "#65e3ff",
+        "tonalRamp": [
+          "oklch(15% 0.045 211)",
+          "oklch(27% 0.075 211)",
+          "oklch(39% 0.105 211)",
+          "oklch(51% 0.13 211)",
+          "oklch(63% 0.13 211)",
+          "oklch(75% 0.105 211)",
+          "oklch(87% 0.065 211)",
+          "oklch(95% 0.025 211)"
+        ]
+      },
+      "soft-lavender": {
+        "role": "tertiary",
+        "displayName": "Soft Lavender",
+        "canonical": "#c391ff",
+        "tonalRamp": [
+          "oklch(15% 0.065 300)",
+          "oklch(27% 0.105 300)",
+          "oklch(39% 0.15 300)",
+          "oklch(51% 0.19 300)",
+          "oklch(63% 0.18 300)",
+          "oklch(75% 0.14 300)",
+          "oklch(87% 0.08 300)",
+          "oklch(95% 0.03 300)"
+        ]
+      },
+      "moonlit-rose": {
+        "role": "neutral",
+        "displayName": "Moonlit Rose",
+        "canonical": "#f0dce9",
+        "tonalRamp": [
+          "oklch(15% 0.025 337)",
+          "oklch(27% 0.04 337)",
+          "oklch(39% 0.05 337)",
+          "oklch(51% 0.055 337)",
+          "oklch(63% 0.05 337)",
+          "oklch(75% 0.04 337)",
+          "oklch(87% 0.025 337)",
+          "oklch(95% 0.01 337)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Expressive titles and short moments of authorship; not an overlay competing with the house."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Interface, descriptions, status text, and utility labels."
+      }
+    },
+    "motion": [
+      {
+        "name": "ambient-desktop-cap",
+        "value": "24fps",
+        "purpose": "Maximum update cadence for inhabited ambient scene motion on desktop."
+      },
+      {
+        "name": "ambient-mobile-cap",
+        "value": "15fps",
+        "purpose": "Maximum update cadence for ambient scene motion on narrow viewports."
+      },
+      {
+        "name": "orbit-damping",
+        "value": "0.08",
+        "purpose": "Gentle inertia for constrained scene orbit."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "scene-narrow",
+        "value": "768px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Curiosity House Stage",
+      "kind": "custom",
+      "refersTo": "scene-viewport",
+      "description": "Full-viewport signature stage where interface recedes around the interactive house.",
+      "html": "<figure class=\"ds-scene-stage\"><div class=\"ds-scene-window\" aria-hidden=\"true\"><span class=\"ds-room ds-room-top\"></span><span class=\"ds-room ds-room-middle\"></span><span class=\"ds-room ds-room-bottom\"></span></div><figcaption class=\"ds-scene-caption\">A little world of curiosity.</figcaption></figure>",
+      "css": ".ds-scene-stage { position: relative; display: grid; width: 100%; min-height: 320px; margin: 0; place-items: center; overflow: hidden; background: var(--color-scene-paper, #0b1028); color: var(--color-scene-ink, #c7dcff); font-family: Figtree, ui-sans-serif, system-ui, sans-serif; } .ds-scene-window { display: grid; width: min(58%, 230px); padding: 10px; gap: 5px; border: 8px solid #f3d6b8; border-radius: 28px; background: #1a4b78; box-shadow: 0 22px 50px rgba(0,0,0,.32), 0 0 42px rgba(255,176,128,.12); transform: rotate(-1deg); } .ds-room { display: block; height: 48px; border: 3px solid #f3d6b8; border-radius: 12px; background: linear-gradient(100deg, #8f2947, #ef5c88); } .ds-room-middle { background: linear-gradient(100deg, #78304b, #ffb080); } .ds-room-bottom { background: linear-gradient(100deg, #193959, #65e3ff); } .ds-scene-caption { position: absolute; inset: auto auto 18px; color: #f0dce9; font-size: 13px; letter-spacing: .02em; }"
+    },
+    {
+      "name": "Scene Status",
+      "kind": "custom",
+      "refersTo": "scene-status",
+      "description": "Quiet centered fallback copy shown when the visual experience cannot communicate its state.",
+      "html": "<p class=\"ds-scene-status\" role=\"status\">The scene could not load. Please refresh to try again.</p>",
+      "css": ".ds-scene-status { max-width: 36ch; margin: 0; padding: 24px; color: #f0dce9; background: #0b1028; font: 500 15px/1.55 Figtree, ui-sans-serif, system-ui, sans-serif; text-align: center; } .ds-scene-status:focus-visible { outline: 2px solid #65e3ff; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Inhabited Sketchbook",
+    "overview": "This world turns personal curiosity into a warm, dimensional place: ideas are not filed into categories but lived in, worked on, cooked with, played through, and observed. Handcrafted miniature detail gives the experience tactility; quiet ambient motion gives it life without turning it into spectacle.\n\nThe house is the visual constant. Its ivory shell, saturated rooms, rounded modular construction, and accumulated objects carry identity more strongly than any surrounding interface. The current midnight ground creates cinematic contrast but is framing, not a permanent brand commitment; it may change when another background serves the house better.\n\nExtensions should feel warm, tactile, and quietly magical. Interface elements recede around the artifact, borrowing its material confidence and gentle geometry without imitating a toy dashboard.",
+    "keyCharacteristics": [
+      "Inhabited miniature detail rather than abstract decoration",
+      "Warm light against deep, cool framing",
+      "Rounded, modular architectural forms",
+      "Saturated pink, blue, and amber accents used inside a composed scene",
+      "Quiet motion that implies ongoing creative activity",
+      "Minimal interface chrome around the central artifact"
+    ],
+    "rules": [
+      {
+        "name": "The House Carries the Color Rule",
+        "body": "Let saturated color live primarily within the house and its authored scene; surrounding UI should not compete with it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Background Is a Stage Rule",
+        "body": "Judge any background by how well it reveals the house. Do not treat the current midnight blue as immutable identity.",
+        "section": "colors"
+      },
+      {
+        "name": "The Artifact Speaks First Rule",
+        "body": "Type frames and explains the world; it must not become a competing hero treatment over the house.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Depth Rule",
+        "body": "Prefer scene lighting, material response, overlap, and scale over decorative CSS shadows around the artwork.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Quiet Glow Rule",
+        "body": "Bloom marks practical lights and select device accents. Screens and broad surfaces must not glow indiscriminately.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the curiosity house as the unmistakable visual protagonist.",
+      "Do use light, material, miniature detail, and restrained ambient motion to make spaces feel inhabited.",
+      "Do preserve meaningful room distinctions and the objects that communicate Abhishek's range.",
+      "Do keep surrounding interface quieter than the scene.",
+      "Do treat responsive framing as composition, not simple uniform scaling.",
+      "Do provide semantic descriptions and composed static states where motion or WebGL is unavailable."
+    ],
+    "donts": [
+      "Don't lock the wider system to Midnight Paper when another background presents the house better.",
+      "Don't spread neon accents across broad interface surfaces or let bloom flatten scene hierarchy.",
+      "Don't place generic portfolio cards, gradients, or oversized marketing typography over the house.",
+      "Don't translate rounded miniature geometry into childish bubble UI.",
+      "Don't add motion that exists only to attract attention; every loop should imply life, work, atmosphere, or interaction.",
+      "Don't fabricate visual proof, project imagery, clients, credentials, or metrics."
+    ]
+  }
+}

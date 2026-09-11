@@ -436,10 +436,10 @@ export default function StudioScene({ onReady, onError }: SceneProps) {
   if (!assets) return null;
 
   return (
-    <div className="studio-viewer">
+    <div className="absolute inset-0">
       <Canvas
         aria-hidden="true"
-        className="studio-canvas"
+        className="[&_canvas]:block [&_canvas]:cursor-grab [&_canvas]:touch-none [&_canvas:active]:cursor-grabbing"
         camera={assets.camera}
         frameloop="demand"
         dpr={[1, 2]}

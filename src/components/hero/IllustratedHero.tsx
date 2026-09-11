@@ -35,9 +35,12 @@ export function IllustratedHero() {
   }, []);
 
   return (
-    <main className="studio-page" aria-label="Curiosity house">
+    <main
+      className="grid min-h-svh place-items-center justify-items-end overflow-hidden bg-scene-paper text-scene-ink"
+      aria-label="Curiosity house"
+    >
       <figure
-        className="studio-artwork"
+        className="relative isolate m-0 h-svh w-full overflow-hidden"
         aria-labelledby={`${id}-title`}
         aria-describedby={`${id}-description`}
         data-scene-status={status}
@@ -60,7 +63,11 @@ export function IllustratedHero() {
           </span>
         </figcaption>
         <span
-          className={status === "failed" ? "studio-message" : "sr-only"}
+          className={
+            status === "failed"
+              ? "absolute inset-x-6 top-1/2 text-center text-moonlit-rose"
+              : "sr-only"
+          }
           role="status"
         >
           {status === "failed"

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -6,48 +6,24 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* Typography */
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
+
+  /* Design-system palette */
+  --color-blossom-pink: #ef5c88;
+  --color-midnight-paper: #0b1028;
+  --color-cloud-blue: #c7dcff;
+  --color-warm-ivory: #f3d6b8;
+  --color-sunlight-peach: #ffb080;
+  --color-electric-cyan: #65e3ff;
+  --color-soft-lavender: #c391ff;
+  --color-moonlit-rose: #f0dce9;
+
+  /* Existing semantic aliases */
   --color-scene-paper: #0b1028;
   --color-scene-ink: #c7dcff;
-}
 
-.studio-page {
-  display: grid;
-  min-height: 100svh;
-  place-items: center end;
-  overflow: hidden;
-  background: var(--color-scene-paper);
-  color: var(--color-scene-ink);
-}
-
-.studio-artwork {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  height: 100svh;
-  margin: 0;
-  overflow: hidden;
-}
-
-.studio-message {
-  position: absolute;
-  inset: 50% 1.5rem auto;
-  color: #f0dce9;
-  text-align: center;
-}
-
-.studio-viewer {
-  position: absolute;
-  inset: 0;
-}
-
-.studio-canvas canvas {
-  display: block;
-  cursor: grab;
-  touch-action: none;
-}
-
-.studio-canvas canvas:active {
-  cursor: grabbing;
+  /* Scene composition */
+  --breakpoint-scene-narrow: 48rem;
 }
