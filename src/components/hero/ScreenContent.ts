@@ -8,7 +8,7 @@ import {
   ShaderChunk,
   Vector3,
 } from "three";
-import type { Group } from "three";
+import type { Group, Object3D } from "three";
 
 function createPainter(context: CanvasRenderingContext2D) {
   return {
@@ -265,6 +265,7 @@ const screens = [
 ];
 
 export function installScreenContent(scene: Group) {
+  const dynamicObjects = new Set<Object3D>();
   const previewTime = { value: 0 };
   scene.traverse((object) => {
     if (
@@ -331,13 +332,17 @@ export function installScreenContent(scene: Group) {
       };
     }
     const display = new Mesh(new PlaneGeometry(size.x, size.y), material);
+    if (draw === drawPreview) dynamicObjects.add(display);
     display.name = `${label} content`;
     bounds.getCenter(display.position);
     display.position.z = bounds.max.z + 0.001;
     original.visible = false;
     scene.add(display);
   }
-  return (time: number) => {
-    previewTime.value = time;
+  return {
+    animate(time: number) {
+      previewTime.value = time;
+    },
+    dynamicObjects,
   };
 }

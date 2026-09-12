@@ -11,7 +11,7 @@ import {
   Vector3,
 } from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import type { BufferGeometry, Camera } from "three";
+import type { BufferGeometry, Camera, Object3D } from "three";
 
 // RGB peripherals lead; cooking and meters provide quieter supporting motion.
 // Batch new geometry, animate uniforms directly, and leave room shadows cached.
@@ -49,7 +49,8 @@ function mergeParts(parts: Array<BufferGeometry>): BufferGeometry {
 export function installSceneAnimation(
   scene: Group,
   camera: Camera,
-): (time: number) => void {
+): { animate: (time: number) => void; dynamicObjects: Set<Object3D> } {
+  const dynamicObjects = new Set<Object3D>();
   scene.updateMatrixWorld(true);
   const meshes: Array<Mesh> = [];
   scene.traverse((object) => {
@@ -71,6 +72,7 @@ export function installSceneAnimation(
     if (!/^Keyboard__(key|space_bar)/.test(key.name)) continue;
     const bounds = new Box3().setFromObject(key);
     if (bounds.min.y < 5) continue;
+    dynamicObjects.add(key);
     const size = bounds.getSize(new Vector3());
     const center = bounds.getCenter(new Vector3());
     if (key.material instanceof MeshStandardMaterial) {
@@ -105,6 +107,7 @@ export function installSceneAnimation(
     const backlight = new Mesh(mergeParts(keyGlows), material);
     backlight.name = "Gaming keyboard RGB backlight";
     scene.add(backlight);
+    dynamicObjects.add(backlight);
     shaderMaterials.push(material);
   }
 
@@ -141,6 +144,8 @@ export function installSceneAnimation(
     }
     ring.material.emissiveIntensity = 1.65;
     fans.push({ rotor, material: ring.material, blades: bladeMaterials });
+    dynamicObjects.add(rotor);
+    dynamicObjects.add(ring);
   }
 
   for (const mesh of meshes) {
@@ -195,6 +200,7 @@ export function installSceneAnimation(
     flame.name = `${name} blue gas flame`;
     flame.position.set(center.x, 1.476, center.z);
     scene.add(flame);
+    dynamicObjects.add(flame);
     shaderMaterials.push(flameMaterial);
 
     const origin = new Vector3(center.x, bounds.max.y + 0.07, center.z);
@@ -226,6 +232,7 @@ export function installSceneAnimation(
       const mesh = new Mesh(steamGeometry, material);
       mesh.name = `${name} drifting steam ${wisp + 1}`;
       scene.add(mesh);
+      dynamicObjects.add(mesh);
       steam.push({ mesh, origin, phase });
       shaderMaterials.push(material);
     }
@@ -274,6 +281,7 @@ export function installSceneAnimation(
     display.name = `${meter.name} animated LEDs`;
     display.position.set(center.x, bounds.max.y + size.y * 0.08, center.z);
     meter.add(display);
+    dynamicObjects.add(display);
     shaderMaterials.push(material);
   }
 
@@ -301,5 +309,5 @@ export function installSceneAnimation(
     }
   }
   animate(0);
-  return animate;
+  return { animate, dynamicObjects };
 }

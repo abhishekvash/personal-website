@@ -12,6 +12,7 @@ import sceneUrl from "../../assets/scene/curiosity-house.glb?url";
 import { installCharacterPortraits } from "./CharacterPortraits";
 import { installSceneAnimation } from "./SceneAnimation";
 import { installScreenContent } from "./ScreenContent";
+import { batchStaticScene } from "./StaticSceneBatching";
 import { positionStudyTaskLamp } from "./StudyTaskLamp";
 import {
   studioCeilingHeight,
@@ -272,7 +273,7 @@ export async function loadScene(
 
   positionChairs(gltf.scene, chairParts);
 
-  function dispose(): void {
+  function collectResources(): void {
     gltf.scene.traverse((object) => {
       if (object.type !== "Mesh") return;
       const mesh = object as Mesh;
@@ -287,6 +288,10 @@ export async function loadScene(
         }
       }
     });
+  }
+
+  function dispose(): void {
+    collectResources();
     geometries.forEach((geometry) => geometry.dispose());
     materials.forEach((material) => material.dispose());
     textures.forEach((texture) => texture.dispose());
@@ -294,13 +299,20 @@ export async function loadScene(
 
   try {
     positionStudyTaskLamp(gltf.scene);
-    const animatePreview = installScreenContent(gltf.scene);
+    const preview = installScreenContent(gltf.scene);
     await installCharacterPortraits(gltf.scene);
     signal.throwIfAborted();
-    const animateRoom = installSceneAnimation(gltf.scene, camera);
+    const room = installSceneAnimation(gltf.scene, camera);
+    const dynamicObjects = new Set([
+      ...room.dynamicObjects,
+      ...preview.dynamicObjects,
+    ]);
+    // Batching detaches source meshes; keep their shared resources owned until teardown.
+    collectResources();
+    batchStaticScene(gltf.scene, dynamicObjects);
     function animate(time: number): void {
-      animateRoom(time);
-      animatePreview(time);
+      room.animate(time);
+      preview.animate(time);
     }
     mark("setup-end");
     measure("setup", "setup-start", "setup-end");
